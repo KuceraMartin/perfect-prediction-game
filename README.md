@@ -1,3 +1,13 @@
-# perfect-prediction-game
+# Perfect Prediction Game
 
-Implementation of the Perfect Prediction Game
+## Build
+
+```sh
+sbt package
+```
+
+## Test
+
+```sh
+sbt test
+```
