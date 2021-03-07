@@ -31,7 +31,6 @@ class NashianBestResponseSpec extends UnitSpec {
   }
 
 
-
   "Nashian best response in battle of sexes to `football`" should "be `football`" in {
     NashianBestResponse(GameFixtures.battleOfSexes, "F") should be ("F")
   }
