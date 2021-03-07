@@ -21,4 +21,16 @@ object GameFacade {
     GameGenerator(random)(rows, cols)
   }
 
+  def generateId(numRows: Int, numCols: Int, seed: Int = Random.nextInt(Int.MaxValue)) =
+    s"$numRows$numCols${seed.toHexString.toUpperCase}"
+
+  def get(id: String): Game[String] = {
+    require(id.length >= 3)
+
+    val numRows = id(0).asDigit
+    val numCols = id(1).asDigit
+    val seed = Integer.parseInt(id.drop(2), 16)
+    generate(numRows, numCols, seed)
+  }
+
 }
