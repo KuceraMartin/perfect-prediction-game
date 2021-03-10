@@ -5,7 +5,9 @@ import akka.actor.typed.scaladsl.Behaviors
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
+import akka.http.scaladsl.model.StatusCodes
 import app.algorithms.{NashianBestResponse, Payoff}
+import app.algorithms.BestResponse._
 import app.model.GameFacade
 
 import scala.io.StdIn
@@ -14,14 +16,12 @@ import spray.json.DefaultJsonProtocol._
 object Main extends App {
 
   case class GameTuple(matrix: Map[String, Map[String, Payoff]], id: String)
-  case class ColStrategy(colStrategy: String)
 
   implicit val system = ActorSystem(Behaviors.empty, "my-system")
   implicit val executionContext = system.executionContext
 
   implicit val payoffFormat = jsonFormat2(Payoff)
   implicit val gameResponseFormat = jsonFormat2(GameTuple)
-  implicit val colStrategyResponse = jsonFormat1(ColStrategy)
 
   val route = concat(
     path("new-game") {
@@ -41,8 +41,10 @@ object Main extends App {
       get {
         parameters('id.as[String], 'rowStrategy.as[String]) { (id, rowStrategy) =>
           val game = GameFacade.get(id)
-          val response = NashianBestResponse(game, rowStrategy)
-          complete(ColStrategy(response))
+          NashianBestResponse(game, rowStrategy) match {
+            case ColumnStrategy(strategy) => complete(Map("colStrategy" -> strategy))
+            case RowStrategyNotFound => complete(StatusCodes.BadRequest -> Map("Invalid row strategy" -> rowStrategy))
+          }
         }
       }
     }

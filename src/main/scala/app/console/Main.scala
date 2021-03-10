@@ -1,5 +1,6 @@
 package app.console
 
+import app.algorithms.BestResponse._
 import app.algorithms.NashianBestResponse
 import app.model.GameFacade
 
@@ -13,20 +14,18 @@ object Main extends App {
 
   val game = GameFacade.generate(numRows, numCols)
   println(game)
+  println()
 
-  print("\nChoose your strategy: ")
-  val s = readStrategy()
-
-  val r = NashianBestResponse(game, s)
+  val r = readAndProcess("Choose your strategy: ")
   println(s"Best response: $r")
 
   @tailrec
-  private def readStrategy(): String = {
-    val s = readLine
-    if (game.matrix.contains(s)) s
-    else {
-      print("Please choose a valid strategy: ")
-      readStrategy()
+  private def readAndProcess(prompt: String): String = {
+    print(prompt)
+    val row = readLine
+    NashianBestResponse(game, row) match {
+      case ColumnStrategy(strategy) => strategy
+      case RowStrategyNotFound => readAndProcess("Please choose a valid strategy: ")
     }
   }
 
