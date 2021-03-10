@@ -27,10 +27,7 @@ object Main extends App {
     path("new-game") {
       get {
         parameters('rows.as[Int].withDefault(3), 'cols.as[Int].?) { (rows, colsOpt) =>
-          val cols = colsOpt match {
-            case Some(num) => num
-            case None => rows
-          }
+          val cols = colsOpt.getOrElse(rows)
           val (game, id) = GameFacade.generateWithId(rows, cols)
           complete(GameTuple(game.matrix, id))
         }
