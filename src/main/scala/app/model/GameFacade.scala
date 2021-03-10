@@ -2,7 +2,7 @@ package app.model
 
 import app.algorithms.{Game, GameGenerator}
 
-import scala.util.Random
+import scala.util.{Failure, Random, Success, Try}
 
 object GameFacade {
 
@@ -21,16 +21,21 @@ object GameFacade {
     GameGenerator(random)(rows, cols)
   }
 
-  def generateId(numRows: Int, numCols: Int, seed: Int = Random.nextInt(Int.MaxValue)) =
-    s"$numRows$numCols${seed.toHexString.toUpperCase}"
+  def generateWithId(numRows: Int, numCols: Int, seed: Int = Random.nextInt(Int.MaxValue)): (Game[String], String) =
+    (
+      generate(numRows, numCols, seed),
+      s"$numRows$numCols${seed.toHexString.toUpperCase}",
+    )
 
-  def get(id: String): Game[String] = {
+  def get(id: String): Option[Game[String]] = {
     require(id.length >= 3)
 
     val numRows = id(0).asDigit
     val numCols = id(1).asDigit
-    val seed = Integer.parseInt(id.drop(2), 16)
-    generate(numRows, numCols, seed)
+    Try(Integer.parseInt(id.drop(2), 16)) match {
+      case Success(seed) => Some(generate(numRows, numCols, seed))
+      case Failure(_) => None
+    }
   }
 
 }

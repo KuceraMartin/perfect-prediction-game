@@ -31,8 +31,7 @@ object Main extends App {
             case Some(num) => num
             case None => rows
           }
-          val id = GameFacade.generateId(rows, cols)
-          val game = GameFacade.get(id)
+          val (game, id) = GameFacade.generateWithId(rows, cols)
           complete(GameTuple(game.matrix, id))
         }
       }
@@ -40,10 +39,13 @@ object Main extends App {
     path("best-response") {
       get {
         parameters('id.as[String], 'rowStrategy.as[String]) { (id, rowStrategy) =>
-          val game = GameFacade.get(id)
-          NashianBestResponse(game, rowStrategy) match {
-            case ColumnStrategy(strategy) => complete(Map("colStrategy" -> strategy))
-            case RowStrategyNotFound => complete(StatusCodes.BadRequest -> Map("Invalid row strategy" -> rowStrategy))
+          GameFacade.get(id) match {
+            case Some(game) =>
+              NashianBestResponse(game, rowStrategy) match {
+                case ColumnStrategy(strategy) => complete(Map("colStrategy" -> strategy))
+                case RowStrategyNotFound => complete(StatusCodes.BadRequest -> Map("Invalid row strategy" -> rowStrategy))
+              }
+            case None => complete(StatusCodes.NotFound, Map("Game id not found" -> id))
           }
         }
       }
