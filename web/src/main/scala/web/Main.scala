@@ -1,21 +1,27 @@
-package app.web
+package web
+
+import scala.io.StdIn
 
 import akka.actor.typed.ActorSystem
 import akka.actor.typed.scaladsl.Behaviors
 import akka.http.scaladsl.Http
-import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
 import akka.http.scaladsl.model.StatusCodes
-import app.algorithms.{NashianBestResponse, Payoff}
-import app.algorithms.BestResponse._
-import app.model.GameFacade
-
-import scala.io.StdIn
+import akka.http.scaladsl.server.Directives._
 import spray.json.DefaultJsonProtocol._
+
+import core.GameFacade
+import core.algorithms.BestResponse.ColumnStrategy
+import core.algorithms.BestResponse.RowStrategyNotFound
+import core.algorithms.NashianBestResponse
+import core.algorithms.Payoff
+
 
 object Main extends App {
 
+
   case class GameTuple(matrix: Map[String, Map[String, Payoff]], id: String)
+
 
   implicit val system = ActorSystem(Behaviors.empty, "my-system")
   implicit val executionContext = system.executionContext

@@ -1,8 +1,9 @@
-package app.algorithms
+package core.algorithms
 
 import scala.util.Random
 
-class GameGenerator (random: Random) {
+
+class GameGenerator(random: Random) {
 
   def apply[T](rows: Seq[T], cols: Seq[T]): Game[T] = {
     val payoffs = (1 to (rows.length * cols.length)).toList

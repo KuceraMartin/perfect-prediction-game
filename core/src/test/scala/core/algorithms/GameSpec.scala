@@ -1,6 +1,7 @@
-package app.algorithms
+package core.algorithms
 
-import app.UnitSpec
+import core.UnitSpec
+
 
 class GameSpec extends UnitSpec {
 

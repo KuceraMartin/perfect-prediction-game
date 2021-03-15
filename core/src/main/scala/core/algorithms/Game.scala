@@ -1,12 +1,14 @@
-package app.algorithms
+package core.algorithms
 
-case class Payoff (row: Int, column: Int) {
+
+case class Payoff(row: Int, column: Int) {
 
   override def toString: String = s"$row, $column"
 
 }
 
-case class Game[K] (matrix: Map[K, Map[K, Payoff]]) {
+
+case class Game[K](matrix: Map[K, Map[K, Payoff]]) {
 
   def isWithoutTies: Boolean = {
     val payoffs = matrix.values.flatMap(_.values)
@@ -20,7 +22,7 @@ case class Game[K] (matrix: Map[K, Map[K, Payoff]]) {
       matrix.keys.map(_.toString.length) ++
       matrix.values.head.keys.map(_.toString.length) ++
       matrix.values.flatMap(_.values).map(_.toString.length)
-    ).max
+      ).max
     "\t" +
     matrix.values.head.keys.map(_.toString.padTo(w, ' ')).mkString("\t") +
     "\n" +

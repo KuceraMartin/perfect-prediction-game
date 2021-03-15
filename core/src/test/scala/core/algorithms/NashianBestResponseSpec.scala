@@ -1,7 +1,8 @@
-package app.algorithms
+package core.algorithms
 
-import app.UnitSpec
-import app.algorithms.BestResponse.{ColumnStrategy, RowStrategyNotFound}
+import core.UnitSpec
+import core.algorithms.BestResponse.{ColumnStrategy, RowStrategyNotFound}
+
 
 class NashianBestResponseSpec extends UnitSpec {
 

@@ -1,8 +1,13 @@
-package app.model
+package core
 
-import app.algorithms.{Game, GameGenerator}
+import scala.util.Failure
+import scala.util.Random
+import scala.util.Success
+import scala.util.Try
 
-import scala.util.{Failure, Random, Success, Try}
+import core.algorithms.Game
+import core.algorithms.GameGenerator
+
 
 object GameFacade {
 

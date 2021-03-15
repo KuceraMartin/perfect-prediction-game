@@ -1,8 +1,9 @@
-package app.algorithms
-
-import app.UnitSpec
+package core.algorithms
 
 import scala.util.Random
+
+import core.UnitSpec
+
 
 class GameGeneratorSpec extends UnitSpec {
 
@@ -10,7 +11,7 @@ class GameGeneratorSpec extends UnitSpec {
     val random = new Random(1)
     val generate = GameGenerator(random)
     val game = generate(List(1, 2), List(1, 2))
-    game.matrix should be(Map(
+    game.matrix should be (Map(
       1 -> Map(
         1 -> Payoff(4, 4),
         2 -> Payoff(1, 1),
@@ -26,7 +27,7 @@ class GameGeneratorSpec extends UnitSpec {
     val random = new Random(1)
     val generate = GameGenerator(random)
     val game = generate('A' to 'C', 'D' to 'G')
-    game.matrix should be(Map(
+    game.matrix should be (Map(
       'A' -> Map(
         'D' -> Payoff(6, 6),
         'E' -> Payoff(1, 11),

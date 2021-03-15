@@ -1,4 +1,5 @@
-package app.algorithms
+package core.algorithms
+
 
 object GameFixtures {
 

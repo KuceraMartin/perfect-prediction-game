@@ -1,6 +1,7 @@
-package app.algorithms
+package core.algorithms
 
-import app.algorithms.BestResponse.Result
+import core.algorithms.BestResponse.Result
+
 
 trait BestResponse {
 
@@ -8,10 +9,13 @@ trait BestResponse {
 
 }
 
+
 object BestResponse {
 
   sealed abstract class Result[+T]()
+
   final case class ColumnStrategy[+T](strategy: T) extends Result[T]
+
   case object RowStrategyNotFound extends Result[Nothing]
 
 }

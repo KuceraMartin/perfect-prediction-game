@@ -1,6 +1,7 @@
-package app.algorithms
+package core.algorithms
 
-import app.algorithms.BestResponse._
+import core.algorithms.BestResponse._
+
 
 object NashianBestResponse extends BestResponse {
 

@@ -1,11 +1,13 @@
-package app.console
-
-import app.algorithms.BestResponse._
-import app.algorithms.NashianBestResponse
-import app.model.GameFacade
+package console
 
 import scala.annotation.tailrec
 import scala.io.StdIn.readLine
+
+import core.GameFacade
+import core.algorithms.BestResponse.ColumnStrategy
+import core.algorithms.BestResponse.RowStrategyNotFound
+import core.algorithms.NashianBestResponse
+
 
 object Main extends App {
 
@@ -25,7 +27,8 @@ object Main extends App {
     val row = readLine
     NashianBestResponse(game, row) match {
       case ColumnStrategy(strategy) => strategy
-      case RowStrategyNotFound => readAndProcess("Please choose a valid strategy: ")
+      case RowStrategyNotFound =>
+        readAndProcess("Please choose a valid strategy: ")
     }
   }
 
