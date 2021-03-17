@@ -1,2 +1,2 @@
 GET    /v1/new-game             endpoints.v1.NewGame.index(rows: Int, cols: Option[Int])
-GET    /v1/play                 endpoints.v1.Play.index(id: String, rowStrategy: String)
+GET    /v1/play                 endpoints.v1.Play.index(id: String, rowStrategy: Int)

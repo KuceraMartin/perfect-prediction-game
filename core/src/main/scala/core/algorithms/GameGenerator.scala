@@ -5,17 +5,12 @@ import scala.util.Random
 
 class GameGenerator(random: Random) {
 
-  def apply[T](rows: Seq[T], cols: Seq[T]): Game[T] = {
-    val payoffs = (1 to (rows.length * cols.length)).toList
+  def apply(rows: Int, cols: Int): Game = {
+    val payoffs = (1 to (rows * cols)).toList
     val rowPayoffs = random.shuffle(payoffs)
     val colPayoffs = random.shuffle(payoffs)
-    Game((for {
-      r <- rows.indices
-      row = for {
-        c <- cols.indices
-        i = r * cols.length + c
-      } yield (cols(c), Payoff(rowPayoffs(i), colPayoffs(i)))
-    } yield (rows(r), row.toMap)).toMap)
+    val matrix = Vector.tabulate(rows, cols)((r, c) => Payoff(rowPayoffs(r), colPayoffs(c)))
+    Game(matrix)
   }
 
 }
