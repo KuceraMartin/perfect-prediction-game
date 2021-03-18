@@ -9,7 +9,10 @@ class GameGenerator(random: Random) {
     val payoffs = (1 to (rows * cols)).toList
     val rowPayoffs = random.shuffle(payoffs)
     val colPayoffs = random.shuffle(payoffs)
-    val matrix = Vector.tabulate(rows, cols)((r, c) => Payoff(rowPayoffs(r), colPayoffs(c)))
+    val matrix = Vector.tabulate(rows, cols) { (r, c) =>
+      val i = r * cols + c
+      Payoff(rowPayoffs(i), colPayoffs(i))
+    }
     Game(matrix)
   }
 

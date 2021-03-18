@@ -17,8 +17,8 @@ class GameGeneratorSpec extends UnitSpec {
         Payoff(1, 1),
       ),
       Vector(
-        (2, 3),
-        (3, 2),
+        Payoff(2, 3),
+        Payoff(3, 2),
       ),
     ))
   }
