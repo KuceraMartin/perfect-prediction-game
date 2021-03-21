@@ -1,3 +1,5 @@
+package web
+
 import javax.inject.Inject
 import javax.inject.Provider
 

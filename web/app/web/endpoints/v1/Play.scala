@@ -1,4 +1,4 @@
-package endpoints.v1
+package web.endpoints.v1
 
 import javax.inject.Inject
 
