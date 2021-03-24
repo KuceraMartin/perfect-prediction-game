@@ -46,11 +46,11 @@ object Main extends App {
       print(col.padTo(w, ' ') + "\t")
     }
     println()
-    for (i <- 0 until rows) {
+    for (i <- 0 until numRows) {
       print(s"${rows(i)}\t")
       print(game.matrix(i).map(_.toString.padTo(w, ' ')).mkString("\t"))
+      println()
     }
-    println()
   }
 
 }
