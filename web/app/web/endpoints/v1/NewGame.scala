@@ -1,41 +1,37 @@
 package web.endpoints.v1
 
+import java.time.LocalDateTime
 import javax.inject.Inject
 
-import scala.util.Random
+import scala.concurrent.ExecutionContext
 
 import play.api.libs.json.Json
 import play.api.libs.json.Writes
 import play.api.mvc.BaseController
 import play.api.mvc.ControllerComponents
 
-import core.algorithms.Game
-import core.algorithms.GameGenerator
-import core.algorithms.Payoff
+import web.model.game.Game
+import web.model.game.GameService
 
 
-class NewGame @Inject() (val controllerComponents: ControllerComponents) extends BaseController {
+class NewGame @Inject() (
+  gameService: GameService,
+  protected val controllerComponents: ControllerComponents
+) (implicit executionContext: ExecutionContext) extends BaseController {
 
-  implicit val payoffWrites = new Writes[Payoff] {
-    override def writes(p: Payoff) = Json.arr(
-      p.row,
-      p.column,
+  implicit val gameWrites = new Writes[Game] {
+    override def writes(g: Game) = Json.obj(
+      "id" -> g.id,
+      "matrix" -> g.matrix,
     )
   }
 
-  implicit val gameTupleWrites = new Writes[(Game, String)] {
-    def writes(tuple: (Game, String)) = Json.obj(
-      "matrix" -> tuple._1.matrix,
-      "id" -> tuple._2,
-    )
-  }
 
-  def index(rows: Int, colsOpt: Option[Int]) = Action {
+  def index(rows: Int, colsOpt: Option[Int]) = Action.async {
     val cols = colsOpt.getOrElse(rows)
-    val seed = Random.nextInt(Int.MaxValue)
-    val id = s"$rows$cols${seed.toHexString.toUpperCase}"
-    val game = GameGenerator(new Random(seed))(rows, cols)
-    Ok(Json.toJson((game, id)))
+    gameService.generate(rows, cols)(LocalDateTime.now()) map { game =>
+      Ok(Json.toJson(game))
+    }
   }
 
 }
