@@ -38,7 +38,7 @@ class Play @Inject() (
                   case None => Future.successful(NotFound("Game not found."))
                   case Some(game) =>
                     resultService.create(user, game, gameType, rowStrategy)(LocalDateTime.now()) map { result =>
-                      Ok(Json.toJson(Map("colStrategy" -> result.colStrategy)))
+                      Ok(Json.toJson(structures.Result(result.colStrategy)))
                     }
                 }
             }

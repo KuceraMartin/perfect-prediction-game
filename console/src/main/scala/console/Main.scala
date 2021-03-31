@@ -1,18 +1,28 @@
 package console
 
 import scala.annotation.tailrec
+import scala.concurrent.Future
 import scala.io.StdIn.readLine
-import scala.util.Random
+import scala.util.Failure
+import scala.util.Try
 
-import core.algorithms.Game
-import core.algorithms.GameGenerator
-import core.algorithms.NashianBestResponse
+import akka.actor.ActorSystem
+import akka.stream.SystemMaterializer
+import play.api.libs.ws.ahc.StandaloneAhcWSClient
+import structures.Game
 
 
 object Main extends App {
 
-  val numRows = if (args.length >= 1) args(0).toInt else 3
-  val numCols = if (args.length >= 2) args(1).toInt else numRows
+  import scala.concurrent.ExecutionContext.Implicits.global
+
+  implicit val system = ActorSystem()
+  implicit val materializer = SystemMaterializer(system).materializer
+
+  val ws = StandaloneAhcWSClient()
+
+  val numRows = readInt("Number of rows", default = Some(3))
+  val numCols = readInt("Number of columns", default = Some(numRows))
 
   val rowFirst = 'A'
   val colFirst = ('A'.toInt + numRows).toChar
@@ -21,21 +31,44 @@ object Main extends App {
   val rows = (rowFirst until colFirst).map(_.toString)
   val cols = (colFirst until colEnd).map(_.toString)
 
-  val game = GameGenerator(Random)(numRows, numCols)
-  printGame(game)
+  val api = new ApiClient(ws)
 
-  val r = readRowStrategy("Choose your strategy: ")
-  val c = NashianBestResponse(game, r)
-  println(s"Best response: ${cols(c)}")
+  play()
+    .andThen { _ =>
+      ws.close()
+      system.terminate()
+    }
+    .andThen {
+      case Failure(exception) =>
+        println("Error:")
+        exception.printStackTrace()
+        System.exit(1)
+    }
 
-  @tailrec
-  private def readRowStrategy(prompt: String): Int = {
-    val row = rows.indexOf(readLine(prompt))
-    if (row >= 0) row
-    else readRowStrategy("Please choose a valid strategy: ")
+
+  private def play(): Future[Unit] = {
+    for {
+      user <- api.newUser()
+      game <- api.newGame(numRows, numCols)
+      _ <- printGame(game)
+      rs <- readRowStrategy()
+      res <- api.play(user, game, rs)
+    } yield {
+      println("Opponent's strategy: " + cols(res.columnStrategy))
+    }
   }
 
-  private def printGame(game: Game): Unit = {
+  private def readRowStrategy(): Future[Int] = {
+    @tailrec
+    def loop(prompt: String): Int = {
+      val row = rows.indexOf(readLine(prompt))
+      if (row >= 0) row
+      else loop("Please choose a valid strategy: ")
+    }
+    Future(loop("Choose your strategy: "))
+  }
+
+  private def printGame(game: Game): Future[Unit] = Future {
     val w = (
         rows.map(_.length) ++
         cols.map(_.length) ++
@@ -50,6 +83,26 @@ object Main extends App {
       print(s"${rows(i)}\t")
       print(game.matrix(i).map(_.toString.padTo(w, ' ')).mkString("\t"))
       println()
+    }
+  }
+
+  private def readInt(prompt: String, default: Option[Int]) = read(prompt, default, s => Try(s.toInt).toOption)
+
+  @tailrec
+  private def read[T](
+    prompt: String,
+    default: Option[T] = None,
+    converter: String => Option[T]
+  ): T = {
+    val v = readLine(prompt + default.map(p => s" ($p)").getOrElse("") + ":")
+    val d = if (v.isBlank) default else None
+    d match {
+      case Some(r) => r
+      case None =>
+        converter(v) match {
+          case Some(r) => r
+          case None => read(prompt, default, converter)
+        }
     }
   }
 

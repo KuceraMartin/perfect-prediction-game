@@ -6,9 +6,12 @@ ThisBuild / scalaVersion := "2.13.5"
 
 lazy val core = project
 
+lazy val structures = project
+
 lazy val console = project
-  .dependsOn(core)
+  .dependsOn(structures)
 
 lazy val web = project
   .dependsOn(core)
+  .dependsOn(structures)
   .enablePlugins(PlayScala)
