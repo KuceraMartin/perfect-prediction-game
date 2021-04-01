@@ -65,4 +65,22 @@ object GameFixtures {
     ),
   ))
 
+  def publicGoodsGame = Game(List(
+    List(
+      Payoff(8, 8),
+      Payoff(11, 7),
+      Payoff(14, 6),
+    ),
+    List(
+      Payoff(7, 11),
+      Payoff(10, 10),
+      Payoff(13, 9),
+    ),
+    List(
+      Payoff(6, 14),
+      Payoff(9, 13),
+      Payoff(12, 12),
+    ),
+  ))
+
 }

@@ -47,4 +47,15 @@ class NashianBestResponseSpec extends UnitSpec {
     NashianBestResponse(GameFixtures.gameOfChicken, 1) should be (0)
   }
 
+
+  "Nashian best response in the public goods game to `nothing`" should "be `nothing`" in {
+    NashianBestResponse(GameFixtures.publicGoodsGame, 0) should be (0)
+  }
+  "Nashian best response in the public goods game to `half`" should "be `nothing`" in {
+    NashianBestResponse(GameFixtures.publicGoodsGame, 1) should be (0)
+  }
+  "Nashian best response in the public goods game to `everything`" should "be `nothing`" in {
+    NashianBestResponse(GameFixtures.publicGoodsGame, 2) should be (0)
+  }
+
 }
