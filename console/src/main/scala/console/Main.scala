@@ -69,21 +69,13 @@ object Main extends App {
   }
 
   private def printGame(game: Game): Future[Unit] = Future {
-    val w = (
-        rows.map(_.length) ++
-        cols.map(_.length) ++
-        game.matrix.flatten.map(_.toString.length)
-      ).max
-    print("\t")
-    for (col <- cols) {
-      print(col.padTo(w, ' ') + "\t")
-    }
-    println()
-    for (i <- 0 until numRows) {
-      print(s"${rows(i)}\t")
-      print(game.matrix(i).map(_.toString.padTo(w, ' ')).mkString("\t"))
-      println()
-    }
+    val table = TableGenerator.create(
+      ("" +: cols) +:
+      game.matrix.zipWithIndex.map {
+        case (row: Seq[(Int, Int)], i: Int) => rows(i) +: row.map { case (row: Int, col: Int) => s"$row, $col" }
+      }
+    )
+    println(table)
   }
 
   private def readInt(prompt: String, default: Option[Int]) = read(prompt, default, s => Try(s.toInt).toOption)
@@ -94,7 +86,7 @@ object Main extends App {
     default: Option[T] = None,
     converter: String => Option[T]
   ): T = {
-    val v = readLine(prompt + default.map(p => s" ($p)").getOrElse("") + ":")
+    val v = readLine(prompt + default.map(p => s" ($p)").getOrElse("") + ": ")
     val d = if (v.isBlank) default else None
     d match {
       case Some(r) => r
