@@ -1,9 +1,11 @@
 package console
 
+import java.util.concurrent.TimeUnit.{SECONDS, MILLISECONDS}
+
 import scala.annotation.tailrec
-import scala.concurrent.Future
+import scala.concurrent.Await
+import scala.concurrent.duration.Duration
 import scala.io.StdIn.readLine
-import scala.util.Failure
 import scala.util.Try
 
 import akka.actor.ActorSystem
@@ -19,81 +21,127 @@ object Main extends App {
   implicit val system = ActorSystem()
   implicit val materializer = SystemMaterializer(system).materializer
 
+
+  print("\u001Bc")
+
   val ws = StandaloneAhcWSClient()
-
-  val numRows = readInt("Number of rows", default = Some(3))
-  val numCols = readInt("Number of columns", default = Some(numRows))
-
-  val rowFirst = 'A'
-  val colFirst = ('A'.toInt + numRows).toChar
-  val colEnd = (colFirst.toInt + numCols).toChar
-
-  val rows = (rowFirst until colFirst).map(_.toString)
-  val cols = (colFirst until colEnd).map(_.toString)
-
   val api = new ApiClient(ws)
+  val user = Await.result(api.newUser(), Duration.Inf)
+  playLoop()
+  ws.close()
+  system.terminate()
 
-  play()
-    .andThen { _ =>
-      ws.close()
-      system.terminate()
-    }
-    .andThen {
-      case Failure(exception) =>
-        println("Error:")
-        exception.printStackTrace()
-        System.exit(1)
-    }
+  print("\u001B[?47l")
 
 
-  private def play(): Future[Unit] = {
-    for {
-      user <- api.newUser()
-      game <- api.newGame(numRows, numCols)
-      _ <- printGame(game)
-      rs <- readRowStrategy()
-      res <- api.play(user, game, rs)
-    } yield {
-      println("Opponent's strategy: " + cols(res.columnStrategy))
+  @tailrec
+  private def playLoop(): Unit = {
+    play()
+    val again = readBool("\nAgain?", Some(true))
+    if (again) {
+      println()
+      playLoop()
     }
   }
 
-  private def readRowStrategy(): Future[Int] = {
-    @tailrec
-    def loop(prompt: String): Int = {
-      val row = rows.indexOf(readLine(prompt))
-      if (row >= 0) row
-      else loop("Please choose a valid strategy: ")
+
+  private def play(): Unit = {
+    val (rows, cols) = readRowsCols()
+    val game = Await.result(api.newGame(rows.size, cols.size), Duration(5, SECONDS))
+    println()
+    val height = printGame(game, rows, cols)
+    println()
+    val rs = readRowStrategy(rows)
+    val resFuture = api.play(user, game, rs)
+    print(s"\u001b[${height + 3}A\n")
+    printGame(game, rows, cols, Some(rs), None)
+    println("\nYour strategy: " + rows(rs))
+    print("Opponent's strategy: ")
+    for (i <- 1 to 12) {
+      Thread.sleep(300)
+      if (i % 4 == 0) print("\u001b[3D\u001b[0K")
+      else print(".")
     }
-    Future(loop("Choose your strategy: "))
+    val res = Await.result(resFuture, Duration(100, MILLISECONDS))
+    print(s"\u001b[${height + 3}A\n")
+    printGame(game, rows, cols, Some(rs), Some(res.columnStrategy))
+    println("\nYour strategy: " + rows(rs))
+    println("Opponent's strategy: " + cols(res.columnStrategy))
+    println("Your score: " + game.matrix(rs)(res.columnStrategy)._1)
   }
 
-  private def printGame(game: Game): Future[Unit] = Future {
-    val table = TableGenerator.create(
-      ("" +: cols) +:
+
+  private def readRowsCols(): (Seq[String], Seq[String]) = {
+    val numRows = readInt("Number of rows", default = Some(3))
+    val numCols = readInt("Number of columns", default = Some(numRows))
+
+    val rowFirst = 'A'
+    val colFirst = ('A'.toInt + numRows).toChar
+    val colEnd = (colFirst.toInt + numCols).toChar
+
+    val rows = (rowFirst until colFirst).map(_.toString)
+    val cols = (colFirst until colEnd).map(_.toString)
+
+    (rows, cols)
+  }
+
+
+  private def readRowStrategy(rows: Seq[String]): Int =
+    read[Int](
+      prompt = "Your strategy",
+      converter = { s =>
+        val row = rows.indexOf(s.toUpperCase)
+        if (row >= 0) Some(row)
+        else None
+      },
+    )
+
+
+  private def printGame(
+    game: Game,
+    rows: Seq[String],
+    cols: Seq[String],
+    highlightRow: Option[Int] = None,
+    highlightCol: Option[Int] = None,
+  ): Int = {
+    val table = ("" +: cols) +:
       game.matrix.zipWithIndex.map {
         case (row: Seq[(Int, Int)], i: Int) => rows(i) +: row.map { case (row: Int, col: Int) => s"$row, $col" }
       }
-    )
-    println(table)
+    val res = TableGenerator.create(table, highlightRow.map(_ + 1), highlightCol.map(_ + 1))
+    println(res.string)
+    res.height
   }
 
-  private def readInt(prompt: String, default: Option[Int]) = read(prompt, default, s => Try(s.toInt).toOption)
+
+  private def readInt(prompt: String, default: Option[Int]) =
+    read(prompt, default.map(i => (i.toString, i)), s => Try(s.toInt).toOption)
+
+
+  private def readBool(prompt: String, default: Option[Boolean]) =
+    read(
+      prompt,
+      default.map(b => (if (b) "yes" else "no", b)),
+      Map("yes" -> true, "y" -> true, "no" -> false, "n" -> false).get,
+    )
+
 
   @tailrec
   private def read[T](
     prompt: String,
-    default: Option[T] = None,
-    converter: String => Option[T]
+    default: Option[(String, T)] = None,
+    converter: String => Option[T],
   ): T = {
-    val v = readLine(prompt + default.map(p => s" ($p)").getOrElse("") + ": ")
+    val v = readLine(prompt + default.map(p => s" (${p._1})").getOrElse("") + ": ")
     val d = if (v.isBlank) default else None
     d match {
-      case Some(r) => r
+      case Some(r) => r._2
       case None =>
         converter(v) match {
           case Some(r) => r
-          case None => read(prompt, default, converter)
+          case None =>
+            print("\u001b[1A")
+            read(prompt, default, converter)
         }
     }
   }

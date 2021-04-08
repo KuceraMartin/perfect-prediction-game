@@ -14,7 +14,8 @@ import structures.Game
 import structures.Result
 import structures.User
 
-class ApiClient (ws: StandaloneWSClient, apiUrl: String = "http://localhost:9000")(implicit ec: ExecutionContext) {
+
+class ApiClient (ws: StandaloneWSClient, apiUrl: String = "http://localhost:9000") (implicit ec: ExecutionContext) {
 
   def newUser(): Future[User] =
     ws.url(s"$apiUrl/v1/new-user")
