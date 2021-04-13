@@ -8,6 +8,13 @@ case class Payoff(row: Int, column: Int) {
 }
 
 
+object Payoff {
+
+  implicit def fromTuple(tuple: (Int, Int)): Payoff = Payoff(tuple._1, tuple._2)
+
+}
+
+
 case class Game(matrix: Seq[Seq[Payoff]]) {
 
   def isWithoutTies: Boolean = {

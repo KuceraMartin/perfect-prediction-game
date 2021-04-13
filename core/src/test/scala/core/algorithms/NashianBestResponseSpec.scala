@@ -5,6 +5,11 @@ import core.UnitSpec
 
 class NashianBestResponseSpec extends UnitSpec {
 
+  "1x1 game" should "respond 0 to 0" in {
+    NashianBestResponse(GameFixtures.oneByOne, 0) should be (0)
+  }
+
+
   "Best response in prisoner's dilemma to `cooperate`" should "be `defect`" in {
     NashianBestResponse(GameFixtures.prisonersDilemma, 0) should be (1)
   }
@@ -56,6 +61,31 @@ class NashianBestResponseSpec extends UnitSpec {
   }
   "Nashian best response in the public goods game to `everything`" should "be `nothing`" in {
     NashianBestResponse(GameFixtures.publicGoodsGame, 2) should be (0)
+  }
+
+
+  "Unnamed game 1" should "respond 2 to 0" in {
+    NashianBestResponse(GameFixtures.unnamedGame1, 0) should be (2)
+  }
+  it should "respond 0 to 1" in {
+    NashianBestResponse(GameFixtures.unnamedGame1, 1) should be (0)
+  }
+  it should "respond 2 to 2" in {
+    NashianBestResponse(GameFixtures.unnamedGame1, 2) should be (2)
+  }
+
+
+  "Unnamed game 2" should "respond 0 to 0" in {
+    NashianBestResponse(GameFixtures.unnamedGame2, 0) should be (0)
+  }
+  it should "respond 1 to 1" in {
+    NashianBestResponse(GameFixtures.unnamedGame2, 1) should be (1)
+  }
+  it should "respond 2 to 2" in {
+    NashianBestResponse(GameFixtures.unnamedGame2, 2) should be (2)
+  }
+  it should "respond 1 to 3" in {
+    NashianBestResponse(GameFixtures.unnamedGame2, 3) should be (1)
   }
 
 }

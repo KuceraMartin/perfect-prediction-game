@@ -3,84 +3,130 @@ package core.algorithms
 
 object GameFixtures {
 
+  def oneByOne = Game(
+    List(List((0, 0)))
+  )
+
   def prisonersDilemma = Game(List(
     List(
-      Payoff(3, 3),
-      Payoff(0, 5),
+      (3, 3),
+      (0, 5),
     ),
     List(
-      Payoff(5, 0),
-      Payoff(1, 1),
+      (5, 0),
+      (1, 1),
     ),
   ))
 
   def rockPaperScissors = Game(List(
     List(
-      Payoff(0, 0),
-      Payoff(-1, 1),
-      Payoff(1, -1),
+      (0, 0),
+      (-1, 1),
+      (1, -1),
     ),
     List(
-      Payoff(1, -1),
-      Payoff(0, 0),
-      Payoff(-1, 1),
+      (1, -1),
+      (0, 0),
+      (-1, 1),
     ),
     List(
-      Payoff(-1, 1),
-      Payoff(1, -1),
-      Payoff(0, 0),
+      (-1, 1),
+      (1, -1),
+      (0, 0),
     ),
   ))
 
   def matchingPennies = Game(List(
     List(
-      Payoff(1, -1),
-      Payoff(-1, 1),
+      (1, -1),
+      (-1, 1),
     ),
     List(
-      Payoff(-1, 1),
-      Payoff(1, -1),
+      (-1, 1),
+      (1, -1),
     ),
   ))
 
   def battleOfSexes = Game(List(
     List(
-      Payoff(2, 1),
-      Payoff(0, 0),
+      (2, 1),
+      (0, 0),
     ),
     List(
-      Payoff(0, 0),
-      Payoff(1, 2),
+      (0, 0),
+      (1, 2),
     ),
   ))
 
   def gameOfChicken = Game(List(
     List(
-      Payoff(0, 0),
-      Payoff(-1, 1),
+      (0, 0),
+      (-1, 1),
     ),
     List(
-      Payoff(1, -1),
-      Payoff(-10, -10),
+      (1, -1),
+      (-10, -10),
     ),
   ))
 
   def publicGoodsGame = Game(List(
     List(
-      Payoff(8, 8),
-      Payoff(11, 7),
-      Payoff(14, 6),
+      (8, 8),
+      (11, 7),
+      (14, 6),
     ),
     List(
-      Payoff(7, 11),
-      Payoff(10, 10),
-      Payoff(13, 9),
+      (7, 11),
+      (10, 10),
+      (13, 9),
     ),
     List(
-      Payoff(6, 14),
-      Payoff(9, 13),
-      Payoff(12, 12),
+      (6, 14),
+      (9, 13),
+      (12, 12),
     ),
+  ))
+
+  def unnamedGame1 = Game(List(
+    List(
+      (0, -1),
+      (-3, -2),
+      (-4, 1),
+    ),
+    List(
+      (2, 3),
+      (1, 2),
+      (-1, 0),
+    ),
+    List(
+      (3, -3),
+      (4, -4),
+      (-2, 4),
+    ),
+  ))
+
+  def unnamedGame2 = Game(List(
+    List(
+      (-1, 6),
+      (6, 2),
+      (-4, -3),
+    ),
+    List(
+      (-2, -1),
+      (5, 4),
+      (2, -2),
+    ),
+    List(
+      (3, 1),
+      (-3, -6),
+      (4, 3),
+    ),
+    List(
+      (-5, -5),
+      (-6, 5),
+      (1, -4),
+    ),
+
   ))
 
 }

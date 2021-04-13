@@ -5,10 +5,8 @@ import core.UnitSpec
 
 class NonNashianBestResponseSpec extends UnitSpec {
 
-  "Non-Nashian best response in 1x1 game" should "be the only option" in {
-    NonNashianBestResponse(Game(
-      List(List(Payoff(0, 0)))
-    ), 0) should be (0)
+  "1x1 game" should "respond 0 to 0" in {
+    NonNashianBestResponse(GameFixtures.oneByOne, 0) should be (0)
   }
 
 
@@ -36,6 +34,31 @@ class NonNashianBestResponseSpec extends UnitSpec {
   }
   "Non-Nashian best response in the public goods game to `everything`" should "be `everything`" in {
     NonNashianBestResponse(GameFixtures.publicGoodsGame, 2) should be (2)
+  }
+
+
+  "Unnamed game 1" should "respond 2 to 0" in {
+    NonNashianBestResponse(GameFixtures.unnamedGame1, 0) should be (2)
+  }
+  it should "respond 0 to 1" in {
+    NonNashianBestResponse(GameFixtures.unnamedGame1, 1) should be (0)
+  }
+  it should "respond 2 to 2" in {
+    NonNashianBestResponse(GameFixtures.unnamedGame1, 2) should be (2)
+  }
+
+
+  "Unnamed game 2" should "respond 1 to 0" in {
+    NonNashianBestResponse(GameFixtures.unnamedGame2, 0) should be (1)
+  }
+  it should "respond 1 to 1" in {
+    NonNashianBestResponse(GameFixtures.unnamedGame2, 1) should be (1)
+  }
+  it should "respond 2 to 2" in {
+    NonNashianBestResponse(GameFixtures.unnamedGame2, 2) should be (2)
+  }
+  it should "respond 2 to 3" in {
+    NonNashianBestResponse(GameFixtures.unnamedGame2, 3) should be (2)
   }
 
 }
