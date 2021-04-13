@@ -5,6 +5,13 @@ import core.UnitSpec
 
 class NonNashianBestResponseSpec extends UnitSpec {
 
+  "Non-Nashian best response in 1x1 game" should "be the only option" in {
+    NonNashianBestResponse(Game(
+      List(List(Payoff(0, 0)))
+    ), 0) should be (0)
+  }
+
+
   "Non-Nashian Best response in prisoner's dilemma to `cooperate`" should "be `cooperate`" in {
     NonNashianBestResponse(GameFixtures.prisonersDilemma, 0) should be (0)
   }

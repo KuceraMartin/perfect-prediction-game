@@ -13,7 +13,7 @@ object NonNashianBestResponse extends BestResponse {
       val rowMin = maxMin(matrix.map(_.map(_.row)))
       val colMin = maxMin(matrix.map(_.map(_.column)).transpose)
       val newMatrix = matrix.map(_.map(p => if (p.row >= rowMin && p.column >= colMin) p else Payoff(Int.MaxValue, Int.MaxValue)))
-      if (newMatrix(rowStrategy).exists(_ != Payoff(Int.MaxValue, Int.MaxValue))) eliminate(newMatrix)
+      if (newMatrix.flatten.count(_ != Payoff(Int.MaxValue, Int.MaxValue)) > 1) eliminate(newMatrix)
       else matrix.map(_.map(p => if (p == Payoff(Int.MaxValue, Int.MaxValue)) Payoff(Int.MinValue, Int.MinValue) else p))
     }
 
