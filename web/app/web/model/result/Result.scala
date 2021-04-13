@@ -39,4 +39,5 @@ case class Result(
   gameType: GameType.Member,
   rowStrategy: Int,
   colStrategy: Int,
+  rowPayoff: Int,
 )

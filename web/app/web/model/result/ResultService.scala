@@ -23,6 +23,7 @@ class ResultService @Inject() (resultDao: ResultDao) (implicit executionContext:
   )
 
   def create(user: User, game: Game, gameType: GameType.Member, rowStrategy: Int) (implicit createdAt: LocalDateTime): Future[Result] = {
+    val colStrategy = bestResponse(gameType)(game, rowStrategy)
     val result = Result(
       UUID.randomUUID(),
       createdAt,
@@ -30,7 +31,8 @@ class ResultService @Inject() (resultDao: ResultDao) (implicit executionContext:
       game.id,
       gameType,
       rowStrategy,
-      colStrategy = bestResponse(gameType)(game, rowStrategy),
+      colStrategy,
+      rowPayoff = game.matrix(rowStrategy)(colStrategy)(0).as[Int]
     )
     resultDao.insert(result) map { _ => result }
   }

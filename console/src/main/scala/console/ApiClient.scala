@@ -10,15 +10,17 @@ import play.api.libs.json.Json
 import play.api.libs.ws.DefaultBodyWritables.writeableOf_String
 import play.api.libs.ws.JsonBodyReadables._
 import play.api.libs.ws.StandaloneWSClient
+import play.api.libs.ws.StandaloneWSRequest
 import structures.Game
 import structures.Result
+import structures.Stats
 import structures.User
 
 
 class ApiClient (ws: StandaloneWSClient, apiUrl: String = "http://localhost:9000") (implicit ec: ExecutionContext) {
 
   def newUser(): Future[User] =
-    ws.url(s"$apiUrl/v1/new-user")
+    req("new-user")
       .post("")
       .map { response =>
         val body = response.body[JsValue]
@@ -30,7 +32,7 @@ class ApiClient (ws: StandaloneWSClient, apiUrl: String = "http://localhost:9000
 
 
   def newGame(rows: Int, cols: Int): Future[Game] =
-    ws.url(s"$apiUrl/v1/new-game")
+    req("new-game")
       .addQueryStringParameters(
         "rows" -> rows.toString,
         "cols" -> cols.toString,
@@ -46,7 +48,7 @@ class ApiClient (ws: StandaloneWSClient, apiUrl: String = "http://localhost:9000
 
 
   def play(user: User, game: Game, rowStrategy: Int): Future[Result] =
-    ws.url(s"$apiUrl/v1/play")
+    req("play")
       .withQueryStringParameters(
         "gameId" -> game.id.toString,
         "gameType" -> "non-nash",
@@ -63,5 +65,23 @@ class ApiClient (ws: StandaloneWSClient, apiUrl: String = "http://localhost:9000
           case e @ JsError(_) => throw new RuntimeException(e.toString)
         }
       }
+
+
+  def stats(user: User): Future[Stats] =
+    req("stats")
+      .withHttpHeaders(
+        "userId" -> user.id.toString,
+      )
+      .get()
+      .map {response =>
+        val body = response.body[JsValue]
+        Json.fromJson[Stats](body) match {
+          case JsSuccess(stats, _) => stats
+          case e @ JsError(_) => throw new RuntimeException(e.toString)
+        }
+      }
+
+
+  private def req(path: String, version: Int = 1): StandaloneWSRequest = ws.url(s"$apiUrl/v$version/$path")
 
 }

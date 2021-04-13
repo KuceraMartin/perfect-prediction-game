@@ -23,6 +23,7 @@ CREATE TABLE result (
     "game_type" game_type NOT NULL,
     "row_strategy" INT NOT NULL,
     "col_strategy" INT NOT NULL,
+    "row_payoff" INT NOT NULL,
     CONSTRAINT "fk_player" FOREIGN KEY ("user_id") REFERENCES "user"("id"),
     CONSTRAINT "fk_game" FOREIGN KEY ("game_id") REFERENCES "game"("id")
 );

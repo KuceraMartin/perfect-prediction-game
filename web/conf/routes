@@ -1,3 +1,4 @@
 POST    /v1/new-game             web.endpoints.v1.NewGame.index(rows: Int, cols: Option[Int])
 POST    /v1/play                 web.endpoints.v1.Play.index(gameId: String, gameType: String, rowStrategy: Int)
 POST    /v1/new-user             web.endpoints.v1.NewUser.index()
+GET     /v1/stats                web.endpoints.v1.Stats.index()

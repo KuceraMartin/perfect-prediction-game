@@ -41,7 +41,17 @@ object Main extends App {
     if (again) {
       println()
       playLoop()
+    } else {
+      printStats()
     }
+  }
+
+
+  private def printStats(): Unit = {
+    val stats = Await.result(api.stats(user), Duration(5, SECONDS))
+    println()
+    println(s"Played games: ${stats.gamesCount}")
+    println(s"Average score: ${stats.averageScore}")
   }
 
 
