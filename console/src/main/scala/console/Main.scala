@@ -57,8 +57,8 @@ object Main extends App {
     printGame(game, rows, cols, Some(rs), None)
     println("\nYour strategy: " + rows(rs))
     print("Opponent's strategy: ")
-    for (i <- 1 to 12) {
-      Thread.sleep(300)
+    for (i <- 1 to 80 if i <=8 || !resFuture.isCompleted) {
+      Thread.sleep(250)
       if (i % 4 == 0) print("\u001b[3D\u001b[0K")
       else print(".")
     }
