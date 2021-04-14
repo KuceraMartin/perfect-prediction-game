@@ -1,11 +1,12 @@
 package console
 
-import java.util.concurrent.TimeUnit.{SECONDS, MILLISECONDS}
+import java.util.concurrent.TimeUnit.{MILLISECONDS, SECONDS}
 
 import scala.annotation.tailrec
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration
 import scala.io.StdIn.readLine
+import scala.sys.exit
 import scala.util.Try
 
 import akka.actor.ActorSystem
@@ -18,6 +19,16 @@ import structures.request.Play
 object Main extends App {
 
   import scala.concurrent.ExecutionContext.Implicits.global
+
+
+  val gameType: String = args match {
+    case Array() => "non-nash"
+    case Array(t) if t == "nash" || t == "non-nash" => t
+    case _ =>
+      println("Invalid arguments.")
+      exit(1)
+  }
+
 
   implicit val system = ActorSystem()
   implicit val materializer = SystemMaterializer(system).materializer
@@ -63,7 +74,7 @@ object Main extends App {
     val height = printGame(game, rows, cols)
     println()
     val rs = readRowStrategy(rows)
-    val resFuture = api.play(user, game, Play("non-nash", rs))
+    val resFuture = api.play(user, game, Play(gameType, rs))
     print(s"\u001b[${height + 3}A\n")
     printGame(game, rows, cols, Some(rs), None)
     println("\nYour strategy: " + rows(rs))
