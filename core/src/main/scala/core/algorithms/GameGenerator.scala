@@ -6,7 +6,8 @@ import scala.util.Random
 class GameGenerator(random: Random) {
 
   def apply(rows: Int, cols: Int): Game = {
-    val payoffs = (1 to (rows * cols)).toList
+    val cnt = rows * cols
+    val payoffs = (-cnt / 2 to cnt / 2).toList.filterNot(cnt % 2 == 0 && _ == 0)
     val rowPayoffs = random.shuffle(payoffs)
     val colPayoffs = random.shuffle(payoffs)
     val matrix = Vector.tabulate(rows, cols) { (r, c) =>
