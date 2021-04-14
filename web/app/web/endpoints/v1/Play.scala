@@ -24,24 +24,30 @@ class Play @Inject() (
   protected val controllerComponents: ControllerComponents,
 ) (implicit executionContext: ExecutionContext) extends BaseController {
 
-  def index(gameIdStr: String, gameTypeStr: String, rowStrategy: Int) = Action.async { request =>
+  def index(gameIdStr: String) = Action.async(parse.tolerantJson)  { request =>
     request.headers.get("userId") match {
       case None => Future.successful(BadRequest("Missing header `userId`."))
       case Some(userId) =>
-        GameType.shortNameToMember(gameTypeStr) match {
-          case None => Future.successful(BadRequest("Invalid game type."))
-          case Some(gameType) =>
-            userDao.get(UUID.fromString(userId)) flatMap {
-              case None => Future.successful(BadRequest("User not found."))
-              case Some(user) =>
-                gameDao.get(UUID.fromString(gameIdStr)) flatMap {
-                  case None => Future.successful(NotFound("Game not found."))
-                  case Some(game) =>
-                    resultService.create(user, game, gameType, rowStrategy)(LocalDateTime.now()) map { result =>
-                      Ok(Json.toJson(structures.Result(result.colStrategy)))
+        Json.fromJson[structures.request.Play](request.body) match {
+          case JsSuccess(body, _) =>
+            GameType.shortNameToMember(body.gameType) match {
+              case None => Future.successful(BadRequest("Invalid game type."))
+              case Some(gameType) =>
+                userDao.get(UUID.fromString(userId)) flatMap {
+                  case None => Future.successful(BadRequest("User not found."))
+                  case Some(user) =>
+                    gameDao.get(UUID.fromString(gameIdStr)) flatMap {
+                      case None => Future.successful(NotFound("Game not found."))
+                      case Some(game) =>
+                        resultService.create(user, game, gameType, body.rowStrategy)(LocalDateTime.now()) map { result =>
+                          Ok(Json.toJson(structures.Result(result.colStrategy)))
+                        }
                     }
                 }
             }
+          case JsError(errors) => Future.successful(
+            BadRequest(Json.toJson(errors.toString()))
+          )
         }
     }
   }

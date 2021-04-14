@@ -12,6 +12,7 @@ import akka.actor.ActorSystem
 import akka.stream.SystemMaterializer
 import play.api.libs.ws.ahc.StandaloneAhcWSClient
 import structures.Game
+import structures.request.Play
 
 
 object Main extends App {
@@ -62,7 +63,7 @@ object Main extends App {
     val height = printGame(game, rows, cols)
     println()
     val rs = readRowStrategy(rows)
-    val resFuture = api.play(user, game, rs)
+    val resFuture = api.play(user, game, Play("non-nash", rs))
     print(s"\u001b[${height + 3}A\n")
     printGame(game, rows, cols, Some(rs), None)
     println("\nYour strategy: " + rows(rs))

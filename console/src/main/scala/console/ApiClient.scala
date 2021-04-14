@@ -15,6 +15,7 @@ import structures.Game
 import structures.Result
 import structures.Stats
 import structures.User
+import structures.request.Play
 
 
 class ApiClient (ws: StandaloneWSClient, apiUrl: String = "http://localhost:9000") (implicit ec: ExecutionContext) {
@@ -47,17 +48,15 @@ class ApiClient (ws: StandaloneWSClient, apiUrl: String = "http://localhost:9000
     }
 
 
-  def play(user: User, game: Game, rowStrategy: Int): Future[Result] =
+  def play(user: User, game: Game, body: Play): Future[Result] =
     req("play")
       .withQueryStringParameters(
         "gameId" -> game.id.toString,
-        "gameType" -> "non-nash",
-        "rowStrategy" -> rowStrategy.toString,
       )
       .withHttpHeaders(
         "userId" -> user.id.toString,
       )
-      .post("")
+      .post(Json.stringify(Json.toJson(body)))
       .map { response =>
         val body = response.body[JsValue]
         Json.fromJson[Result](body) match {
