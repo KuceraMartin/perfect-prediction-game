@@ -10,6 +10,8 @@ import scala.concurrent.Future
 import core.algorithms.NashianBestResponse
 import core.algorithms.NonNashianBestResponse
 
+import structures.GameType
+
 import web.model.game.Game
 import web.model.game.CoreBridge.modelGametoCoreGame
 import web.model.user.User

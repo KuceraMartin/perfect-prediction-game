@@ -11,11 +11,11 @@ import play.api.libs.ws.DefaultBodyWritables.writeableOf_String
 import play.api.libs.ws.JsonBodyReadables._
 import play.api.libs.ws.StandaloneWSClient
 import play.api.libs.ws.StandaloneWSRequest
-import structures.Game
-import structures.Result
-import structures.Stats
-import structures.User
 import structures.request.Play
+import structures.response.Game
+import structures.response.Result
+import structures.response.Stats
+import structures.response.User
 
 
 class ApiClient (ws: StandaloneWSClient, apiUrl: String = "http://localhost:9000") (implicit ec: ExecutionContext) {

@@ -11,8 +11,10 @@ import play.api.libs.json._
 import play.api.mvc.BaseController
 import play.api.mvc.ControllerComponents
 
+import structures.GameType
+import structures.response.Result
+
 import web.model.game.GameDao
-import web.model.result.GameType
 import web.model.result.ResultService
 import web.model.user.UserDao
 
@@ -40,7 +42,7 @@ class Play @Inject() (
                       case None => Future.successful(NotFound("Game not found."))
                       case Some(game) =>
                         resultService.create(user, game, gameType, body.rowStrategy)(LocalDateTime.now()) map { result =>
-                          Ok(Json.toJson(structures.Result(result.colStrategy)))
+                          Ok(Json.toJson(Result(result.colStrategy)))
                         }
                     }
                 }

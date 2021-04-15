@@ -1,4 +1,4 @@
-package structures
+package structures.response
 
 import play.api.libs.json.Json
 

@@ -9,7 +9,6 @@ import scala.concurrent.Future
 import play.api.libs.json._
 import play.api.mvc.BaseController
 import play.api.mvc.ControllerComponents
-import structures.Stats
 
 import web.model.result.ResultDao
 import web.model.user.UserDao

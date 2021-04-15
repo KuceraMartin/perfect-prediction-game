@@ -7,12 +7,23 @@ import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
 
 import play.api.db.slick.DatabaseConfigProvider
+import slick.ast.BaseTypedType
+import structures.GameType
+import structures.GameType.Member
 
 import web.model.BaseDao
 import web.model.BaseTable
+import web.model.SlickPgProfile
 import web.model.SlickPgProfile.api._
 
+
 class ResultTable(tag: Tag) extends BaseTable[Result](tag, "result") {
+
+  implicit private val gameTypeMapping: BaseTypedType[Member] = new SlickPgProfile.GenericJdbcType[Member] (
+    "game_type",
+    GameType.withName,
+    _.n,
+  )
 
   def userId = column[UUID]("user_id")
   def gameId = column[UUID]("game_id")

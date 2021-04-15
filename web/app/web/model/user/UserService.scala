@@ -7,7 +7,7 @@ import javax.inject.Inject
 import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
 
-import structures.Stats
+import structures.response.Stats
 
 import web.model.result.ResultDao
 

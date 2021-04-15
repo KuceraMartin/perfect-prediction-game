@@ -12,8 +12,8 @@ import scala.util.Try
 import akka.actor.ActorSystem
 import akka.stream.SystemMaterializer
 import play.api.libs.ws.ahc.StandaloneAhcWSClient
-import structures.Game
 import structures.request.Play
+import structures.response.Game
 
 
 object Main extends App {

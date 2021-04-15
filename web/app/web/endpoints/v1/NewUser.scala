@@ -8,6 +8,7 @@ import scala.concurrent.ExecutionContext
 import play.api.libs.json.Json
 import play.api.mvc.BaseController
 import play.api.mvc.ControllerComponents
+import structures.response.User
 
 import web.model.user.UserService
 
@@ -19,7 +20,7 @@ class NewUser @Inject() (
 
   def index() = Action.async {
     usersService.create()(LocalDateTime.now()) map { user =>
-      val str = structures.User(user.id)
+      val str = User(user.id)
       Ok(Json.toJson(str))
     }
   }

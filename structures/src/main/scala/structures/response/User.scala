@@ -1,4 +1,4 @@
-package structures
+package structures.response
 
 import java.util.UUID
 
