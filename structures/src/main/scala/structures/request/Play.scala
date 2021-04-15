@@ -2,8 +2,10 @@ package structures.request
 
 import play.api.libs.json.Json
 
+import structures.GameType
 
-case class Play(gameType: String, rowStrategy: Int)
+
+case class Play(gameType: GameType.Member, rowStrategy: Int)
 
 
 object Play {

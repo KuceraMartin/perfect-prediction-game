@@ -12,6 +12,8 @@ import scala.util.Try
 import akka.actor.ActorSystem
 import akka.stream.SystemMaterializer
 import play.api.libs.ws.ahc.StandaloneAhcWSClient
+
+import structures.GameType
 import structures.request.Play
 import structures.response.Game
 
@@ -21,12 +23,13 @@ object Main extends App {
   import scala.concurrent.ExecutionContext.Implicits.global
 
 
-  val gameType: String = args match {
-    case Array() => "non-nash"
-    case Array(t) if t == "nash" || t == "non-nash" => t
-    case _ =>
-      println("Invalid arguments.")
-      exit(1)
+  val gameType: GameType.Member = (args match {
+    case Array() => Some(GameType.NonNashian)
+    case Array(t) => GameType.shortNameToMember(t)
+    case _ => None
+  }) getOrElse {
+    println("Invalid arguments.")
+    exit(1)
   }
 
 

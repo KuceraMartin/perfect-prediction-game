@@ -32,18 +32,14 @@ class Play @Inject() (
       case Some(userId) =>
         Json.fromJson[structures.request.Play](request.body) match {
           case JsSuccess(body, _) =>
-            GameType.shortNameToMember(body.gameType) match {
-              case None => Future.successful(BadRequest("Invalid game type."))
-              case Some(gameType) =>
-                userDao.get(UUID.fromString(userId)) flatMap {
-                  case None => Future.successful(BadRequest("User not found."))
-                  case Some(user) =>
-                    gameDao.get(UUID.fromString(gameIdStr)) flatMap {
-                      case None => Future.successful(NotFound("Game not found."))
-                      case Some(game) =>
-                        resultService.create(user, game, gameType, body.rowStrategy)(LocalDateTime.now()) map { result =>
-                          Ok(Json.toJson(Result(result.colStrategy)))
-                        }
+            userDao.get(UUID.fromString(userId)) flatMap {
+              case None => Future.successful(BadRequest("User not found."))
+              case Some(user) =>
+                gameDao.get(UUID.fromString(gameIdStr)) flatMap {
+                  case None => Future.successful(NotFound("Game not found."))
+                  case Some(game) =>
+                    resultService.create(user, game, body.gameType, body.rowStrategy)(LocalDateTime.now()) map { result =>
+                      Ok(Json.toJson(Result(result.colStrategy)))
                     }
                 }
             }
