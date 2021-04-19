@@ -40,7 +40,7 @@ object Main extends App {
   print("\u001Bc")
 
   val ws = StandaloneAhcWSClient()
-  val api = new ApiClient(ws)
+  val api = new ApiClient(ws, sys.env.getOrElse("PTE_API_URL", "http://localhost:9000"))
   val user = Await.result(api.newUser(), Duration.Inf)
   playLoop()
   ws.close()

@@ -18,7 +18,7 @@ import structures.response.Stats
 import structures.response.User
 
 
-class ApiClient (ws: StandaloneWSClient, apiUrl: String = "http://localhost:9000") (implicit ec: ExecutionContext) {
+class ApiClient (ws: StandaloneWSClient, apiUrl: String) (implicit ec: ExecutionContext) {
 
   def newUser(): Future[User] =
     req("new-user")

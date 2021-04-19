@@ -1,0 +1,80 @@
+version: "3.8"
+
+services:
+    postgres:
+        image: postgres:13.2-alpine
+        ports:
+            - 5432:5432
+        expose:
+            - ${DB_EXPOSE}
+        environment:
+            POSTGRES_DB: ${DB_NAME}
+            POSTGRES_USER: ${DB_USERNAME}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+        volumes:
+            - postgres:/var/lib/postgresql/data
+    web:
+        build:
+            context: docker/scala
+            args:
+                USER_ID: ${USER_ID}
+                GROUP_ID: ${GROUP_ID}
+        depends_on:
+            - postgres
+        ports:
+            - 9000:9000
+        expose:
+            - ${WEB_EXPOSE}
+        environment:
+            DB_HOST: postgres
+            DB_PORT: 5432
+            DB_NAME: ${DB_NAME}
+            DB_USERNAME: ${DB_USERNAME}
+            DB_PASSWORD: ${DB_PASSWORD}
+        volumes:
+            - .:/src
+            - sbt:/home/scala/.sbt
+            - cache:/home/scala/.cache
+        command: sbt web/run
+    console:
+        build:
+            context: docker/scala
+            args:
+                USER_ID: ${USER_ID}
+                GROUP_ID: ${GROUP_ID}
+        depends_on:
+            -   web
+        environment:
+            PTE_API_URL: http://web:9000
+        volumes:
+            - .:/src
+            - sbt:/home/scala/.sbt
+            - cache:/home/scala/.cache
+        entrypoint: java -jar console/target/scala-2.12/console-assembly-0.1.jar
+    sbt:
+        build:
+            context: docker/scala
+            args:
+                USER_ID: ${USER_ID}
+                GROUP_ID: ${GROUP_ID}
+        volumes:
+            - .:/src
+            - sbt:/home/scala/.sbt
+            - cache:/home/scala/.cache
+        entrypoint: sbt
+    package:
+        build:
+            context: docker/scala
+            args:
+                USER_ID: ${USER_ID}
+                GROUP_ID: ${GROUP_ID}
+        volumes:
+            - .:/src
+            - sbt:/home/scala/.sbt
+            - cache:/home/scala/.cache
+        command: sbt package
+
+volumes:
+    postgres:
+    sbt:
+    cache:
