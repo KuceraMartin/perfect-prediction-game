@@ -7,7 +7,6 @@ import scala.concurrent.Await
 import scala.concurrent.duration.Duration
 import scala.io.StdIn.readLine
 import scala.sys.exit
-import scala.util.Try
 
 import akka.actor.ActorSystem
 import akka.stream.SystemMaterializer
@@ -18,18 +17,27 @@ import structures.request.Play
 import structures.response.Game
 
 
+case class Config(
+  gameType: GameType.Member = GameType.NonNashian,
+  rows: Int = 3,
+  cols: Int = 3,
+)
+
+
 object Main extends App {
 
   import scala.concurrent.ExecutionContext.Implicits.global
 
-
-  val gameType: GameType.Member = (args match {
-    case Array() => Some(GameType.NonNashian)
-    case Array(t) => GameType.shortNameToMember(t)
-    case _ => None
-  }) getOrElse {
-    println("Invalid arguments.")
-    exit(1)
+  val config: Config = args.foldLeft(Config()) { (config, arg) =>
+    val dim = "(\\d+)x(\\d+)".r
+    arg match {
+      case "nash" | "--nash" => config.copy(gameType = GameType.Nashian)
+      case "non-nash" | "--non-nash" => config.copy(gameType = GameType.NonNashian)
+      case dim(r, c) => config.copy(rows = r.toInt, cols = c.toInt)
+      case _ =>
+        println(s"Invalid argument `$arg`.")
+        exit(1)
+    }
   }
 
 
@@ -52,7 +60,8 @@ object Main extends App {
   @tailrec
   private def playLoop(): Unit = {
     play()
-    val again = readBool("\nAgain?", Some(true))
+    println()
+    val again = readBool("Again?", Some(true))
     if (again) {
       println()
       playLoop()
@@ -71,13 +80,13 @@ object Main extends App {
 
 
   private def play(): Unit = {
-    val (rows, cols) = readRowsCols()
+    val (rows, cols) = generateRowsCols(config.rows, config.cols)
     val game = Await.result(api.newGame(rows.size, cols.size), Duration(5, SECONDS))
     println()
     val height = printGame(game, rows, cols)
     println()
     val rs = readRowStrategy(rows)
-    val resFuture = api.play(user, game, Play(gameType, rs))
+    val resFuture = api.play(user, game, Play(config.gameType, rs))
     print(s"\u001b[${height + 3}A\n")
     printGame(game, rows, cols, Some(rs), None)
     println("\nYour strategy: " + rows(rs))
@@ -96,10 +105,7 @@ object Main extends App {
   }
 
 
-  private def readRowsCols(): (Seq[String], Seq[String]) = {
-    val numRows = readInt("Number of rows", default = Some(3))
-    val numCols = readInt("Number of columns", default = Some(numRows))
-
+  private def generateRowsCols(numRows: Int, numCols: Int): (Seq[String], Seq[String]) = {
     val rowFirst = 'A'
     val colFirst = ('A'.toInt + numRows).toChar
     val colEnd = (colFirst.toInt + numCols).toChar
@@ -139,10 +145,6 @@ object Main extends App {
   }
 
 
-  private def readInt(prompt: String, default: Option[Int]) =
-    read(prompt, default.map(i => (i.toString, i)), s => Try(s.toInt).toOption)
-
-
   private def readBool(prompt: String, default: Option[Boolean]) =
     read(
       prompt,
@@ -157,7 +159,7 @@ object Main extends App {
     default: Option[(String, T)] = None,
     converter: String => Option[T],
   ): T = {
-    val v = readLine(prompt + default.map(p => s" (${p._1})").getOrElse("") + ": ")
+    val v = readLine(prompt + default.map(p => s" (${p._1})").getOrElse("") + ": ").trim
     val d = if (v.isBlank) default else None
     d match {
       case Some(r) => r._2
@@ -165,7 +167,7 @@ object Main extends App {
         converter(v) match {
           case Some(r) => r
           case None =>
-            print("\u001b[1A")
+            print("\u001b[1A\033[K")
             read(prompt, default, converter)
         }
     }
