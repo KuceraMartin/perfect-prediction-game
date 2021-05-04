@@ -1,7 +1,7 @@
 name := "perfect-prediction-game"
 
 ThisBuild / version := "0.1"
-ThisBuild / scalaVersion := "2.13.5"
+ThisBuild / scalaVersion := "2.12.12"
 
 
 lazy val commonSettings = Seq(
@@ -28,3 +28,6 @@ lazy val web = project
   .dependsOn(structures)
   .enablePlugins(PlayScala)
   .settings(commonSettings)
+
+lazy val analysis = project
+  .dependsOn(core)

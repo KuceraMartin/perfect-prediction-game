@@ -9,6 +9,7 @@ object Versions {
   val slickPg = "0.19.5"
   val playWs = "2.1.3"
   val playJson = "2.9.2"
+  val spark = "3.1.1"
 
 }
 
@@ -28,5 +29,7 @@ object Dependencies {
   val playWsJson = "com.typesafe.play" %% "play-ws-standalone-json" % Versions.playWs
 
   val playJson = "com.typesafe.play" %% "play-json" % Versions.playJson
+
+  val spark = "org.apache.spark" %% "spark-sql" % Versions.spark % "provided"
 
 }

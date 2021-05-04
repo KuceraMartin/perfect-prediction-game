@@ -62,17 +62,15 @@ services:
             - sbt:/home/scala/.sbt
             - cache:/home/scala/.cache
         entrypoint: sbt
-    package:
+    analysis:
         build:
-            context: docker/scala
+            context: docker/spark
             args:
                 USER_ID: ${USER_ID}
                 GROUP_ID: ${GROUP_ID}
         volumes:
             - .:/src
-            - sbt:/home/scala/.sbt
-            - cache:/home/scala/.cache
-        command: sbt package
+        entrypoint: analysis/bin/run.sh
 
 volumes:
     postgres:
