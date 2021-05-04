@@ -1,9 +1,13 @@
 package core.algorithms
 
+import scala.collection.GenTraversableOnce
+
 
 case class Payoff(row: Int, column: Int) {
 
   override def toString: String = s"$row, $column"
+
+  def swap: Payoff = Payoff(column, row)
 
 }
 
@@ -14,14 +18,29 @@ object Payoff {
 
 }
 
+case class Game(matrix: Seq[Seq[Payoff]]) extends Seq[Seq[Payoff]] {
 
-case class Game(matrix: Seq[Seq[Payoff]]) {
+
+  override def length: Int = matrix.length
+
+  override def apply(idx: Int): Seq[Payoff] = matrix(idx)
+
+  override def iterator: Iterator[Seq[Payoff]] = matrix.iterator
 
   def isWithoutTies: Boolean = {
-    val payoffs = matrix.flatten
+    val payoffs = flatten
     val rp = payoffs.map(_.row).toSet
     val cp = payoffs.map(_.column).toSet
     rp.size == payoffs.size && cp.size == payoffs.size
   }
+
+  def transpose: Game = transpose(_.map(_.swap))
+
+}
+
+
+object Game {
+
+  implicit def fromMatrix(matrix: Seq[Seq[Payoff]]): Game = Game(matrix)
 
 }

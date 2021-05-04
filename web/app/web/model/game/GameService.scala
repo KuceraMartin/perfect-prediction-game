@@ -31,7 +31,7 @@ class GameService @Inject()(gameDao: GameDao, random: Random)(implicit ec: Execu
       createdAt,
       rows,
       cols,
-      Json.toJson(GameGenerator(new Random(seed))(rows, cols).matrix),
+      Json.toJson(GameGenerator(new Random(seed))(rows, cols)),
       seed,
     )
     gameDao.insert(game).map { _ => game }
