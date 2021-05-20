@@ -1,0 +1,36 @@
+%% Theorem-like environments
+
+%% This can be changed according to language. You can comment out the ones you
+%% don't need.
+
+\numberwithin{equation}{chapter}
+
+\def\algorithmautorefname{Algorithm}
+\def\conjectureautorefname{Conjecture}
+\def\corollaryautorefname{Corollary}
+\def\definitionautorefname{Definition}
+\def\exampleautorefname{Example}
+\def\lemmaautorefname{Lemma}
+\def\observationautorefname{Observation}
+\def\propositionautorefname{Proposition}
+\def\remarkautorefname{Remark}
+\def\theoremautorefname{Theorem}
+
+%% English variants
+\theorembodyfont{\normalfont}
+\newtheorem{theorem}{\theoremautorefname}[chapter]
+\newtheorem{conjecture}{\conjectureautorefname}
+\newtheorem{corollary}{\corollaryautorefname}
+\newtheorem{definition}{\definitionautorefname}
+\newtheorem{example}{\exampleautorefname}
+\newtheorem{lemma}{\lemmaautorefname}
+\newtheorem{observation}{\observationautorefname}
+\newtheorem{proposition}{\propositionautorefname}
+\newtheorem{remark}{\remarkautorefname}
+
+%% Proof environment with a small square as a "qed" symbol
+\theoremstyle{nonumberplain}
+\theorembodyfont{\normalfont}
+\theoremsymbol{\ensuremath{\square}}
+\newtheorem{proof}{Proof}
+%\newtheorem{beweis}{Beweis}
