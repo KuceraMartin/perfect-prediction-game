@@ -1,7 +1,7 @@
 # This file is a template, and might need editing before it works on your project.
 ---
 stages:
-  - build
+  - build_report
 
 variables:
   # Feel free to choose the image that suits you best.
@@ -14,11 +14,15 @@ variables:
   # adnrv/texlive
   LATEX_IMAGE: listx/texlive:2020
 
-build:
-  stage: build
+build_report:
+  stage: build_report
   image: $LATEX_IMAGE
   script:
-    - pdflatex report/report.tex
+    - cd report
+    - pdflatex report.tex
+    - bibtex report.aux
+    - pdflatex report.tex
+    - pdflatex report.tex
 
   artifacts:
     paths:
