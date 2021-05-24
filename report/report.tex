@@ -57,6 +57,11 @@
 %% file, and consult the package docs for each.
 \input{extrapackages}
 
+%% Make document internal hyperlinks wherever possible. (TOC, references)
+%% This MUST be loaded after varioref, which is loaded in 'extrapackages'
+%% above.  We just load it last to be safe.
+\usepackage[linkcolor=black,colorlinks=true,citecolor=black,filecolor=black]{hyperref}
+
 %% Our layout configuration.  DO NOT CHANGE.
 \input{layoutsetup}
 
@@ -66,11 +71,6 @@
 
 %% Helpful macros.
 \input{macrosetup}
-
-%% Make document internal hyperlinks wherever possible. (TOC, references)
-%% This MUST be loaded after varioref, which is loaded in 'extrapackages'
-%% above.  We just load it last to be safe.
-\usepackage[linkcolor=black,colorlinks=true,citecolor=black,filecolor=black]{hyperref}
 
 
 %% Document information
