@@ -100,8 +100,15 @@ We call this \enquote{better} state (\textit{cooperate}, \textit{cooperate}) Par
   A strategy profile $s \in S$ is \textit{Pareto-optimal} if there is no profile $s' \in S$ that Pareto-dominates $s$.
 \end{definition}
 
-\begin{definition}[Symmetric game in normal form]
-	We say a game $G = (P, S, \uu)$ is symmetric if all players have the same sets of strategies: $S_i = S_j\ \forall i, j \in P$, and the payoffs only depend on the set of opponents' strategies (not on who is playing them): $u_i(\vecs) = u_i(s_i', \ppi_{-i})\ \forall i \in P, \vecs \in S, s_i' \in S_i, \ppi_{-i} \text{ is a permutation of } \vecs_{-i}.$
+\begin{definition}[Symmetric game]
+	We say a game $G = (P, S, \uu)$ is symmetric if there is a common set of strategies $S_c$ shared by all players:
+  $S_i = S_c\ \forall i \in P$,
+  and there is a common utility function $u_c$ shared by all players:
+  $u_i = u_c\ \forall i \in P$.
+  The utility only depends on the set of opponents' strategies (not on who is playing them):
+  \[
+    u_c(s_i, \vecs_{-i}) = u_c(s_i, \ppi_{-i})\ \forall s_i \in S_c, \vecs_{-i} \in S_c^{n-1}, \ppi_{-i} \text{ is a permutation of } \vecs_{-i}.
+  \]
 \end{definition}
 
 \section{Non-Nashian Game Theory}
