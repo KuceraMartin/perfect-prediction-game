@@ -60,34 +60,55 @@ In this case, we usually refer to the players the \textit{row player} and the \t
 Now that we have defined games in normal form, we can introduce some more standard notation.
 
 \begin{definition}
-  For a strategy profile $\vecs = (s_1, \dots, s_n) \in S$ we denote $\vecs_{-i} = (s_1, \dots, s_{i-1}, s_{i+1}, \dots, s_n)$, i.e., the vector $\vecs$ with element $s_i$ skipped.
-  For a strategy $s_i' \in S_i$ of player $i$ we denote $u_i(s_i', \vecs_{-i}) = u_i(s_1, \dots, s_{i-1}, s_{i'}, s_{i+1}, \dots, s_n)$ the utility of player $i$ for strategy profile $\vecs$ with element $s_i$ replaced by $s_i'$.
+  For a strategy profile $\vecs = (s_1, \dots, s_n) \in S$ we denote $\vecs_{-i} = (s_1, \dots, s_{i-1}, s_{i+1}, \dots, s_n)$ the opponents' profile, i.e., the vector $\vecs$ with element $s_i$ skipped.
+  We denote $S_{-i} = S_1 \times \dots \times S_{i-1} \times S_{i+1} \times \dots \times S_n$ the set of all opponents' profiles.
+  For a strategy $s_i' \in S_i$ of player $i$ we denote $(s_i', \vecs_{-i}) = (s_1, \dots, s_{i-1}, s_i', s_{i+1}, \dots, s_n) \in S$ the strategy profile $\vecs$ with element $s_i$ replaced by $s_i'$.
+  We denote  $u_i(s_i', \vecs_{-i}) = u_i((s_i', \vecs_{-i}))$.
 \end{definition}
 
 In Nashian game theory, we explore the best strategy for a player, supposing that he knew the strategies that all other players would choose.
 This is captured by the notion of best response.
 
 \begin{definition}[Nashian best response]
-  For a player $i \in P$, we say a strategy $s_i^* \in S_i$ is a Nashian best response to the strategy profile $\vecs_{-i}$ of his opponents if it satisfies
+  For a player $i \in P$, we say a strategy $s_i^* \in S_i$ is a Nashian best response to a strategy profile $\vecs_{-i}$ of his opponents if, supposing that $\vecs_{-i}$ stays fixed, player $i$ has no motivation to change his strategy from $s_i^*$ to another strategy.
+  Formally, we say $s_i^*$ is a (\textit{weak}) Nashian best response if it satisfies
   \[
     u_i(s_i^*, \vecs_{-i}) \ge u_i(s_i', \vecs_{-i})\ \forall s_i' \in S_i.
   \]
+  We say $s_i^*$ is a \textit{strict} Nashian best response if it satisfies
+  \[
+    u_i(s_i^*, \vecs_{-i}) > u_i(s_i', \vecs_{-i})\ \forall s_i' \in S_i.
+  \]
+  In this work, if we do not specify the type, we always refer to the \textit{weak} type.
+  Note that every strict best response is also a weak best response.
 \end{definition}
 
-In the example of Prisoner's dilemma in \autoref{tab:prisoners-dilemma}, the Nashian best response for the row player to \textit{cooperate} is \textit{defect}, and the Nashian best response to \textit{defect} is also \textit{defect}.
+In the example of Prisoner's dilemma in \autoref{tab:prisoners-dilemma}, the strict Nashian best response for the row player to \textit{cooperate} is \textit{defect}, and the strict Nashian best response to \textit{defect} is also \textit{defect}.
 
 Having defined a best response, it is quite natural to ask whether there exists a strategy profile in which each player's strategy is the best response to all other players' strategies.
 This is formally called the Nash equilibrium.
 
 \begin{definition}[Nash equilibrium]
-  We say a strategy profile $\vecs = (s_1, \dots, s_n)$ is a Nash equilibrium if for every player $i \in P$, strategy $s_i$ is a Nashian best response to $\vecs_{-i}$.
+  We say a strategy profile $\vecs = (s_1, \dots, s_n)$ is a (\textit{weak}) Nash equilibrium if for every player $i \in P$, strategy $s_i$ is a (weak) Nashian best response to $\vecs_{-i}$.
+  Similarly, $\vecs$ is a \textit{strict} Nash equilibrium if for every player $i \in P$, strategy $s_i$ is a strict Nashian best response to $\vecs_{-i}$.
 \end{definition}
 
 If we consider mixed strategies, at least one Nash equilibrium always exists~\cite{Nash51}.
 However, for pure strategies, it is not always the case.
 
-In the case of prisonner's dilemma, the strategy profile (\textit{defect}, \textit{defect}) is the only Nash equilibrium.
-The dilemma in this game is that mutual cooperation would yield a better outcome for both players.
+In the case of Prisoner's Dilemma, the strategy profile (\textit{defect}, \textit{defect}) is the only Nash equilibrium (both strict and weak).
+In some games, there are additional weak equilibiria that are not strict.
+However, in games such as Prisoner's Dilemma, this can clearly never be the case because there are no two strategy profiles with the same outcome for some player.
+We say Prisoner's Dilemma is a \textit{game without ties}.
+
+\begin{definition}[Game without ties]
+  We say a game $G = (P, S, \uu)$ is without ties if it satisfies
+  \[
+    u_i(\vecs) \ne u_i(\vect)\ \forall i \in P\ \forall \vecs, \vect \in S.
+  \]
+\end{definition}
+
+The \textit{dilemma} in Prisoner's Dilemma is that mutual cooperation would yield a better outcome for both players.
 However, from a self-interested perspective, it is not considered a rational choice to cooperate under the Nashian assumptions.
 We call this \enquote{better} state (\textit{cooperate}, \textit{cooperate}) Pareto-optimal.
 
@@ -99,6 +120,9 @@ We call this \enquote{better} state (\textit{cooperate}, \textit{cooperate}) Par
   \end{itemize}
   A strategy profile $s \in S$ is \textit{Pareto-optimal} if there is no profile $s' \in S$ that Pareto-dominates $s$.
 \end{definition}
+
+In this work, we also discuss symmetric games.
+Informally, these are games that look the same from each player's perspective.
 
 \begin{definition}[Symmetric game]
 	We say a game $G = (P, S, \uu)$ is symmetric if there is a common set of strategies $S_c$ shared by all players:
