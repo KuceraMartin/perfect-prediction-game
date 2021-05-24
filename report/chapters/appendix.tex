@@ -1,4 +1,152 @@
-\chapter{Dummy Appendix}
+\chapter{Appendix}
 
-You can defer lengthy calculations that would otherwise only interrupt
-the flow of your thesis to an appendix.
+\section{Game Theory}
+In this section, we present examples and counterexamples of games with various properties.
+These should complete our discussion from \autoref{chap:game-theory} on different equilibria and the relationships between them.
+
+Most of our equilibria involve some kind of round-elimination.
+To better visialize the elimination process, we highlight stragy profiles eliminated in different rounds with a diffrent background shade.
+Profiles that are eliminated in the very first round are highlighted in the \colorbox{gray!80}{darkest} background.
+Every subsequent round of elimination is highlighted with a \colorbox{gray!60}{lighter} and \colorbox{gray!40}{lighter} background.
+The last round of elimination is highlighted wih the \colorbox{gray!20}{lightest} backrgoud.
+Profiles that survive infinitely many rounds are left without highlighting.
+
+\begin{table}
+	\caption{
+		IR $\ne$ PTBRE.
+		Profiles (B, B), (B, C), (C, B), and (C, C) are individually rational but only (B, B) is a perfectly transparent best profile equilibrium.
+	}
+	\label{tab:ir-ne-ptbre}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+			& A		& B	   & C	  \\
+		\hline
+		A 		&\cellcolor{gray!70} 0, 0 &\cellcolor{gray!70} 1, 2 &\cellcolor{gray!70} 3, 4 \\
+		\hline
+		B		&\cellcolor{gray!70} 2, 1 &\cellcolor{gray!20} 5, 5 &\cellcolor{gray!20} 6, 7 \\
+		\hline
+		C		&\cellcolor{gray!70} 4, 3 &\cellcolor{gray!20} 7, 6 &\cellcolor{gray!00} 8, 8 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\begin{table}
+	\caption{
+		PTBRE $\ne$ PTE.
+		Profiles (B, B) and (C, C) are perfectly transparent best response equilibiria but only (B, B) is a perfectly transparent equilibrium.
+	}
+	\label{tab:ptbre-ne-pte}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+			& A		& B	   & C	  \\
+		\hline
+		A 		&\cellcolor{gray!70} 0, 0 &\cellcolor{gray!70} 1, 2 &\cellcolor{gray!70} 4, 5 \\
+		\hline
+		B		&\cellcolor{gray!70} 2, 1 &\cellcolor{gray!00} 8, 8 &\cellcolor{gray!70} 3, 6 \\
+		\hline
+		C		&\cellcolor{gray!70} 5, 4 &\cellcolor{gray!70} 6, 3 &\cellcolor{gray!20} 7, 7 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\begin{table}
+	\caption{
+		PTE $\ne$ PTBPE.
+		Strategy profile (B, B) is a PTE.
+		Profile (B, C) is a perfectly transparent row-best profile and (C, B) is a perfectly transparent column-best profile, so there is no PTBPE.
+	}
+	\label{tab:pte-ne-ptbpe}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+			& A		& B	   & C	  \\
+		\hline
+		A 		&\cellcolor{gray!20} 7, 7 &\cellcolor{gray!70} 6, 4 &\cellcolor{gray!70} 5, 3 \\
+		\hline
+		B		&\cellcolor{gray!70} 4, 6 &\cellcolor{gray!00} 8, 8 &\cellcolor{gray!70} 9, 1 \\
+		\hline
+		C		&\cellcolor{gray!70} 3, 5 &\cellcolor{gray!70} 1, 9 &\cellcolor{gray!70} 2, 2 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\begin{table}
+	\caption{
+		PTBPE $\ne$ MR.
+		In the first copy of the table, preemptively eliminated strategies (used for computing the PTBPE) are highlighted.
+		In the second copy, minimax dominated strategies (i.e., those that are not minimax rationalizable) are higlighted.
+		Strategy profile (B, F) is a PTBPE, and the only minimax rationalizable profile is (C, F).
+	}
+	\label{tab:ptbpe-ne-minimax}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+			& D		& E	   & F	  \\
+		\hline
+		A 		&\cellcolor{gray!80} 1, 1 &\cellcolor{gray!80} 2, 2 &\cellcolor{gray!80} 3, 4 \\
+		\hline
+		B		&\cellcolor{gray!80} 4, 5 &\cellcolor{gray!40} 6, 8 &\cellcolor{gray!00} 7, 9 \\
+		\hline
+		C		&\cellcolor{gray!60} 5, 6 &\cellcolor{gray!80} 8, 3 &\cellcolor{gray!60} 9, 7 \\
+		\hline
+	\end{tabular}
+	\hspace{1em}
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+			& D		& E	   & F	  \\
+		\hline
+		A 		&\cellcolor{gray!80} 1, 1 &\cellcolor{gray!80} 2, 2 &\cellcolor{gray!80} 3, 4 \\
+		\hline
+		B		&\cellcolor{gray!60} 4, 5 &\cellcolor{gray!40} 6, 8 &\cellcolor{gray!40} 7, 9 \\
+		\hline
+		C		&\cellcolor{gray!60} 5, 6 &\cellcolor{gray!20} 8, 3 &\cellcolor{gray!00} 9, 7 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+
+\begin{table}
+	\caption{
+		PTBPE and MR coincide.
+		In this game, minimax elimination and the perfectly transparent preemption eliminate exactly the same profiles in each round.
+		Profile (C, C) is both a perfectly transparent best profile equilibrium, and minimax rationalizable.
+	}
+	\label{tab:ptbpe-eq-minimax}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+			& A		& B	   & C	  \\
+		\hline
+		A 		&\cellcolor{gray!70} 0, 0 &\cellcolor{gray!70} 1, 2 &\cellcolor{gray!70} 3, 4 \\
+		\hline
+		B		&\cellcolor{gray!70} 2, 1 &\cellcolor{gray!20} 5, 5 &\cellcolor{gray!20} 6, 7 \\
+		\hline
+		C		&\cellcolor{gray!70} 4, 3 &\cellcolor{gray!20} 7, 6 &\cellcolor{gray!00} 8, 8 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+
+\begin{table}
+	\caption{
+		PTBRE does not exist.
+		The perfectly transparent best responses to A, B, C, D are B, D, B, C, respectively (for both row and column player, as the game is symmetric).
+	}
+	\label{tab:no-ptbre}
+	\centering
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
+			& A		& B	   & C	 & D	 \\
+		\hline
+		A 		&\cellcolor{gray!70}  1,  1 &\cellcolor{gray!20} 13,  5 &\cellcolor{gray!70}  6,  2 &\cellcolor{gray!70}  9,  0 \\
+		\hline
+		B		&\cellcolor{gray!20}  5, 13 &\cellcolor{gray!20}  4,  4 &\cellcolor{gray!20} 15,  7 &\cellcolor{gray!20}  8, 14 \\
+		\hline
+		C		&\cellcolor{gray!70}  2,  6 &\cellcolor{gray!20}  7, 15 &\cellcolor{gray!70}  3,  3 &\cellcolor{gray!20} 12, 10 \\
+		\hline
+		D		&\cellcolor{gray!70}  0,  9 &\cellcolor{gray!20} 14,  8 &\cellcolor{gray!20} 10, 12 &\cellcolor{gray!20} 11, 11 \\
+		\hline
+	\end{tabular}
+\end{table}
