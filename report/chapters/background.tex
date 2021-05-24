@@ -136,14 +136,28 @@ Informally, these are games that look the same from each player's perspective.
 \end{definition}
 
 \section{Non-Nashian Game Theory}
-\begin{definition}[Minimax rationality]
-  TODO
+Suppose that there is a game in which some player $i$ has some strategies $s_i$ and $s_j$, $s_i \ne s_j$ such that no matter what strategies the opponents choose, player $i$ will get a better payoff by playing $s_i$ compared to $s_j$.
+If the player wants to maximize utility, it would be irrational to play $s_j$.
+If we suppose all players are rational, we can eliminate strategies such as $s_j$ because we know they will never be part of an outcome.
+For player $i$ to choose the best strategy, it may be useful to first discard all the strategy profiles that are not possible outcomes.
+This reduces the number of options to compare and to choose from.
+Moreover, after discarding some of the profiles, the whole process may be repeated; maybe it will again discard some impossible outcomes.
+
+\begin{definition}[Minimax rationalizibility]
+  Given a game $G = (P, S, \uu)$, we define $\mathcal{R}_0 = S$ and $\mathcal{R}_k \subseteq \mathcal{R}_{k-1}$ the set of strategy profiles that are not minimax-dominated in the $i$\textsuperscript{th} round:
+  \[
+    \mathcal{R}_k(G) = \left\{\vecs \in \mathcal{R}_{k-1}(G) \mid \forall i \in P: \max_{\vect_{-i} \in S_{-i}}u_i(s_i, \vect_{-i}) \ge \max_{t_i \in S_i}\min_{t_{-i} \in S_{-i}}u_i(t_i, \vect_{-i})\right\}.
+  \]
+  We say a strategy profile $\vecs \in S$ is minimax rationalizable (MR) if it survives all rounds: $\vecs \in \mathcal{R}_k(G)\ \forall k \in \N$.
 \end{definition}
+
+Minimax rationalizibility is a useful concept but in practice it turns out not to be very selective: in many games, most (or even all) strategies are minimax rationalizable.
+Individual rationality implements a similar idea but provides a more granular selection: individal strategy profiles are compared, instead of the whole strategies.
 
 \begin{definition}[Individual rationality]
   For any game $G = (P, S, \uu)$ we say a strategy profile $\vecs = (s_1, \dots, s_n) \in S$ is \textit{not} individually rational if there is a player $i \in P$ who could, by choosing a different strategy $s_i' \ne s_i$, ensure a higher worst-case payoff (across all possible opponent profiles) than $u_i(\vecs)$.
   Otherwise, we say $\vecs$ is individually rational.
-  Formally, a strategy profile $\vecs$ is individually rational if
+  Formally, a strategy profile $\vecs$ is individually rational (IR) if
   \[
     \forall i \in P: u_i(\vecs) \ge \max_{t_i\in S_i}\min_{\vect_{-i} \in S_{-i}}u_i(t_i, \vect_{-i}).
   \]
@@ -171,26 +185,21 @@ Informally, this means that
   If one player would have chosen a different strategy, all the others would have known and would still have acted rationally.
 \end{enumerate}
 Making these two assumptions together allows to define a new kind of equilibrium.
-It is based on iteratively eliminating strategy profiles that cannot possibly be an outcome of the game.
-First, it is easy to see that any strategy profile that is not individually rational cannot be an outcome of the game because there would be some player who would surely be better off with a different strategy (and the player can predict it because of Necessare Knowledge of Strategies).
+Similar to minimax rationalizibility, it is based on iteratively eliminating strategy profiles that cannot possibly be an outcome of the game.
+First, it is easy to see that any strategy profile that is not individually rational cannot be an outcome of the game because there would be some player who would surely be better off with a different strategy (and all players know this because of Necessare Knowledge of Strategies).
 Thus, in the first round of elimination, we can eliminate all strategy profiles that are not individually rational.
 Now, since every player knows that only individually rational strategy profiles are possible outcomes, they do not actually need to consider the eliminated profiles anymore.
 This naturally leads to another round of elimination, in which we only keep profiles that are individually rational with respect to the set of possible outcomes from the previous round.
-The iterative process of eliminating impossible strategy profiles is described by the following definition.
 
-\begin{definition}[$k$\textsuperscript{th}-level-preempted strategy profile]
-  For a given game $G = (P, S, \uu)$, we define $\mathcal{S}_0(G) = S$.
+\begin{definition}[Perfectly transparent equilibrium]
+  For a given game $G = (P, S, \uu)$, we define the $k$\textsuperscript{th}-level-preempted strategy profile $\mathcal{S}_k \subseteq S$ for $k \in \N$ as follows.
+  $\mathcal{S}_0(G) = S$.
   For $k \ge 1$, we say a strategy profile is $k$\textsuperscript{th}-level-preempted if it does not Pareto-dominate the maximin utility over all strategy profiles that are not $(k-1)$\textsuperscript{st}-level preempted.
   The set of strategy profiles that survived the $k$\textsuperscript{th} round of elimination is
   \[
     \mathcal{S}_k(G) = \left\{\vecs \in \mathcal{S}_{k-1}(G) \mid \forall i \in P: u_i(\vecs) \ge \max_{t_i \in S_i}\min_{t_{-i} \in S_{-i}} u_i(t_i, t_{-i})\right\}.
   \]
-\end{definition}
-
-Finally, we define a perfectly transparent equilibrium, which is the main focus of this work.
-
-\begin{definition}[Perfectly transparent equilibrium]
-  For a given game $G = (P, S, \uu)$ with no ties, a perfectly transparent equilibrium (PTE) is a strategy profile $\vecs \in S$ that never gets eliminated in the preemtpion process.
+  A perfectly transparent equilibrium (PTE) is a strategy profile $\vecs \in S$ that never gets eliminated in the preemtpion process.
   In other words, $\vecs \in S$ is a PTE if $\vecs \in \mathcal{S}_k(G)\ \forall k \in \N$.
 \end{definition}
 
