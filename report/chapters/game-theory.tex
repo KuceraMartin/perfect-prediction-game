@@ -7,31 +7,63 @@
 \end{lemma}
 
 \begin{proof}
-	For every player $i \in P$ we denote $m_i = \text{arg} \max_{t_i \in S_i} \min_{\vect_{-i} \in S_{-i}} u_i(t_i, \vect_{-i}) \in S_i$ the strategy that lower-bounds utility of player $i$.
+	For every player $i \in P$ we denote $m_i \in S_i$ the strategy that lower-bounds utility of player $i$:
+	\[
+		m_i = \text{arg} \max_{t_i \in S_i} \min_{\vect_{-i} \in S_{-i}} u_i(t_i, \vect_{-i}).
+	\]
 	We claim that the strategy profile $\mm = (m_1, \dots, m_n) \in S$ is individually rational.
-	If $\mm$ was not individually rational, there would have to be some player $j \in P$ and a strategy $s_j^* \in S_j$ that would ensure a better worst-case payoff: $\min_{\vecs_{-j} \in S_{-j}}u_j(s_j^*, \vecs_{-j}) > u_j(\mm)$ which would contradict the choice of $m_j$.
+	If $\mm$ was not individually rational, there would have to be some player $j \in P$ and a strategy $s_j^* \in S_j$ that would ensure a better worst-case payoff: $\min_{\vecs_{-j} \in S_{-j}}u_j(s_j^*, \vecs_{-j}) > u_j(\mm)$ which would contradict the choice of~$m_j$.
 \end{proof}
 
-\section{Games without ties}
+\begin{definition}[Perfectly transparent best response]
+	In a game $G = (P, S, \uu)$ we say a strategy $s_i^* \in S_i$ is a perfectly transparent best response to a strategy profile $\vecs_{-i} \in S_{-i}$ of the opponent players if it is the Nashian best response to $\vecs_{-i}$ across all profiles that survive the maximum number of preemption rounds.
+	The weak/strict notion is inherited from the Nashian best response.
+	Formally $s_i^*$ is a (\textit{weak}) perfectly transparent best response if either $(s_i^*, \vecs_{-i})$ is a PTE or $\exists k \in \N: (s_i^*, \vecs_{-i}) \in \mathcal{S}_k(G), (s_i, \vecs_{-i}) \notin \mathcal{S}_{k+1}(G) \forall s_i \in S_i$, and
+	\[
+		\forall (s_i', \vecs_{-i}) \in \mathcal{S}_k(G): u_i(s_i^*, \vecs_{-i}) \ge u_i(s_i', \vecs_{-i}).
+	\]
+	It is a \textit{strict} perfectly transparent best response if either $(s_i^*, \vecs_{-i})$ is a PTE or $\exists k \in \N: (s_i^*, \vecs_{-i}) \in \mathcal{S}_k(G), (s_i, \vecs_{-i}) \notin \mathcal{S}_{k+1}(G) \forall s_i \in S_i$, and
+	\[
+		\forall (s_i', \vecs_{-i}) \in \mathcal{S}_k(G): s_i' \ne s_i^* \implies u_i(s_i^*, \vecs_{-i}) > u_i(s_i', \vecs_{-i}).
+	\]
+\end{definition}
 
+\begin{definition}[Perfectly transparent best response equilibrium]
+	We say a strategy profile $\vecs = (s_1, \dots, s_n) \in S$ is a (\textit{weak}) perfectly transparent best response equilibrium (PTBRE) if $s_i$ is a (weak) perfectly transparent best response to $\vecs_{-i}$ for all players $i \in P$.
+	
+	Similarly, $\vecs$ is a \textit{strict} PTBRE if $s_i$ is a strict perfectly transparent best response to $\vecs_{-i}$ for all players $i \in P$.
+\end{definition}
+
+\begin{definition}[Perfectly transparent $i$-best profile]
+	For a givne game $G = (P, S, \uu)$ and player $i \in P$ we say a strategy profile $\vecs = (s_1, \dots, s_n) \in S$ is a (\textit{weak}) perfectly transparent $i$-best profile if
+	$s_i$ is a (weak) perfectly transparent best response to $\vecs_{-i}$ and
+	\[
+		\forall \vecs'_{-i} \in S_{-i}: u_i(\vecs) \ge u_i\left(b(\vecs'_{-i}), \vecs'_{-i}\right),
+	\]
+	where $b(\vecs'_{-i})$ is the perfectly transparent best response to $\vecs'_{-i}$.
+	It is a \textit{strict} perfectly transparent $i$-best profile if $s_i$ is a strict perfectly transparent best response to $s_{-i}$ and
+	\[
+		\forall \vecs_{-i}' \in S_{-i}: \vecs_{-i}' \ne s_{-i} \implies u_i(\vecs) > u_i\left(b(s_{-i}'), \vecs_{-i}'\right).
+	\]
+\end{definition}
+
+\begin{definition}[Perfectly transparent best profile equilibrium]
+	We say that a strategy profile $\vecs \in S$ is a (\textit{weak}) perfectly transparent best profile equilibrium (PTBPE) if $\vecs$ is a (weak) perfectly transparent $i$-best profile for all $i \in P$.
+
+	Similarly, $\vecs$ is a \textit{strict} PTBPE if it is a strict perfectly transparent $i$-best profile for all $i \in P$.
+\end{definition}
+
+\section{Games without ties}
+We can observe that in games without ties, similar to Nash equilibria, weak and strict equilibiria are equivalent also in the case of PTBRE and PTBPE.
+Thus, in this section, we do not distingiush between them.
+
+% TODO: convert into intro to equilibiria subsets:
 \begin{observation}
 	\label{th:pte-subset-ir}
 	If a game $G = (P, S, \uu)$ has a PTE $\vecs \in S$, then $\vecs$ is individually rational.
 	However, not every individually rational profile is a PTE.
 	In other words, if we think of PTE and IR as sets of strategy profiles in any given game, we have PTE $\subsetneq$ IR.
 \end{observation}
-
-\begin{definition}[Perfectly transparent best response]
-	For a game $G = (P, S, \uu)$ we say a strategy $s_i^* \in S_i$ is a perfectly transparent best response to a strategy profile $\vecs_{-i}$ of the opponent players if it is the Nashian best response to $\vecs_{-i}$ across all profiles that survive the maximum number of preemption rounds before all possible profiles are eliminated.
-	Formally, there is some $k \in \N$ such that $(s_i^*, \vecs_{-i}) \in \mathcal{S}_k$, and $(s_i, \vecs_{-i}) \notin \mathcal{S}_{k+1} \forall s_i \in S_i$, and
-	\[
-		u_i(s_i^*, \vecs_{-i}) \ge u_i(s_i', \vecs_{-i})\ \forall (s_i', \vecs_{-i}) \in \mathcal{S}_k.
-	\]
-\end{definition}
-
-\begin{definition}[Perfectly transparent best response equilibrium]
-	We say a strategy profile $\vecs = (s_1, \dots, s_n) \in S$ is a perfectly transparent best response equilibrium (PTBRE) if $s_i$ is a perfectly transparent best response to $\vecs_{-i}$ for all players $i \in P$.
-\end{definition}
 
 \begin{lemma}
 	For any game $G = (P, S, \uu)$, if a strategy profile $\vecs \in S$ is a PTBRE, then it is individually rational.
@@ -40,8 +72,8 @@
 
 \begin{proof}
 	Let us suppose that there is a game $G = (P, S, \uu)$ and a strategy profile $\vecs = (s_1, \dots, s_n) \in S$ such that $\vecs$ is a PTBRE but not individually rational.
-	This is equivalent to $s_i$ being a perfectly transparent best response to $\vecs_{-i}$ for all $i \in P$, and $\vecs \notin \mathcal{S}_1$.
-	Note that we must also have $(s_i', \vecs_{-i}) \notin \mathcal{S}_1\ \forall s_i' \in S_i,\ \forall i \in P$ because otherwise $s_i$ would not be a perfectly transparent best response to $\vecs_{-i}$ for some player $i$.
+	This is equivalent to $s_i$ being a perfectly transparent best response to $\vecs_{-i}$ for all $i \in P$, and $\vecs \notin \mathcal{S}_1(G)$.
+	Note that we must also have $(s_i', \vecs_{-i}) \notin \mathcal{S}_1(G)\ \forall s_i' \in S_i,\ \forall i \in P$ because otherwise $s_i$ would not be a perfectly transparent best response to $\vecs_{-i}$ for some player $i$.
 	This means the perfetcly transparent best response of every player $i \in P$ to $\vecs_{-i}$ is simply a Nashian best response (since all considered strategy profiles are eliminated in the same preemption round).
 	Thus, $\vecs$ is a Nash equilibrium, which is always individually rational.
 \end{proof}
@@ -59,26 +91,17 @@
 	\autoref{tab:ptbre-ne-pte} shows that the inclusion is strict.
 \end{remark}
 
-\begin{definition}[Perfectly transparent $i$-best profile]
-	For a game $G = (P, S, \uu)$ and player $i \in P$ we say a strategy profile $\vecs = (s_1, \dots, s_n) \in S$ is a perfectly transparent $i$-best profile if
-	$s_i$ is a perfectly transparent best response to $\vecs_{-i}$ and $u_i(\vecs) \ge u_i(b(\vecs'_{-i}), \vecs'_{-i})$ for all opponent profiles $\vecs'_{-i}$ where $b(\vecs'_{-i})$ is the perfectly transparent best response to $\vecs'_{-i}$.
-\end{definition}
-
-\begin{definition}[Perfectly transparent best profile equilibrium]
-	We say a strategy profile $\vecs \in S$ is a perfectly transparent best profile equilibrium (PTBPE) if $\vecs$ is a perfectly transparent $i$-best profile for all $i \in P$.
-\end{definition}
-
 \begin{lemma}
 	If a game $G = (P, S, \uu)$ has a PTBPE $\vecs \in S$, then $\vecs$ is also a PTE, i.e., we have the inclusion PTBPE $\subset$ PTE.
 \end{lemma}
 
 \begin{proof}
-	For the sake of deriving a contradiction, suppose that there is a game $G = (P, S, \uu)$ with a strategy profile $\vecs = (s_1, \dots, s_n) \in S$ such that $\vecs$ is a PTBPE but not a PTE and let $k$ be the last preemption round in which $\vecs$ is not eliminated (i.e., $\vecs \in \mathcal{S}_k$ but $\vecs \notin \mathcal{S}_{k+1}$).
+	For the sake of deriving a contradiction, suppose that there is a game $G = (P, S, \uu)$ with a strategy profile $\vecs = (s_1, \dots, s_n) \in S$ such that $\vecs$ is a PTBPE but not a PTE and let $k$ be the last preemption round in which $\vecs$ is not eliminated (i.e., $\vecs \in \mathcal{S}_k(G)$ but $\vecs \notin \mathcal{S}_{k+1}(G)$).
 	Because $\vecs$ is eliminated in the $(k+1)$\textsuperscript{st} round, there must be some player $i \in P$ with a strategy $s_i^* \ne s_i$ which causes the elimination:
 	\[
-		\forall \vecs_{-i}' \in S_{-i}: (s_i^*, \vecs_{-i}') \in \mathcal{S}_k \implies u_i(s_i^*, \vecs_{-i}') > u_i(\vecs).
+		\forall \vecs_{-i}' \in S_{-i}: (s_i^*, \vecs_{-i}') \in \mathcal{S}_k(G) \implies u_i(s_i^*, \vecs_{-i}') > u_i(\vecs).
 	\]
-	Let $\vecs_{-i}^* \in S_{-i}$ such that $(s_i^*, \vecs_{-i}^*)\in \mathcal{S}_k$ (there must be at least one to cause $\vecs \notin \mathcal{S}_{k+1}$).
+	Let $\vecs_{-i}^* \in S_{-i}$ such that $(s_i^*, \vecs_{-i}^*)\in \mathcal{S}_k(G)$ (there must be at least one to cause $\vecs \notin \mathcal{S}_{k+1}(G)$).
 	We have $u_i(s_i^*, \vecs_{-i}^*) > u_i(\vecs)$ which means $s_i$ is not a perfectly transparent best response of player $i$ to $\vecs_{-i}$, so $\vecs$ is not a perfectly transparent $i$-best profile, contradicting $\vecs$ being a PTBPE.
 \end{proof}
 
