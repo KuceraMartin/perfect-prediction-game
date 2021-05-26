@@ -32,7 +32,7 @@ Note that we only consider pure strategies, meaning that each player must choose
 Every game in normal form can be captured by an $n$-dimensional matrix with one dimension for each player and one index for every strategy in the strategy set of that player.
 Every cell of the matrix contains a vector of utilities for each player for a particular strategy profile.
 
-In this work, we focus solely on 2-player games which can be conveniently displayed as 2-dimensional matrices.
+In this work, we focus mainly on 2-player games which can be conveniently displayed as 2-dimensional matrices.
 In this case, we usually refer to the players the \textit{row player} and the \textit{column player}.
 \autoref{tab:prisoners-dilemma} shows an example of such a matrix.
 
@@ -104,7 +104,7 @@ We say Prisoner's Dilemma is a \textit{game without ties}.
 \begin{definition}[Game without ties]
   We say a game $G = (P, S, \uu)$ is without ties if it satisfies
   \[
-    u_i(\vecs) \ne u_i(\vect)\ \forall i \in P\ \forall \vecs, \vect \in S.
+    \forall i \in P,\ \forall \vecs, \vect \in S: \vecs \ne \vect \implies u_i(\vecs) \ne u_i(\vect).
   \]
 \end{definition}
 
@@ -144,9 +144,9 @@ This reduces the number of options to compare and to choose from.
 Moreover, after discarding some of the profiles, the whole process may be repeated; maybe it will again discard some impossible outcomes.
 
 \begin{definition}[Minimax rationalizibility]
-  Given a game $G = (P, S, \uu)$, we define $\mathcal{R}_0 = S$ and $\mathcal{R}_k \subseteq \mathcal{R}_{k-1}$ the set of strategy profiles that are not minimax-dominated in the $i$\textsuperscript{th} round:
+  Given a game $G = (P, S, \uu)$, we define $\mathcal{R}_0(G) = S$ and $\mathcal{R}_k(G) \subseteq \mathcal{R}_{k-1}(G)$ the set of strategy profiles that are not minimax-dominated in the $i$\textsuperscript{th} round:
   \[
-    \mathcal{R}_k(G) = \left\{\vecs \in \mathcal{R}_{k-1}(G) \mid \forall i \in P: \max_{\vect_{-i} \in S_{-i}}u_i(s_i, \vect_{-i}) \ge \max_{t_i \in S_i}\min_{t_{-i} \in S_{-i}}u_i(t_i, \vect_{-i})\right\}.
+    \mathcal{R}_k(G) = \left\{\vecs \in \mathcal{R}_{k-1}(G) \mid \forall i \in P: \max_{\vect_{-i} \in S_{-i}}u_i(s_i, \vect_{-i}) \ge \max_{t_i \in S_i}\min_{(t_i, \vect_{-i}) \in \mathcal{R}_{k-1}(G)}u_i(t_i, \vect_{-i})\right\}.
   \]
   We say a strategy profile $\vecs \in S$ is minimax rationalizable (MR) if it survives all rounds: $\vecs \in \mathcal{R}_k(G)\ \forall k \in \N$.
 \end{definition}
@@ -197,7 +197,7 @@ This naturally leads to another round of elimination, in which we only keep prof
   For $k \ge 1$, we say a strategy profile is $k$\textsuperscript{th}-level-preempted if it does not Pareto-dominate the maximin utility over all strategy profiles that are not $(k-1)$\textsuperscript{st}-level preempted.
   The set of strategy profiles that survived the $k$\textsuperscript{th} round of elimination is
   \[
-    \mathcal{S}_k(G) = \left\{\vecs \in \mathcal{S}_{k-1}(G) \mid \forall i \in P: u_i(\vecs) \ge \max_{t_i \in S_i}\min_{t_{-i} \in S_{-i}} u_i(t_i, t_{-i})\right\}.
+    \mathcal{S}_k(G) = \left\{\vecs \in \mathcal{S}_{k-1}(G) \mid \forall i \in P: u_i(\vecs) \ge \max_{t_i \in S_i}\min_{(t_i, \vect_{-i}) \in \mathcal{S}_{k-1}(G)} u_i(t_i, t_{-i})\right\}.
   \]
   A perfectly transparent equilibrium (PTE) is a strategy profile $\vecs \in S$ that never gets eliminated in the preemtpion process.
   In other words, $\vecs \in S$ is a PTE if $\vecs \in \mathcal{S}_k(G)\ \forall k \in \N$.
