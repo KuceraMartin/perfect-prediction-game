@@ -135,6 +135,12 @@ Minimax rationalizibility intersects with all the other equilibiria, as shown in
 \end{figure}
 
 \section{Symmetric games without ties}
+In this section, we restrict ourselves to symmetric games.
+All the \enquote{subset} relations from the previous section still hold, since symmetric games are a subset of general games.
+Moreover, none of the equilibiria collapses (i.e., they are still strict subsets, even when restricted to symmetric games); this because all the provided counterexamples are symmetric games.
+Thus, the venn diagram from \autoref{fig:venn-general-without-ties} remains almost unchanged.
+The only new relation that emerges is between minimax rationaliziblity and PTE.
+Furthermore, we present some other interesting observations about symmetric games.
 
 \begin{observation}
 	 In a symmetric game $G = (P, S, \uu)$, if a strategy profile $\vecs \in S$ is a PTE, then it lies on the diagonal, i.e., we have $\vecs = (a, a, \dots, a)$ for some strategy $a$.
@@ -167,3 +173,11 @@ Minimax rationalizibility intersects with all the other equilibiria, as shown in
 	Moreover, we must have $u_i(\vecs^*) > u_i(\vecs)\ \forall i \in P$ because $s_j$ minimax-dominates $s_i$.
 	This means $\vecs$ is not Pareto-optimal which contradicts $\vecs$ being a PTE.
 \end{proof}
+
+\begin{remark}
+	\autoref{tab:sym-mr-ne-pte} shows that the inclusion is strict.
+\end{remark}
+
+\begin{remark}
+	\autoref{tab:sym-ptbre-ne-mr} and \autoref{tab:sym-mr-ne-ptbre} show that PTBRE and MR are still intersecting, even in symmetric games.
+\end{remark}

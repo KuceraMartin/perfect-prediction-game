@@ -150,3 +150,106 @@ Profiles that survive infinitely many rounds are left without highlighting.
 		\hline
 	\end{tabular}
 \end{table}
+
+
+\begin{table}
+	\caption{
+		MR\textsuperscript{sym} $\ne$ PTE\textsuperscript{sym}.
+		In the first copy of the table, preemptively eliminated strategies (used for computing the PTE) are highlighted.
+		In the second copy, minimax dominated strategies (i.e., those that are not minimax rationalizable) are higlighted.
+		Strategy profiles (B, B), (B, C), (C, B), and (C, C) are MR but there is no PTE.
+	}
+	\label{tab:sym-mr-ne-pte}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+			& D		& E	   & F	  \\
+		\hline
+		A 		&\cellcolor{gray!80} 0, 0 &\cellcolor{gray!80} 1, 2 &\cellcolor{gray!80} 3, 7 \\
+		\hline
+		B		&\cellcolor{gray!80} 2, 1 &\cellcolor{gray!80} 4, 4 &\cellcolor{gray!20} 6, 8 \\
+		\hline
+		C		&\cellcolor{gray!80} 7, 3 &\cellcolor{gray!20} 8, 6 &\cellcolor{gray!50} 5, 5 \\
+		\hline
+	\end{tabular}
+	\hspace{1em}
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+			& D		& E	   & F	  \\
+		\hline
+		A 		&\cellcolor{gray!80} 0, 0 &\cellcolor{gray!80} 1, 2 &\cellcolor{gray!80} 3, 7 \\
+		\hline
+		B		&\cellcolor{gray!80} 2, 1 &\cellcolor{gray!00} 4, 4 &\cellcolor{gray!00} 6, 8 \\
+		\hline
+		C		&\cellcolor{gray!80} 7, 3 &\cellcolor{gray!00} 8, 6 &\cellcolor{gray!00} 5, 5 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\begin{table}
+	\caption{
+		PTBRE\textsuperscript{sym} $\ne$ MR\textsuperscript{sym}.
+		In the first copy of the table, preemptively eliminated strategies (used for computing PTBRE) are highlighted.
+		In the second copy, minimax dominated strategies (i.e., those that are not minimax rationalizable) are higlighted.
+		Strategy profiles (B, B) and (C, C) are a PTBRE but only (C, C) is MR.
+	}
+	\label{tab:sym-ptbre-ne-mr}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+			& A		& B	   & C	  \\
+		\hline
+		A 		&\cellcolor{gray!70} 0, 0 &\cellcolor{gray!70} 1, 2 &\cellcolor{gray!70} 3, 5 \\
+		\hline
+		B		&\cellcolor{gray!70} 2, 1 &\cellcolor{gray!20} 6, 6 &\cellcolor{gray!70} 4, 7 \\
+		\hline
+		C		&\cellcolor{gray!70} 5, 3 &\cellcolor{gray!70} 7, 4 &\cellcolor{gray!00} 8, 8 \\
+		\hline
+	\end{tabular}
+	\hspace{1em}
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+			& A		& B	   & C	  \\
+		\hline
+		A 		&\cellcolor{gray!70} 0, 0 &\cellcolor{gray!70} 1, 2 &\cellcolor{gray!70} 3, 5 \\
+		\hline
+		B		&\cellcolor{gray!70} 2, 1 &\cellcolor{gray!20} 6, 6 &\cellcolor{gray!20} 4, 7 \\
+		\hline
+		C		&\cellcolor{gray!70} 5, 3 &\cellcolor{gray!20} 7, 4 &\cellcolor{gray!00} 8, 8 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\begin{table}
+	\caption{
+		MR\textsuperscript{sym} $\ne$ PTBRE\textsuperscript{sym}.
+		In the first copy of the table, preemptively eliminated strategies are highlighted.
+		In the second copy, minimax dominated strategies are higlighted.
+		Strategy profiles (B, B), (B, C), (C, B), and (C, C) are a MR but only (C, C) is a PTBRE.
+	}
+	\label{tab:sym-mr-ne-ptbre}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+			& A		& B	   & C	  \\
+		\hline
+		A 		&\cellcolor{gray!80} 0, 0 &\cellcolor{gray!80} 1, 2 &\cellcolor{gray!80} 3, 4 \\
+		\hline
+		B		&\cellcolor{gray!80} 2, 1 &\cellcolor{gray!50} 5, 5 &\cellcolor{gray!20} 7, 6 \\
+		\hline
+		C		&\cellcolor{gray!80} 4, 3 &\cellcolor{gray!20} 6, 7 &\cellcolor{gray!00} 8, 8 \\
+		\hline
+	\end{tabular}
+	\hspace{1em}
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+			& A		& B	   & C	  \\
+		\hline
+		A 		&\cellcolor{gray!80} 0, 0 &\cellcolor{gray!80} 1, 2 &\cellcolor{gray!80} 3, 4 \\
+		\hline
+		B		&\cellcolor{gray!80} 2, 1 &\cellcolor{gray!00} 5, 5 &\cellcolor{gray!00} 7, 6 \\
+		\hline
+		C		&\cellcolor{gray!80} 4, 3 &\cellcolor{gray!00} 6, 7 &\cellcolor{gray!00} 8, 8 \\
+		\hline
+	\end{tabular}
+\end{table}
