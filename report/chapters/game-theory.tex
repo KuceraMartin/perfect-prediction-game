@@ -15,6 +15,9 @@
 	If $\mm$ was not individually rational, there would have to be some player $j \in P$ and a strategy $s_j^* \in S_j$ that would ensure a better worst-case payoff: $\min_{\vecs_{-j} \in S_{-j}}u_j(s_j^*, \vecs_{-j}) > u_j(\mm)$ which would contradict the choice of~$m_j$.
 \end{proof}
 
+In this chapter, we introduce two new equilibria: the perfectly transparent best response equilibrium, and the perfectly transparent best profile equilibrium.
+Then, we discuss some relations between these two equilibiria, and between the other equilibria introduced in \autoref{chap:background}.
+
 \begin{definition}[Perfectly transparent best response]
 	In a game $G = (P, S, \uu)$ we say a strategy $s_i^* \in S_i$ is a perfectly transparent best response to a strategy profile $\vecs_{-i} \in S_{-i}$ of the opponent players if it is the Nashian best response to $\vecs_{-i}$ across all profiles that survive the maximum number of preemption rounds.
 	The weak/strict notion is inherited from the Nashian best response.
@@ -53,17 +56,16 @@
 	Similarly, $\vecs$ is a \textit{strict} PTBPE if it is a strict perfectly transparent $i$-best profile for all $i \in P$.
 \end{definition}
 
+Recall that for any game $G = (P, S, \uu)$, a strategy profile $\vecs \in S$ is individually rational if and only if it survives the first preemption round: $\vecs \in \mathcal{S}_1(G)$.
+This means that every PTE must be individually rational.
+If we think of these equilibiria as sets of strategy profiles in any possible game, we can express this as PTE $\subset$ IR.
+It is not hard to see that the inclusion is indeed strict as there are games in which $\mathcal{S}_2 \subsetneq \mathcal{S}_1$, so not all individually rational profiles are PTEs.
+
+In the rest of this chapter, we present several such inclusion results that help to understand the relations between individal rationality, perfetcly transparent best response equilibiria, perfectly transparent equilibiria, perfectly transparent best profile equilibiria, and minimax rationalizibility.
+
 \section{Games without ties}
 We can observe that in games without ties, similar to Nash equilibria, weak and strict equilibiria are equivalent also in the case of PTBRE and PTBPE.
 Thus, in this section, we do not distingiush between them.
-
-% TODO: convert into intro to equilibiria subsets:
-\begin{observation}
-	\label{th:pte-subset-ir}
-	If a game $G = (P, S, \uu)$ has a PTE $\vecs \in S$, then $\vecs$ is individually rational.
-	However, not every individually rational profile is a PTE.
-	In other words, if we think of PTE and IR as sets of strategy profiles in any given game, we have PTE $\subsetneq$ IR.
-\end{observation}
 
 \begin{lemma}
 	For any game $G = (P, S, \uu)$, if a strategy profile $\vecs \in S$ is a PTBRE, then it is individually rational.
