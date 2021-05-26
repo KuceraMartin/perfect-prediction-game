@@ -103,8 +103,10 @@ Thus, in this section, we do not distingiush between them.
 	\[
 		\forall \vecs_{-i}' \in S_{-i}: (s_i^*, \vecs_{-i}') \in \mathcal{S}_k(G) \implies u_i(s_i^*, \vecs_{-i}') > u_i(\vecs).
 	\]
-	Let $\vecs_{-i}^* \in S_{-i}$ such that $(s_i^*, \vecs_{-i}^*)\in \mathcal{S}_k(G)$ (there must be at least one to cause $\vecs \notin \mathcal{S}_{k+1}(G)$).
-	We have $u_i(s_i^*, \vecs_{-i}^*) > u_i(\vecs)$ which means $s_i$ is not a perfectly transparent best response of player $i$ to $\vecs_{-i}$, so $\vecs$ is not a perfectly transparent $i$-best profile, contradicting $\vecs$ being a PTBPE.
+	Let $\vecs_{-i}^* \in S_{-i}$ be the opponents' profile that minimizes $u_i(s_i^*, \vecs_{-i}^*)$, subject to $(s_i^*, \vecs_{-i}^*)\in \mathcal{S}_k(G)$ (there must be at least one such profile to cause $\vecs \notin \mathcal{S}_{k+1}(G)$).
+	Let $b \in S_i$ be the perfectly transparent best response to $\vecs_{-i}^*$.
+	By the choice of $\vecs_{-i}^*$, we must have $u_i(b, \vecs_{-i}^*) \ge u_i(s_i^*, \vecs_{-i}^*) > u_i(\vecs)$.
+	This means that $\vecs$ is not a perfectly transparent $i$-best profile, contradicting $\vecs$ being a PTBPE.
 \end{proof}
 
 \begin{remark}
@@ -114,7 +116,8 @@ Thus, in this section, we do not distingiush between them.
 Minimax rationalizibility intersects with all the other equilibiria, as shown in \autoref{tab:ptbpe-ne-minimax} and \autoref{tab:ptbpe-eq-minimax}.
 
 \begin{figure}
-	\caption{A venn diagram depicting the inclusion of different equilibria.}
+	\caption{A venn diagram depicting the inclusion of different equilibria in general games without ties.}
+	\label{fig:venn-general-without-ties}
 	\centering
 
 	\begin{tikzpicture}[line width=0.25pt]
@@ -151,7 +154,7 @@ Minimax rationalizibility intersects with all the other equilibiria, as shown in
 
 \begin{lemma}
 	In a symmetric game $G = (P, S, \uu)$, if a strategy profile $\vecs \in S$ is a PTE, then it is minimax rationalizable.
-	Thus, we have PTE\textsuperscript{sym} $\subset$ MR.
+	Thus, we have PTE\textsuperscript{sym} $\subset$ MR\textsuperscript{sym}.
 \end{lemma}
 
 \begin{proof}
