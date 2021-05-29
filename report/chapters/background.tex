@@ -217,13 +217,33 @@ It neatly combines object-oriented and functional programming paradigms and many
 In the rest of this subsection we describe some core concepts in Scala that are not common in other programming languages and will be referred to later in this text.
 
 \subsubsection{Traits}
-TODO
+Traits are similar to interfaces in Java and other languages.
+A trait defines methods and fields that are shared among classes and objects that extend the trait.
+A trait itself cannot be instantiated.
+Unlike interfaces in Java which can only declare abstract methods, traits in Scala can also define the implementation of its methods.
 
 \subsubsection{Case Classes}
-TODO
+Case classes are just regular classes with some extra features / syntactic sugar.
+The benefits include:
+\begin{itemize}
+  \item Methods \textsc{equals} and \textsc{hashCode} are generated allowing to compare objects (by structure rather than reference) and use them as keys in maps easily.
+  \item A convenient \textsc{copy} method is generated to simplify copying the object, with possible changes in certain values.
+  \item An \textsc{unapply} method is generated which is used in pattern matching (see below).
+  \item A default \textsc{toString} method is generated, which is useful for debugging.
+\end{itemize}
 
-\subsubsection{Objects}
-TODO
+A typical use-case is for modeling immutable data: structures, data transfer objects (DTOs), value objects, etc.
+
+
+\subsubsection{Singleton Objects}
+Using the \textit{object} keyword, Scala allows to define classes that have exactly one instance.
+The instance is created lazily when referenced for the first time.
+
+\subsubsection{Pattern Matching}
+Pattern matching is a construct that allows to check a value against a pattern and optionally deconstruct/\enquote{unpack} the value into components.
+It is a more powerful version of Java's \textit{switch} statement and can be used to replace a series of if/else statements.
+
+TODO: code example?
 
 \subsubsection{sbt}
 sbt is the most common build tool for Scala projects, similar to Apache's Maven.
