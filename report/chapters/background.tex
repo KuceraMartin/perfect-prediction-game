@@ -207,5 +207,57 @@ This naturally leads to another round of elimination, in which we only keep prof
 
 For any game with no ties, if a PTE exists, then it is unique and Pareto-optimal~\cite{Fourny20}.
 
-\section{Web Development}
-\section{Data Analysis}
+
+\section{Technology}
+
+\subsection{Scala}
+Scala is a strong statically typed programming language that can be compiled to Java bytecode and run on a Java virtual machine (JVM), thus natively supporting interoperability with Java and other JVM-compatible languages.
+It neatly combines object-oriented and functional programming paradigms and many of its design decisions are made to address Java's flaws.
+
+In the rest of this subsection we describe some core concepts in Scala that are not common in other programming languages and will be referred to later in this text.
+
+\subsubsection{Traits}
+TODO
+
+\subsubsection{Case Classes}
+TODO
+
+\subsubsection{Objects}
+TODO
+
+\subsubsection{sbt}
+sbt is the most common build tool for Scala projects, similar to Apache's Maven.
+The main features of sbt are compilation and dependency management.
+It is also compatible with Java projects and Maven repositories.
+
+\subsubsection{ScalaTest}
+ScalaTest is the most popular testing tool in the Scala ecosystem.
+Despite having many advanced features, it is easy to use, especially if one has experience with other test frameworks.
+
+\subsubsection{Play Framework}
+Play Framework is a web framework for Java and Scala.
+It folllows the model--view--controller (MVC) architecture and provides all features typical for a web framework, such as  HTTP routing, sessions, template engine, form validation, caching, REST, localization, dependency injection, logging, etc.
+
+
+\subsubsection{Slick}
+Slick is a database query and access library for Scala.
+It supports constructing database queries by calling methods that resemble those of regular Scala collections.
+This allows for more (compile-time checked) type-safety as well as a certain level of database management system agnosticism.
+
+Slick differentiates itself against regular object-relational mappers (ORMs) such as Hibernate, sometimes using the term \textit{functional-relational mapper}.
+It makes access to relational data similar to accessing immutable collections and focuses on flexible query composition with strongly controlled side effects.
+For example, Slick does not support inheritance; instead, this should be replaced by relationships that can be thought of as \textit{roles}: a hierarchical link \enquote{foo \textit{is a} bar} can be replaced by a relation \enquote{foo \textit{has role} bar}.
+
+\subsection{PostgreSQL}
+PostgrSQL is a prominent free and open-source relational database management system.
+It has a good SQL compliance and featrures transactions with atomicity, consistency, isolation, and durability (ACID) properties.
+It is available for all major operating systems.
+
+\subsection{Apache Spark}
+Apache Spark is an analytics engine for large-scale data processing.
+In this work, we mostly use the Spark SQL component which introduces DataFrames, an abstraction that provides support for structured data.
+It can be operated by a domain-specific language (DSL) within many common programming lanugages, including Scala.
+
+\subsection{Docker}
+Docker is an OS-level virtualization tool that allows to deliver software in isolated packages called containers.
+Compared to virtual machines, Docker containers use fewer resources because they share a single OS-kernel.
