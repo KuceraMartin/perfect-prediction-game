@@ -19,7 +19,7 @@ In this chapter, we introduce two new equilibria: the perfectly transparent best
 Then, we discuss some relations between these two equilibiria, and between the other equilibria introduced in \autoref{chap:background}.
 
 \begin{definition}[Perfectly transparent best response]
-	In a game $G = (P, S, \uu)$ we say a strategy $s_i^* \in S_i$ is a perfectly transparent best response to a strategy profile $\vecs_{-i} \in S_{-i}$ of the opponent players if it is the Nashian best response to $\vecs_{-i}$ across all profiles that survive the maximum number of preemption rounds.
+	In a game (possibly with ties) $G = (P, S, \uu)$ we say a strategy $s_i^* \in S_i$ is a perfectly transparent best response to a strategy profile $\vecs_{-i} \in S_{-i}$ of the opponent players if it is the Nashian best response to $\vecs_{-i}$ across all profiles that survive the maximum possible number of preemption rounds.
 	The weak/strict notion is inherited from the Nashian best response.
 	Formally $s_i^*$ is a (\textit{weak}) perfectly transparent best response if either $(s_i^*, \vecs_{-i})$ is a PTE or $\exists k \in \N: (s_i^*, \vecs_{-i}) \in \mathcal{S}_k(G), (s_i, \vecs_{-i}) \notin \mathcal{S}_{k+1}(G) \forall s_i \in S_i$, and
 	\[
@@ -38,7 +38,7 @@ Then, we discuss some relations between these two equilibiria, and between the o
 \end{definition}
 
 \begin{definition}[Perfectly transparent $i$-best profile]
-	For a givne game $G = (P, S, \uu)$ and player $i \in P$ we say a strategy profile $\vecs = (s_1, \dots, s_n) \in S$ is a (\textit{weak}) perfectly transparent $i$-best profile if
+	For a given game $G = (P, S, \uu)$ and player $i \in P$ we say a strategy profile $\vecs = (s_1, \dots, s_n) \in S$ is a (\textit{weak}) perfectly transparent $i$-best profile if
 	$s_i$ is a (weak) perfectly transparent best response to $\vecs_{-i}$ and
 	\[
 		\forall \vecs'_{-i} \in S_{-i}: u_i(\vecs) \ge u_i\left(b(\vecs'_{-i}), \vecs'_{-i}\right),
@@ -115,6 +115,8 @@ Thus, in this section, we do not distingiush between them.
 
 Minimax rationalizibility intersects with all the other equilibiria, as shown in \autoref{tab:ptbpe-ne-minimax} and \autoref{tab:ptbpe-eq-minimax}.
 
+All the proven inclusions are depicted by a Venn diagram in \autoref{fig:venn-general-without-ties}.
+
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[line width=0.25pt]
@@ -129,16 +131,16 @@ Minimax rationalizibility intersects with all the other equilibiria, as shown in
 		\node at (-0.2,3.25) {IR};
 		\node at (5,0) {MR};
 	\end{tikzpicture}
-	\caption{A venn diagram depicting the inclusion of different equilibria in general games without ties.}
+	\caption{A Venn diagram depicting the inclusion of different equilibria in general games without ties.}
 	\label{fig:venn-general-without-ties}
 \end{figure}
 
 \section{Symmetric games without ties}
 In this section, we restrict ourselves to symmetric games.
-All the \enquote{subset} relations from the previous section still hold, since symmetric games are a subset of general games.
+All the \enquote{subset} relations from the previous section still hold, since symmetric games are a special case of general games.
 Moreover, none of the equilibiria collapses (i.e., they are still strict subsets, even when restricted to symmetric games); this because all the provided counterexamples are symmetric games.
-Thus, the venn diagram from \autoref{fig:venn-general-without-ties} remains almost unchanged.
 The only new relation that emerges is between minimax rationaliziblity and PTE.
+All the inclusions are depicted in \autoref{fig:venn-sym-without-ties}.
 Furthermore, we present some other interesting observations about symmetric games.
 
 \begin{observation}
@@ -180,3 +182,21 @@ Furthermore, we present some other interesting observations about symmetric game
 \begin{remark}
 	\autoref{tab:sym-ptbre-ne-mr} and \autoref{tab:sym-mr-ne-ptbre} show that PTBRE and MR are still intersecting, even in symmetric games.
 \end{remark}
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[line width=0.25pt]
+		\draw (0,0) circle (1);
+		\draw (0,0) circle (2);
+		\draw (0,0) circle (3);
+		\draw[rounded corners=2ex] (-3.5,3.5) rectangle (3.5,-3.5);
+		\draw (3.0,0) ellipse (5 and 3);
+		\node at (0,0) {PTBPE};
+		\node at (-0.5,1.35) {PTE};
+		\node at (-1,2.35) {PTBRE};
+		\node at (-2,3.0) {IR};
+		\node at (5,0) {MR};
+	\end{tikzpicture}
+	\caption{A Venn diagram depicting the inclusion of equilibria in symmetric games without ties.}
+	\label{fig:venn-sym-without-ties}
+\end{figure}

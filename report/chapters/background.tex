@@ -75,11 +75,11 @@ This is captured by the notion of best response.
   For a player $i \in P$, we say a strategy $s_i^* \in S_i$ is a Nashian best response to a strategy profile $\vecs_{-i}$ of his opponents if, supposing that $\vecs_{-i}$ stays fixed, player $i$ has no motivation to change his strategy from $s_i^*$ to another strategy.
   Formally, we say $s_i^*$ is a (\textit{weak}) Nashian best response if it satisfies
   \[
-    u_i(s_i^*, \vecs_{-i}) \ge u_i(s_i', \vecs_{-i})\ \forall s_i' \in S_i.
+    \forall s_i' \in S_i: u_i(s_i^*, \vecs_{-i}) \ge u_i(s_i', \vecs_{-i}).
   \]
   We say $s_i^*$ is a \textit{strict} Nashian best response if it satisfies
   \[
-    u_i(s_i^*, \vecs_{-i}) > u_i(s_i', \vecs_{-i})\ \forall s_i' \in S_i \setminus \{s_i^*\}.
+    \forall s_i' \in S_i \setminus \{s_i^*\}: u_i(s_i^*, \vecs_{-i}) > u_i(s_i', \vecs_{-i}).
   \]
   In this work, if we do not specify the type, we always refer to the \textit{weak} type.
   Note that every strict best response is also a weak best response.
@@ -127,14 +127,13 @@ In this work, we also discuss symmetric games.
 Informally, these are games that look the same from each player's perspective.
 
 \begin{definition}[Symmetric game]
-	We say a game $G = (P, S, \uu)$ is symmetric if there is a common set of strategies $S_c$ shared by all players:
-  $S_i = S_c\ \forall i \in P$,
-  and there is a common utility function $u_c$ shared by all players:
-  $u_i = u_c\ \forall i \in P$.
-  The utility only depends on the set of opponents' strategies (not on who is playing them):
-  \[
-    u_c(s_i, \vecs_{-i}) = u_c(s_i, \ppi_{-i})\ \forall s_i \in S_c, \vecs_{-i} \in S_c^{n-1}, \ppi_{-i} \text{ is a permutation of } \vecs_{-i}.
-  \]
+  We say a game $G = (P, S, \uu)$ is symmetric if
+  \begin{itemize}
+    \item the strategy spaces are identical:
+    $$\forall i, j \in P, S_i = S_j = Y,$$
+    \item and the payoffs are symmetric:
+    $$\forall \text{ permutations } \pi: P \to P,\ i \in P,\ \vecs \in S: u_{\pi(i)}(\vecs) = u_i(s_{\pi(1)}, \dots, s_{\pi(n)}).$$
+\end{itemize}
 \end{definition}
 
 \section{Non-Nashian Game Theory}
@@ -205,7 +204,12 @@ This naturally leads to another round of elimination, in which we only keep prof
   In other words, $\vecs \in S$ is a PTE if $\vecs \in \mathcal{S}_k(G)\ \forall k \in \N$.
 \end{definition}
 
-For any game with no ties, if a PTE exists, then it is unique and Pareto-optimal~\cite{Fourny20}.
+\begin{remark}
+  Another stronger definition of PTE exists:
+  However, we do not consider this definition in our work.
+\end{remark}
+
+For any game without ties, if a PTE exists, then it is unique and Pareto-optimal~\cite{Fourny20}.
 
 
 \section{Technology}
