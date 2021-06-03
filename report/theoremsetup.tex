@@ -16,6 +16,12 @@
 \def\remarkautorefname{Remark}
 \def\theoremautorefname{Theorem}
 
+\makeatletter
+\renewtheoremstyle{plain}%
+{\item[\hskip\labelsep \theorem@headerfont ##1\ ##2 \theorem@separator]}%
+{\item[\hskip\labelsep \theorem@headerfont ##1\ ##2\ \normalfont{(##3)}  \theorem@separator]}
+\makeatother
+
 %% English variants
 \theorembodyfont{\normalfont}
 \newtheorem{theorem}{\theoremautorefname}[chapter]
