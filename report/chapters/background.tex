@@ -68,6 +68,16 @@ Now that we have defined games in normal form, we can introduce some more standa
   We denote  $u_i(s_i', \vecs_{-i}) = u_i((s_i', \vecs_{-i}))$.
 \end{definition}
 
+Sometimes we will adapt a slight abuse of notation when making statements about sets of strategy profiles constrained by certain elements (i.e., specific players' strategies) being fixed.
+For example, for a previously bound variable $s_i' \in S_i$ we write
+\[
+  \min_{(s_i', \vecs_{-i}) \in S}u_i(s_i', \vecs_{-i}) = \min_{\vecs_{-i} \in S_{-i} \text{ such that } (s_i', \vecs_{-i} \in S)}u_i(\vecs).
+\]
+Similarly, for a previously bound variable $\vecs_{-i} \in S_{-i}$ we write
+\[
+  \min_{(s_i', \vecs_{-i}) \in S}u_i(s_i', \vecs_{-i}) = \min_{s_i' \in S_{i} \text{ such that } (s_i', \vecs_{-i} \in S)}u_i(\vecs).
+\]
+
 In Nashian game theory, we explore the best strategy for a player, supposing that he knew the strategies that all other players would choose.
 This is captured by the notion of best response.
 
