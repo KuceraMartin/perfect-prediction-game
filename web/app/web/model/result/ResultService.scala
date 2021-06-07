@@ -8,7 +8,7 @@ import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
 
 import core.algorithms.NashianBestResponse
-import core.algorithms.NonNashianBestResponse
+import core.algorithms.PerfectlyTransparentBestResponse
 
 import structures.GameType
 
@@ -21,7 +21,7 @@ class ResultService @Inject() (resultDao: ResultDao) (implicit executionContext:
 
   private val bestResponse = Map(
     GameType.Nashian -> NashianBestResponse,
-    GameType.NonNashian -> NonNashianBestResponse,
+    GameType.NonNashian -> PerfectlyTransparentBestResponse,
   )
 
   def create(user: User, game: Game, gameType: GameType.Member, rowStrategy: Int) (implicit createdAt: LocalDateTime): Future[Result] = {
