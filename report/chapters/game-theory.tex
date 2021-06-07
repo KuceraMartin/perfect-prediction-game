@@ -43,11 +43,14 @@ Then, we discuss some relations between these two equilibiria, and between the o
 	\[
 		\forall \vecs'_{-i} \in S_{-i}: u_i(\vecs) \ge u_i\left(b(\vecs'_{-i}), \vecs'_{-i}\right),
 	\]
-	where $b(\vecs'_{-i})$ is the perfectly transparent best response to $\vecs'_{-i}$.
-	It is a \textit{strict} perfectly transparent $i$-best profile if $s_i$ is a strict perfectly transparent best response to $s_{-i}$ and
+	where $b(\vecs'_{-i})$ is some weak perfectly transparent best response to $\vecs'_{-i}$ (note that there may be multiple best responses to $\vecs'_{-i}$ but they must all have the same utility for player $i$).
+
+	It is a \textit{strict} perfectly transparent $i$-best profile if $s_i$ is a strict perfectly transparent best response to $\vecs_{-i}$ and
 	\[
-		\forall \vecs_{-i}' \in S_{-i}: \vecs_{-i}' \ne s_{-i} \implies u_i(\vecs) > u_i\left(b(s_{-i}'), \vecs_{-i}'\right).
+		\forall \vecs_{-i}' \in S_{-i}: \vecs_{-i}' \ne s_{-i} \implies u_i(\vecs) > u_i\left(b(\vecs_{-i}'), \vecs_{-i}'\right).
 	\]
+	Note that even in the strict definition, we still consider $b(\vecs_{-1})$ to be a weak best response.
+	This is to ensure that every strict best profile is also a weak best profile.
 \end{definition}
 
 \begin{definition}[Perfectly transparent best profile equilibrium]
