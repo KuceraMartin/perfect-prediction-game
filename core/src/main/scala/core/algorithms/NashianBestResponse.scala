@@ -1,11 +1,29 @@
 package core.algorithms
 
 
-object NashianBestResponse extends BestResponse {
+object NashianBestResponse {
 
-  override def apply(game: Game, rowStrategy: Int): Int = {
-    require(rowStrategy >= 0 && rowStrategy <= game.length)
-    game(rowStrategy).zipWithIndex.max(Ordering.by[(Payoff, Int), Int](_._1.column))._2
+  object Weak extends BestResponse {
+
+    override def apply(game: Game, rowStrategy: Int): Seq[Profile] = {
+      require(rowStrategy >= 0 && rowStrategy <= game.length)
+      game(rowStrategy).zipWithIndex
+                       .groupBy(_._1.column)
+                       .maxBy(_._1)
+                       ._2.map(s => Profile(rowStrategy, s._2))
+    }
+
+  }
+
+
+  object Strict extends BestResponse {
+
+    override def apply(game: Game, rowStrategy: Int): Seq[Profile] = {
+      val res = Weak(game, rowStrategy)
+      if (res.length == 1) res
+      else Nil
+    }
+
   }
 
 }

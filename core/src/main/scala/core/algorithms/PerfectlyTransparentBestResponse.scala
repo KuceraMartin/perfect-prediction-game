@@ -3,38 +3,30 @@ package core.algorithms
 import scala.annotation.tailrec
 
 
-object PerfectlyTransparentBestResponse extends BestResponse {
+class PerfectlyTransparentBestResponse(nashianBestResponse: BestResponse) extends BestResponse {
 
-  override def apply(game: Game, rowStrategy: Int): Int = {
+  override def apply(game: Game, rowStrategy: Int): Seq[Profile] = {
     @tailrec
-    def loop(oldGame: Game, newGame: Game): Game = {
-      val availableInRow = newGame(rowStrategy).exists(notEliminated)
-      val canEliminate = availableCells(newGame) > 1
+    def loop(oldGame: Game, newGame: Game, firstRun: Boolean = true): Game = {
+      val availableInRow = newGame(rowStrategy).exists(PerfectlyTransparentEquilibrium.notEliminated)
       if (availableInRow) {
-        if (canEliminate) loop(newGame, IndividualRationality.eliminate(newGame))
+        if (newGame != oldGame || firstRun) loop(newGame, IndividualRationality.eliminate(newGame), firstRun = false)
         else newGame
       } else oldGame
     }
-    NashianBestResponse(loop(game, game), rowStrategy)
+    nashianBestResponse(loop(game, game), rowStrategy)
   }
 
 
-  @tailrec
-  def pte(game: Game): Option[Profile] = {
-    val newGame = IndividualRationality.eliminate(game)
-    val available = availableCells(newGame)
-    if (available > 1) pte(newGame)
-    else if (available == 1) {
-      val row = newGame.indexWhere(_.exists(notEliminated))
-      val col = newGame(row).indexWhere(notEliminated)
-      Some(Profile(row, col))
-    } else None
-  }
 
 
-  private def notEliminated(payoff: Payoff): Boolean = payoff != Payoff.Undefined
+}
 
 
-  private def availableCells(game: Game): Int = game.flatten.count(notEliminated)
+object PerfectlyTransparentBestResponse {
+
+  object Weak extends PerfectlyTransparentBestResponse(NashianBestResponse.Weak)
+
+  object Strict extends PerfectlyTransparentBestResponse(NashianBestResponse.Strict)
 
 }

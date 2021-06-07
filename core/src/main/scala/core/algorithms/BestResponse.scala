@@ -3,11 +3,13 @@ package core.algorithms
 
 trait BestResponse {
 
-  def apply(game: Game, rowStrategy: Int): Int
+  def apply(game: Game, rowStrategy: Int): Seq[Profile]
 
   def equilibria(game: Game): Seq[Profile] =
     game.indices
-        .map(i => Profile(i, apply(game, i)))
-        .filter(p => apply(game.transpose, p.col) == p.row)
+      .flatMap { rowStrategy =>
+        apply(game, rowStrategy)
+        .filter(profile => apply(game.transpose, profile.col).contains(profile.swap))
+      }
 
 }

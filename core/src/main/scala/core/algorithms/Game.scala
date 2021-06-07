@@ -19,7 +19,11 @@ object Payoff {
 }
 
 
-case class Profile(row: Int, col: Int)
+case class Profile(row: Int, col: Int) {
+
+  def swap: Profile = Profile(col, row)
+
+}
 
 
 object Profile {
@@ -31,12 +35,13 @@ object Profile {
 
 case class Game(matrix: Seq[Seq[Payoff]]) extends Seq[Seq[Payoff]] {
 
-
   override def length: Int = matrix.length
 
   override def apply(idx: Int): Seq[Payoff] = matrix(idx)
 
   override def iterator: Iterator[Seq[Payoff]] = matrix.iterator
+
+  def apply(profile: Profile): Payoff = matrix(profile.row)(profile.col)
 
   def rowIndices: Range = indices
 

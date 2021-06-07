@@ -6,9 +6,10 @@ import org.apache.spark.sql.types.StructType
 
 import core.algorithms.Game
 import core.algorithms.Payoff
+import core.algorithms.Profile
 
 
-object InputFormat {
+object Format {
 
   val schema = new StructType()
     .add("x", IntegerType, false) // id
@@ -16,7 +17,7 @@ object InputFormat {
     .add("y", ArrayType(ArrayType(ArrayType(IntegerType, false), false), false), false) // matrix
     .add("P", ArrayType(ArrayType(IntegerType, false), false), false) // Perfectly Transparent Equilibria
 
-  case class Row(game: Game, pte: Seq[(Int, Int)])
+  case class Row(game: Game, pte: Seq[Profile])
 
   implicit def fromSparkRow(row: org.apache.spark.sql.Row): Row = {
     val seq = row.getAs[Seq[Seq[Int]]]("P")
@@ -25,5 +26,7 @@ object InputFormat {
       pte = if (seq.nonEmpty) List((seq.head(0), seq.head(1))) else Nil,
     )
   }
+
+  def profileToSeq(profile: Profile): Seq[Int] = List(profile.row, profile.col)
 
 }
