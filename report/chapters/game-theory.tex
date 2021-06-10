@@ -15,7 +15,7 @@
 	If $\mm$ was not individually rational, there would have to be some player $j \in P$ and a strategy $s_j^* \in S_j$ that would ensure a better worst-case payoff: $\min_{\vecs_{-j} \in S_{-j}}u_j(s_j^*, \vecs_{-j}) > u_j(\mm)$ which would contradict the choice of~$m_j$.
 \end{proof}
 
-In this chapter, we introduce two new equilibria: the perfectly transparent best response equilibrium, and the perfectly transparent best profile equilibrium.
+In this chapter, we introduce two new equilibria: the perfectly transparent best response equilibrium, and the perfectly transparent optimal profile equilibrium.
 Then, we discuss some relations between these two equilibiria, and between the other equilibria introduced in \autoref{chap:background}.
 
 \begin{definition}[Perfectly transparent best response]
@@ -38,25 +38,48 @@ Then, we discuss some relations between these two equilibiria, and between the o
 \end{definition}
 
 \begin{definition}[Perfectly transparent $i$-best profile]
-	For a given game $G = (P, S, \uu)$ and player $i \in P$ we say a strategy profile $\vecs = (s_1, \dots, s_n) \in S$ is a (\textit{weak}) perfectly transparent $i$-best profile if
+	For a game $G = (P, S, \uu)$ of two players with $P = \{i, j\}$
+	we say a strategy profile $\vecs = (s_1, s_2) \in S$ is a (\textit{weak}) perfectly transparent $i$-best profile if
+	$j$'s strategy $s_j$ is a (weak) perfectly transparent best response to $s_i$, and
+	\[
+		\forall s_i' \in S_i: u_i(\vecs) \ge u_i\left(s_i', b(s_i')\right),
+	\]
+	where $b(s_i')$ is some weak perfectly transparent best response of player $j$ to $s_i'$ (note that there may be multiple best responses to $s_i'$ but they must all have the same utility for player $i$).
+
+	It is a \textit{strict} perfectly transparent $i$-best profile if $s_j$ is a strict perfectly transparent best response to $s_i$ and
+	\[
+		\forall s_i' \in S_i: s_i' \ne s_i \implies u_i(\vecs) > u_i\left(s_i', b(s_i')\right).
+	\]
+	Note that even in the strict definition, we still consider $b(s_i')$ to be a weak best response.
+	This is to ensure that every strict best profile is also a weak best profile.
+\end{definition}
+
+\begin{definition}[Perfectly transparent best profile equilibrium]
+	For a game of two players, we say that a strategy profile $\vecs \in S$ is a (\textit{weak}) perfectly transparent best profile equilibrium (PTBPE) if $\vecs$ is a (weak) perfectly transparent $i$-best profile for both players $i \in P$.
+
+	Similarly, $\vecs$ is a \textit{strict} PTBPE if it is a strict perfectly transparent $i$-best profile for both $i \in P$.
+\end{definition}
+
+\begin{definition}[Perfectly transparent $i$-optimal profile]
+	For a given game $G = (P, S, \uu)$ and player $i \in P$ we say a strategy profile $\vecs = (s_1, \dots, s_n) \in S$ is a (\textit{weak}) perfectly transparent $i$-optimal profile if
 	$s_i$ is a (weak) perfectly transparent best response to $\vecs_{-i}$ and
 	\[
 		\forall \vecs'_{-i} \in S_{-i}: u_i(\vecs) \ge u_i\left(b(\vecs'_{-i}), \vecs'_{-i}\right),
 	\]
 	where $b(\vecs'_{-i})$ is some weak perfectly transparent best response to $\vecs'_{-i}$ (note that there may be multiple best responses to $\vecs'_{-i}$ but they must all have the same utility for player $i$).
 
-	It is a \textit{strict} perfectly transparent $i$-best profile if $s_i$ is a strict perfectly transparent best response to $\vecs_{-i}$ and
+	It is a \textit{strict} perfectly transparent $i$-optimal profile if $s_i$ is a strict perfectly transparent best response to $\vecs_{-i}$ and
 	\[
 		\forall \vecs_{-i}' \in S_{-i}: \vecs_{-i}' \ne s_{-i} \implies u_i(\vecs) > u_i\left(b(\vecs_{-i}'), \vecs_{-i}'\right).
 	\]
 	Note that even in the strict definition, we still consider $b(\vecs_{-1})$ to be a weak best response.
-	This is to ensure that every strict best profile is also a weak best profile.
+	This is to ensure that every strict optimal profile is also a weak optimal profile.
 \end{definition}
 
-\begin{definition}[Perfectly transparent best profile equilibrium]
-	We say that a strategy profile $\vecs \in S$ is a (\textit{weak}) perfectly transparent best profile equilibrium (PTBPE) if $\vecs$ is a (weak) perfectly transparent $i$-best profile for all $i \in P$.
+\begin{definition}[Perfectly transparent optimal profile equilibrium]
+	We say that a strategy profile $\vecs \in S$ is a (\textit{weak}) perfectly transparent optimal profile equilibrium (PTOPE) if $\vecs$ is a (weak) perfectly transparent $i$-optimal profile for all $i \in P$.
 
-	Similarly, $\vecs$ is a \textit{strict} PTBPE if it is a strict perfectly transparent $i$-best profile for all $i \in P$.
+	Similarly, $\vecs$ is a \textit{strict} PTOPE if it is a strict perfectly transparent $i$-optimal profile for all $i \in P$.
 \end{definition}
 
 Recall that for any game $G = (P, S, \uu)$, a strategy profile $\vecs \in S$ is individually rational if and only if it survives the first preemption round: $\vecs \in \mathcal{S}_1(G)$.
@@ -64,7 +87,7 @@ This means that every PTE must be individually rational.
 If we think of these equilibiria as sets of strategy profiles in any possible game, we can express this as PTE $\subset$ IR.
 It is not hard to see that the inclusion is indeed strict as there are games in which $\mathcal{S}_2 \subsetneq \mathcal{S}_1$, so not all individually rational profiles are PTEs.
 
-In the rest of this chapter, we present several such inclusion results that help to understand the relations between individal rationality, perfetcly transparent best response equilibiria, perfectly transparent equilibiria, perfectly transparent best profile equilibiria, and minimax rationalizibility.
+In the rest of this chapter, we present several such inclusion results that help to understand the relations between individal rationality, perfetcly transparent best response equilibiria, perfectly transparent equilibiria, perfectly transparent optimal profile equilibiria, and minimax rationalizibility.
 
 
 \section{Games with ties}
@@ -83,8 +106,8 @@ The results are summarized by a Venn diagram in \autoref{fig:venn-with-ties}.
 		\draw (0.4,0.3) ellipse (2.5 and 3);
 		\draw[rounded corners=2ex] (-3.2,3.5) rectangle (3.2,-2.8);
 		\draw (4.5,0) ellipse (3.9 and 3);
-		\node at (-0.2,0) {sPTBPE};
-		\node at (-0.2,0.7) {PTBPE};
+		\node at (-0.2,0) {sPTOPE};
+		\node at (-0.2,0.7) {PTOPE};
 		\node at (-0.2,1.35) {PTE};
 		\node at (-0.2,2) {sPTBRE};
 		\node at (0,2.75) {PTBRE};
@@ -95,22 +118,23 @@ The results are summarized by a Venn diagram in \autoref{fig:venn-with-ties}.
 	\label{fig:venn-with-ties}
 \end{figure}
 
-First, we can see from our definition of PTBPE and PTBRE that any strategy profile satisfying the strict definition of each equilibrium also satisfies the weak definition of the respective equilibrium.
-Thus, we have sPTBPE $\subset$ PTBPE, and sPTBRE $\subset$ sPTBRE.
+First, we can see from our definition of PTOPE, PTBPE, and PTBRE that any strategy profile satisfying the strict definition of each equilibrium also satisfies the weak definition of the respective equilibrium.
+Thus, we have sPTOPE $\subset$ PTOPE, sPTBPE $\subset$ PTBPE, and sPTBRE $\subset$ PTBRE.
 
 \begin{remark}
-	TODO: inclusions are indeed strict.
+	The inclusions are indeed strict, as shown in \autoref{tab:ptope-not-sub-sptope}, TODO, and TODO.
 \end{remark}
 
 \begin{observation}
-	For any game $G = (P, S, \uu)$, if a strategy profile $\vecs \in S$ is a PTBPE, then it is a PTBRE.
-	Similarly, if $\vecs$ is a strict PTBPE, then it is a strict PTBRE.
-	Thus, we have PTBPE $\subset$ PTBRE, and sPTBPE $\subset$ sPTBRE.
+	\label{th:ptope-subset-ptbre}
+	For any game $G = (P, S, \uu)$, if a strategy profile $\vecs \in S$ is a PTOPE, then it is a PTBRE.
+	Similarly, if $\vecs$ is a strict PTOPE, then it is a strict PTBRE.
+	Thus, we have PTOPE $\subset$ PTBRE, and sPTOPE $\subset$ sPTBRE.
 \end{observation}
 
 \begin{proof}
-	If $\vecs$ is a PTBPE, it is by definition a perfectly transparent $i$-best profile for every player $i \in P$.
-	If $\vecs$ is a perfectly transparent $i$-best profile, then, again by definition, $s_i$ is a perfectly transparent best response to $\vecs_{-i}$.
+	If $\vecs$ is a PTOPE, it is by definition a perfectly transparent $i$-optimal profile for every player $i \in P$.
+	If $\vecs$ is a perfectly transparent $i$-optimal profile, then, again by definition, $s_i$ is a perfectly transparent best response to $\vecs_{-i}$.
 	This being true for all $i \in P$ is exactly the definition of a PTBRE.
 	The same argument holds for strict equilibiria.
 \end{proof}
@@ -120,15 +144,16 @@ Thus, we have sPTBPE $\subset$ PTBPE, and sPTBRE $\subset$ sPTBRE.
 \end{remark}
 
 \begin{remark}
-	\autoref{tab:ptbpe-not-sub-sptbre} shows that PTBPE $\not\subseteq$ sPTBRE.
+	\autoref{tab:PTOPE-not-sub-sptbre} shows that PTOPE $\not\subseteq$ PTBRE.
 \end{remark}
 
 \begin{lemma}
-	If a game $G = (P, S, \uu)$ has a PTBPE $\vecs \in S$, then $\vecs$ is also a PTE, i.e., we have the inclusion PTBPE $\subset$ PTE.
+	\label{th:ptope-subset-pte}
+	If a game $G = (P, S, \uu)$ has a PTOPE $\vecs \in S$, then $\vecs$ is also a PTE, i.e., we have the inclusion PTOPE $\subset$ PTE.
 \end{lemma}
 
 \begin{proof}
-	For the sake of deriving a contradiction, suppose that there is a game $G = (P, S, \uu)$ with a strategy profile $\vecs = (s_1, \dots, s_n) \in S$ such that $\vecs$ is a PTBPE but not a PTE and let $k$ be the last preemption round in which $\vecs$ is not eliminated (i.e., $\vecs \in \mathcal{S}_k(G)$ but $\vecs \notin \mathcal{S}_{k+1}(G)$).
+	For the sake of deriving a contradiction, suppose that there is a game $G = (P, S, \uu)$ with a strategy profile $\vecs = (s_1, \dots, s_n) \in S$ such that $\vecs$ is a PTOPE but not a PTE and let $k$ be the last preemption round in which $\vecs$ is not eliminated (i.e., $\vecs \in \mathcal{S}_k(G)$ but $\vecs \notin \mathcal{S}_{k+1}(G)$).
 	Because $\vecs$ is eliminated in the $(k+1)$\textsuperscript{st} round, there must be some player $i \in P$ with a strategy $s_i^* \ne s_i$ which causes the elimination:
 	\[
 		\forall \vecs_{-i}' \in S_{-i}: (s_i^*, \vecs_{-i}') \in \mathcal{S}_k(G) \implies u_i(s_i^*, \vecs_{-i}') > u_i(\vecs).
@@ -136,14 +161,15 @@ Thus, we have sPTBPE $\subset$ PTBPE, and sPTBRE $\subset$ sPTBRE.
 	Let $\vecs_{-i}^* \in S_{-i}$ be the opponents' profile that minimizes $u_i(s_i^*, \vecs_{-i}^*)$, subject to $(s_i^*, \vecs_{-i}^*)\in \mathcal{S}_k(G)$ (there must be at least one such profile to cause $\vecs \notin \mathcal{S}_{k+1}(G)$).
 	Let $b \in S_i$ be the perfectly transparent best response to $\vecs_{-i}^*$.
 	By the choice of $\vecs_{-i}^*$, we must have $u_i(b, \vecs_{-i}^*) \ge u_i(s_i^*, \vecs_{-i}^*) > u_i(\vecs)$.
-	This means that $\vecs$ is not a perfectly transparent $i$-best profile, contradicting $\vecs$ being a PTBPE.
+	This means that $\vecs$ is not a perfectly transparent $i$-optimal profile, contradicting $\vecs$ being a PTOPE.
 \end{proof}
 
 \begin{remark}
-	\autoref{tab:pte-ne-ptbpe} shows that the inclusion is strict.
+	\autoref{tab:pte-ne-PTOPE} shows that the inclusion is strict.
 \end{remark}
 
 \begin{observation}
+	\label{th:pte-subset-ir}
 	In any game $G = (P, S, \uu)$, if a strategy profile $\vecs \in S$ is a PTE, then it is individually rational.
 	We have PTE $\subset$ IR.
 \end{observation}
@@ -155,6 +181,7 @@ Thus, we have sPTBPE $\subset$ PTBPE, and sPTBRE $\subset$ sPTBRE.
 \end{proof}
 
 \begin{lemma}
+	\label{th:ptbre-subset-ir}
 	For any game $G = (P, S, \uu)$, if a strategy profile $\vecs \in S$ is a PTBRE, then it is individually rational.
 	Thus, we have PTBRE $\subset$ IR.
 \end{lemma}
@@ -171,13 +198,13 @@ Thus, we have sPTBPE $\subset$ PTBPE, and sPTBRE $\subset$ sPTBRE.
 	\autoref{tab:ir-ne-ptbre} shows that the inclusion is indeed strict.
 \end{remark}
 
-Minimax rationalizibility intersects with all the other equilibiria, as shown in \autoref{tab:ptbpe-ne-minimax} and \autoref{tab:ptbpe-eq-minimax}.
+Minimax rationalizibility intersects with all the other equilibiria, as shown in \autoref{tab:PTOPE-ne-minimax} and \autoref{tab:PTOPE-eq-minimax}.
 
 \autoref{tab:ties-pte-not-sub-ptbre} shows that PTE $\not\subseteq$ PTBRE, and TODO shows that sPTBRE $\not\subseteq$ PTE, which completes our inclusion inspection.
 
 
 \section{Games without ties}
-We can observe that in games without ties, similar to Nash equilibria, weak and strict equilibiria are equivalent also in the case of PTBRE and PTBPE.
+We can observe that in games without ties, similar to Nash equilibria, weak and strict equilibiria are equivalent also in the case of PTBRE and PTOPE.
 Thus, in this section, we do not distingiush between them.
 Moreover, all the \enquote{is subset of} relations are inherited from the previous section.
 The only difference is that PTE is not intersecting with PTBRE anymore (the example in \autoref{tab:ties-pte-not-sub-ptbre} indeed has ties).
@@ -202,7 +229,7 @@ All inclusions for games without ties are depicted by a Venn diagram in \autoref
 		\draw (0,0) circle (3);
 		\draw[rounded corners=2ex] (-3.5,3.5) rectangle (3.5,-3.5);
 		\draw (4.5,0) ellipse (4 and 3);
-		\node at (-0.2,0) {PTBPE};
+		\node at (-0.2,0) {PTOPE};
 		\node at (-0.2,1.35) {PTE};
 		\node at (-0.2,2.35) {PTBRE};
 		\node at (-0.2,3.25) {IR};
@@ -229,7 +256,7 @@ Furthermore, we present some other interesting observations about symmetric game
 		\draw (0,0) circle (3);
 		\draw[rounded corners=2ex] (-3.5,3.5) rectangle (3.5,-3.5);
 		\draw (3.0,0) ellipse (5 and 3);
-		\node at (0,0) {PTBPE};
+		\node at (0,0) {PTOPE};
 		\node at (-0.5,1.35) {PTE};
 		\node at (-1,2.35) {PTBRE};
 		\node at (-2,3.0) {IR};
@@ -248,11 +275,11 @@ Furthermore, we present some other interesting observations about symmetric game
 \end{proof}
 
 \begin{corollary}
-	If a symmetric game $G = (P, S, \uu)$ has a PTE $\vecs \in S$ and $\vecs$ is the perfectly transparent $i$-best profile for some player $i \in P$, then $\vecs$ is a PTBPE. 
+	If a symmetric game $G = (P, S, \uu)$ has a PTE $\vecs \in S$ and $\vecs$ is the perfectly transparent $i$-optimal profile for some player $i \in P$, then $\vecs$ is a PTOPE. 
 \end{corollary}
 
 \begin{proof}
-	Since $\vecs$ is on the diagonal and it is the perfectly transparent $i$-best profile for some $i \in P$, by symmetry, it must actually be the perfectly transparent $j$-best profile for all $j \in P$, which is the definition of PTBPE.
+	Since $\vecs$ is on the diagonal and it is the perfectly transparent $i$-optimal profile for some $i \in P$, by symmetry, it must actually be the perfectly transparent $j$-optimal profile for all $j \in P$, which is the definition of PTOPE.
 \end{proof}
 
 \begin{lemma}[Fourny \cite{Fourny20}]

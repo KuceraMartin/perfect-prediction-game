@@ -1,7 +1,7 @@
 package core.algorithms
 
 
-class PerfectlyTransparentColBestProfile(ptbr: BestResponse) {
+class PerfectlyTransparentColOptimalProfile(ptbr: BestResponse) {
 
   def apply(game: Game): Seq[Profile] = {
     val bestResponses = game.indices.flatMap(ptbr(game, _))
@@ -13,12 +13,12 @@ class PerfectlyTransparentColBestProfile(ptbr: BestResponse) {
 }
 
 
-object PerfectlyTransparentColBestProfile {
+object PerfectlyTransparentColOptimalProfile {
 
-  object Weak extends PerfectlyTransparentColBestProfile(PerfectlyTransparentBestResponse.Weak)
+  object Weak extends PerfectlyTransparentColOptimalProfile(PerfectlyTransparentBestResponse.Weak)
 
 
-  object Strict extends PerfectlyTransparentColBestProfile(PerfectlyTransparentBestResponse.Strict) {
+  object Strict extends PerfectlyTransparentColOptimalProfile(PerfectlyTransparentBestResponse.Strict) {
 
     override def apply(game: Game): Seq[Profile] = {
       val res = super.apply(game)

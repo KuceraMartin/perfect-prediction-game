@@ -13,10 +13,30 @@ Profiles that survive infinitely many rounds are left without highlighting.
 
 \begin{table}
 	\caption{
-		PTBPE\textsuperscript{sym} $\not\subseteq$ sPTBRE\textsuperscript{sym}.
-		Profiles (A, A), (A, C), (B, B), and (C, A) are PTBPE but only (B, B) is a strict PTBRE.
+		PTOPE\textsuperscript{sym} $\not\subseteq$ sPTOPE\textsuperscript{sym}.
+		Profiles (B, B) and (C, C) are PTOPE but only (C, C) is a strict PTOPE.
 	}
-	\label{tab:ptbpe-not-sub-sptbre}
+	\label{tab:ptope-not-sub-sptope}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+			& A		& B	   & C	  \\
+		\hline
+		A 		&\cellcolor{gray!00} 4, 4 &\cellcolor{gray!00} 7, 2 &\cellcolor{gray!00} 2, 2 \\
+		\hline
+		B		&\cellcolor{gray!00} 2, 7 &\cellcolor{gray!00} 7, 7 &\cellcolor{gray!70} 6, 0 \\
+		\hline
+		C		&\cellcolor{gray!00} 2, 2 &\cellcolor{gray!70} 0, 6 &\cellcolor{gray!00} 7, 7 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\begin{table}
+	\caption{
+		PTOPE\textsuperscript{sym} $\not\subseteq$ sPTBRE\textsuperscript{sym}.
+		Profiles (A, A), (A, C), (B, B), and (C, A) are PTOPE but only (B, B) is a strict PTBRE.
+	}
+	\label{tab:PTOPE-not-sub-sptbre}
 	\centering
 	\begin{tabular}{|c|c|c|c|}
 		\hline
@@ -33,8 +53,8 @@ Profiles that survive infinitely many rounds are left without highlighting.
 
 \begin{table}
 	\caption{
-		IR $\ne$ PTBRE.
-		Profiles (B, B), (B, C), (C, B), and (C, C) are individually rational but only (B, B) is a perfectly transparent best profile equilibrium.
+		IR $\not\subseteq$ PTBRE.
+		Profiles (B, B), (B, C), (C, B), and (C, C) are individually rational but only (B, B) is a perfectly transparent optimal profile equilibrium.
 	}
 	\label{tab:ir-ne-ptbre}
 	\centering
@@ -73,11 +93,11 @@ Profiles that survive infinitely many rounds are left without highlighting.
 
 \begin{table}
 	\caption{
-		PTE $\ne$ PTBPE.
+		PTE $\not\subseteq$ PTOPE.
 		Strategy profile (B, B) is a PTE.
-		Profile (B, C) is a perfectly transparent row-best profile and (C, B) is a perfectly transparent column-best profile, so there is no PTBPE.
+		Profile (B, C) is a perfectly transparent row-optimal profile and (C, B) is a perfectly transparent column-optimal profile, so there is no PTOPE.
 	}
-	\label{tab:pte-ne-ptbpe}
+	\label{tab:pte-ne-PTOPE}
 	\centering
 	\begin{tabular}{|c|c|c|c|}
 		\hline
@@ -94,12 +114,12 @@ Profiles that survive infinitely many rounds are left without highlighting.
 
 \begin{table}
 	\caption{
-		PTBPE $\ne$ MR.
-		In the first copy of the table, preemptively eliminated strategies (used for computing the PTBPE) are highlighted.
+		PTOPE $\ne$ MR.
+		In the first copy of the table, preemptively eliminated strategies (used for computing the PTOPE) are highlighted.
 		In the second copy, minimax dominated strategies (i.e., those that are not minimax rationalizable) are higlighted.
-		Strategy profile (B, F) is a PTBPE, and the only minimax rationalizable profile is (C, F).
+		Strategy profile (B, F) is a PTOPE, and the only minimax rationalizable profile is (C, F).
 	}
-	\label{tab:ptbpe-ne-minimax}
+	\label{tab:PTOPE-ne-minimax}
 	\centering
 	\begin{tabular}{|c|c|c|c|}
 		\hline
@@ -129,11 +149,11 @@ Profiles that survive infinitely many rounds are left without highlighting.
 
 \begin{table}
 	\caption{
-		PTBPE and MR coincide.
+		PTOPE and MR coincide.
 		In this game, minimax elimination and the perfectly transparent preemption eliminate exactly the same profiles in each round.
-		Profile (C, C) is both a perfectly transparent best profile equilibrium, and minimax rationalizable.
+		Profile (C, C) is both a perfectly transparent optimal profile equilibrium, and minimax rationalizable.
 	}
-	\label{tab:ptbpe-eq-minimax}
+	\label{tab:PTOPE-eq-minimax}
 	\centering
 	\begin{tabular}{|c|c|c|c|}
 		\hline
