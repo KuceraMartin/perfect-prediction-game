@@ -66,35 +66,61 @@ It is not hard to see that the inclusion is indeed strict as there are games in 
 
 In the rest of this chapter, we present several such inclusion results that help to understand the relations between individal rationality, perfetcly transparent best response equilibiria, perfectly transparent equilibiria, perfectly transparent best profile equilibiria, and minimax rationalizibility.
 
-\section{Games without ties}
-We can observe that in games without ties, similar to Nash equilibria, weak and strict equilibiria are equivalent also in the case of PTBRE and PTBPE.
-Thus, in this section, we do not distingiush between them.
 
-\begin{lemma}
-	For any game $G = (P, S, \uu)$, if a strategy profile $\vecs \in S$ is a PTBRE, then it is individually rational.
-	Thus, we have PTBRE $\subset$ IR.
-\end{lemma}
+\section{Games with ties}
 
-\begin{proof}
-	Let us suppose that there is a game $G = (P, S, \uu)$ and a strategy profile $\vecs = (s_1, \dots, s_n) \in S$ such that $\vecs$ is a PTBRE but not individually rational.
-	This is equivalent to $s_i$ being a perfectly transparent best response to $\vecs_{-i}$ for all $i \in P$, and $\vecs \notin \mathcal{S}_1(G)$.
-	Note that we must also have $(s_i', \vecs_{-i}) \notin \mathcal{S}_1(G)\ \forall s_i' \in S_i,\ \forall i \in P$ because otherwise $s_i$ would not be a perfectly transparent best response to $\vecs_{-i}$ for some player $i$.
-	This means the perfetcly transparent best response of every player $i \in P$ to $\vecs_{-i}$ is simply a Nashian best response (since all considered strategy profiles are eliminated in the same preemption round).
-	Thus, $\vecs$ is a Nash equilibrium, which is always individually rational.
-\end{proof}
+We start by presenting results about the most general setup: games with ties.
+All the proofs presented in this section naturally hold also for the more specific cases (symmetric games, games without ties).
+The results are summarized by a Venn diagram in \autoref{fig:venn-with-ties}.
+
+\begin{figure}[b]
+	\centering
+	\begin{tikzpicture}[line width=0.25pt]
+		\draw (0,0) ellipse (1 and 0.5);
+		\draw (-0,0.2) ellipse (1.7 and 0.9);
+		\draw (0,0) ellipse (2.5 and 1.7);
+		\draw (0,0.4) ellipse (1.5 and 2.1);
+		\draw (0.4,0.3) ellipse (2.5 and 3);
+		\draw[rounded corners=2ex] (-3.2,3.5) rectangle (3.2,-2.8);
+		\draw (4.5,0) ellipse (3.9 and 3);
+		\node at (-0.2,0) {sPTBPE};
+		\node at (-0.2,0.7) {PTBPE};
+		\node at (-0.2,1.35) {PTE};
+		\node at (-0.2,2) {sPTBRE};
+		\node at (0,2.75) {PTBRE};
+		\node at (-2.2,2.8) {IR};
+		\node at (5,0) {MR};
+	\end{tikzpicture}
+	\caption{A Venn diagram depicting the inclusion of different equilibria in games with ties.}
+	\label{fig:venn-with-ties}
+\end{figure}
+
+First, we can see from our definition of PTBPE and PTBRE that any strategy profile satisfying the strict definition of each equilibrium also satisfies the weak definition of the respective equilibrium.
+Thus, we have sPTBPE $\subset$ PTBPE, and sPTBRE $\subset$ sPTBRE.
 
 \begin{remark}
-	\autoref{tab:ir-ne-ptbre} shows that the inclusion is indeed strict.
+	TODO: inclusions are indeed strict.
 \end{remark}
 
 \begin{observation}
-	\label{th:ptbre-subset-pte}
-	If a strategy profile is a PTE, then it must be a PTBRE because in the last preemption round, there is only one strategy profile to choose from.
-	We have PTE $\subset$ PTBRE.
+	For any game $G = (P, S, \uu)$, if a strategy profile $\vecs \in S$ is a PTBPE, then it is a PTBRE.
+	Similarly, if $\vecs$ is a strict PTBPE, then it is a strict PTBRE.
+	Thus, we have PTBPE $\subset$ PTBRE, and sPTBPE $\subset$ sPTBRE.
 \end{observation}
 
+\begin{proof}
+	If $\vecs$ is a PTBPE, it is by definition a perfectly transparent $i$-best profile for every player $i \in P$.
+	If $\vecs$ is a perfectly transparent $i$-best profile, then, again by definition, $s_i$ is a perfectly transparent best response to $\vecs_{-i}$.
+	This being true for all $i \in P$ is exactly the definition of a PTBRE.
+	The same argument holds for strict equilibiria.
+\end{proof}
+
 \begin{remark}
-	\autoref{tab:ptbre-ne-pte} shows that the inclusion is strict.
+	TODO: inclusion indeed strict
+\end{remark}
+
+\begin{remark}
+	\autoref{tab:ptbpe-not-sub-sptbre} shows that PTBPE $\not\subseteq$ sPTBRE.
 \end{remark}
 
 \begin{lemma}
@@ -117,11 +143,58 @@ Thus, in this section, we do not distingiush between them.
 	\autoref{tab:pte-ne-ptbpe} shows that the inclusion is strict.
 \end{remark}
 
+\begin{observation}
+	In any game $G = (P, S, \uu)$, if a strategy profile $\vecs \in S$ is a PTE, then it is individually rational.
+	We have PTE $\subset$ IR.
+\end{observation}
+
+\begin{proof}
+	By definition, a profile is IR if it survives the first preemption round, i.e., $\vecs \in \mathcal{S}_1$.
+	If $\vecs$ is a PTE, it survives all preemption rounds.
+	Thus, it must satisfy $\vecs \in \mathcal{S}_1$.
+\end{proof}
+
+\begin{lemma}
+	For any game $G = (P, S, \uu)$, if a strategy profile $\vecs \in S$ is a PTBRE, then it is individually rational.
+	Thus, we have PTBRE $\subset$ IR.
+\end{lemma}
+
+\begin{proof}
+	Let us suppose that there is a game $G = (P, S, \uu)$ and a strategy profile $\vecs = (s_1, \dots, s_n) \in S$ such that $\vecs$ is a PTBRE but not individually rational.
+	This is equivalent to $s_i$ being a perfectly transparent best response to $\vecs_{-i}$ for all $i \in P$, and $\vecs \notin \mathcal{S}_1(G)$.
+	Note that we must also have $(s_i', \vecs_{-i}) \notin \mathcal{S}_1(G)\ \forall s_i' \in S_i,\ \forall i \in P$ because otherwise $s_i$ would not be a perfectly transparent best response to $\vecs_{-i}$ for some player $i$.
+	This means the perfetcly transparent best response of every player $i \in P$ to $\vecs_{-i}$ is simply a Nashian best response (since all considered strategy profiles are eliminated in the same preemption round).
+	Thus, $\vecs$ is a Nash equilibrium, which is always individually rational.
+\end{proof}
+
+\begin{remark}
+	\autoref{tab:ir-ne-ptbre} shows that the inclusion is indeed strict.
+\end{remark}
+
 Minimax rationalizibility intersects with all the other equilibiria, as shown in \autoref{tab:ptbpe-ne-minimax} and \autoref{tab:ptbpe-eq-minimax}.
 
-All the proven inclusions are depicted by a Venn diagram in \autoref{fig:venn-general-without-ties}.
+\autoref{tab:ties-pte-not-sub-ptbre} shows that PTE $\not\subseteq$ PTBRE, and TODO shows that sPTBRE $\not\subseteq$ PTE, which completes our inclusion inspection.
 
-\begin{figure}
+
+\section{Games without ties}
+We can observe that in games without ties, similar to Nash equilibria, weak and strict equilibiria are equivalent also in the case of PTBRE and PTBPE.
+Thus, in this section, we do not distingiush between them.
+Moreover, all the \enquote{is subset of} relations are inherited from the previous section.
+The only difference is that PTE is not intersecting with PTBRE anymore (the example in \autoref{tab:ties-pte-not-sub-ptbre} indeed has ties).
+
+\begin{observation}
+	\label{th:ptbre-subset-pte}
+	If a strategy profile is a PTE, then it must be a PTBRE because in the last preemption round, there is only one strategy profile to choose from.
+	We have PTE $\subset$ PTBRE.
+\end{observation}
+
+\begin{remark}
+	\autoref{tab:ptbre-ne-pte} shows that the inclusion is strict.
+\end{remark}
+
+All inclusions for games without ties are depicted by a Venn diagram in \autoref{fig:venn-general-without-ties}.
+
+\begin{figure}[h]
 	\centering
 	\begin{tikzpicture}[line width=0.25pt]
 		\draw (0,0) circle (1);
@@ -135,17 +208,36 @@ All the proven inclusions are depicted by a Venn diagram in \autoref{fig:venn-ge
 		\node at (-0.2,3.25) {IR};
 		\node at (5,0) {MR};
 	\end{tikzpicture}
-	\caption{A Venn diagram depicting the inclusion of different equilibria in general games without ties.}
+	\caption{A Venn diagram depicting the inclusion of different equilibria in games without ties.}
 	\label{fig:venn-general-without-ties}
 \end{figure}
 
+
 \section{Symmetric games without ties}
-In this section, we restrict ourselves to symmetric games.
+In this section, we restrict ourselves to symmetric games without ties.
 All the \enquote{subset} relations from the previous section still hold, since symmetric games are a special case of general games.
 Moreover, none of the equilibiria collapses (i.e., they are still strict subsets, even when restricted to symmetric games); this because all the provided counterexamples are symmetric games.
-The only new relation that emerges is between minimax rationaliziblity and PTE.
+The only new relation that emerges is between minimax rationaliziblity and~PTE.
 All the inclusions are depicted in \autoref{fig:venn-sym-without-ties}.
 Furthermore, we present some other interesting observations about symmetric games.
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[line width=0.25pt]
+		\draw (0,0) circle (1);
+		\draw (0,0) circle (2);
+		\draw (0,0) circle (3);
+		\draw[rounded corners=2ex] (-3.5,3.5) rectangle (3.5,-3.5);
+		\draw (3.0,0) ellipse (5 and 3);
+		\node at (0,0) {PTBPE};
+		\node at (-0.5,1.35) {PTE};
+		\node at (-1,2.35) {PTBRE};
+		\node at (-2,3.0) {IR};
+		\node at (5,0) {MR};
+	\end{tikzpicture}
+	\caption{A Venn diagram depicting the inclusion of equilibria in symmetric games without ties.}
+	\label{fig:venn-sym-without-ties}
+\end{figure}
 
 \begin{observation}
 	 In a symmetric game $G = (P, S, \uu)$, if a strategy profile $\vecs \in S$ is a PTE, then it lies on the diagonal, i.e., we have $\vecs = (a, a, \dots, a)$ for some strategy $a$.
@@ -186,25 +278,3 @@ Furthermore, we present some other interesting observations about symmetric game
 \begin{remark}
 	\autoref{tab:sym-ptbre-ne-mr} and \autoref{tab:sym-mr-ne-ptbre} show that PTBRE and MR are still intersecting, even in symmetric games.
 \end{remark}
-
-\begin{figure}
-	\centering
-	\begin{tikzpicture}[line width=0.25pt]
-		\draw (0,0) circle (1);
-		\draw (0,0) circle (2);
-		\draw (0,0) circle (3);
-		\draw[rounded corners=2ex] (-3.5,3.5) rectangle (3.5,-3.5);
-		\draw (3.0,0) ellipse (5 and 3);
-		\node at (0,0) {PTBPE};
-		\node at (-0.5,1.35) {PTE};
-		\node at (-1,2.35) {PTBRE};
-		\node at (-2,3.0) {IR};
-		\node at (5,0) {MR};
-	\end{tikzpicture}
-	\caption{A Venn diagram depicting the inclusion of equilibria in symmetric games without ties.}
-	\label{fig:venn-sym-without-ties}
-\end{figure}
-
-\section{Games with ties}
-In games with ties, the argument presented in \autoref{th:ptbre-subset-pte} does not hold anymore.
-Indeed, \autoref{tab:ties-pte-ne-ptbre} shows that PTE and PTBRE are intersecting.

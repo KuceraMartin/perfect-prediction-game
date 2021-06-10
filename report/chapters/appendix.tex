@@ -13,6 +13,26 @@ Profiles that survive infinitely many rounds are left without highlighting.
 
 \begin{table}
 	\caption{
+		PTBPE\textsuperscript{sym} $\not\subseteq$ sPTBRE\textsuperscript{sym}.
+		Profiles (A, A), (A, C), (B, B), and (C, A) are PTBPE but only (B, B) is a strict PTBRE.
+	}
+	\label{tab:ptbpe-not-sub-sptbre}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+			& A		& B	   & C	  \\
+		\hline
+		A 		&\cellcolor{gray!00} 8, 8 &\cellcolor{gray!20} 7, 8 &\cellcolor{gray!00} 8, 8 \\
+		\hline
+		B		&\cellcolor{gray!20} 8, 7 &\cellcolor{gray!00} 8, 8 &\cellcolor{gray!70} 0, 1 \\
+		\hline
+		C		&\cellcolor{gray!00} 8, 8 &\cellcolor{gray!70} 1, 0 &\cellcolor{gray!70} 1, 1 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\begin{table}
+	\caption{
 		IR $\ne$ PTBRE.
 		Profiles (B, B), (B, C), (C, B), and (C, C) are individually rational but only (B, B) is a perfectly transparent best profile equilibrium.
 	}
@@ -257,10 +277,10 @@ Profiles that survive infinitely many rounds are left without highlighting.
 
 \begin{table}
 	\caption{
-		PTE\textsuperscript{ties} $\ne$ PTBRE\textsuperscript{ties}.
+		PTE\textsuperscript{sym} $\not\subseteq$ PTBRE\textsuperscript{sym}.
 		Profiles (A, D), (A, F), and (C, D) are PTE but only (A, D) is a PTBRE.
 	}
-	\label{tab:ties-pte-ne-ptbre}
+	\label{tab:ties-pte-not-sub-ptbre}
 	\centering
 	\begin{tabular}{|c|c|c|c|}
 		\hline
