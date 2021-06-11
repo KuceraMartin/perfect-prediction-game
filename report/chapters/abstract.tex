@@ -1,4 +1,16 @@
 \begin{abstract}
-  This example thesis briefly shows the main features of our thesis
-  style, and how to use it for your purposes.
+  In non-Nashian game theory, we assume that all players can perfectly predict each other's actions.
+  A Perfectly Transparent Equilibrium (PTE) for games in normal form, as introduced by Fourny \cite{Fourny20}, describes a state such that no player is motivated to change their strategy (similar to Nash equilibrium but with the additional assumption of Perfect Prediction).
+
+  This work introduces a web-based backend for an interactive game of a human vs. computer with the purpose to train human players to develop strategies leading to a resulting state that is a PTE.
+
+  PTE, unlike Nash equilibrium, does not use the notion of a best response in its definition.
+  Instead, it is defined using an elimination process (similar to minimax rationalizibility), and we consider a state to be PTE if it is never eliminated in the process.
+
+  We define some new best response notions: perfectly transparent best response, perfectly transparent $i$-best profile, and perfectly transparent $i$-optimal profile.
+  These naturally induce new equilibria notions as well (if a state is considered a best response by each individual player, we say that state is an equilibrium).
+  We present some theoretical results about the inclusions of these equilibria (that is, if some state is an equilibrium of one kind, whether it implies that it also is an equilibrium of another kind) with respect to each other, and to PTE, minimax rationalizibility, and individual rationality.
+
+  These results may be useful for potential futurue social experiments with real people playing games against each other or against a computer (e.g. one that is connected to our backend).
+  We show that certain decision-making processes indeed lead both players to reaching a PTE, while others might not.
 \end{abstract}
