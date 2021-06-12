@@ -100,26 +100,33 @@ The results are summarized by a Venn diagram in \autoref{fig:venn-with-ties}.
 	\centering
 	\begin{tikzpicture}[line width=0.25pt]
 		\draw (0,0) ellipse (1 and 0.5);
-		\draw (-0,0.2) ellipse (1.7 and 0.9);
-		\draw (0,0) ellipse (2.5 and 1.7);
-		\draw (0,0.4) ellipse (1.5 and 2.1);
-		\draw (0.4,0.3) ellipse (2.5 and 3);
-		\draw[rounded corners=2ex] (-3.2,3.5) rectangle (3.2,-2.8);
-		\draw (4.5,0) ellipse (3.9 and 3);
-		\node at (-0.2,0) {sPTOPE};
-		\node at (-0.2,0.7) {PTOPE};
-		\node at (-0.2,1.35) {PTE};
-		\node at (-0.2,2) {sPTBRE};
-		\node at (0,2.75) {PTBRE};
-		\node at (-2.2,2.8) {IR};
-		\node at (5,0) {MR};
+		\draw (-0.2,0.2) ellipse (1.5 and 1.1);
+		\draw (1.75,0) ellipse (1 and 0.5);
+		\draw (2,0.2) ellipse (1.5 and 1.1);
+		\draw (0.9,0.3) ellipse (2 and 2.5);
+		\draw (0.3,0.4) ellipse (3.3 and 3.3);
+		\draw (1.7,-0.2) ellipse (3.5 and 2.5);
+		\draw[rounded corners=2ex] (-3.2,4) rectangle (5.5,-3.2);
+		\draw (4.1,-0.3) ellipse (3.7 and 3);
+		\node at (-0.25,0) {sPTOPE};
+		\node at (-0.3,0.8) {PTOPE};
+		\node at (1.95,0) {sPTBPE};
+		\node at (1.85,0.8) {PTBPE};
+		\node at (0.4,1.6) {sPTBRE};
+		\node at (-1.5,2.0) {PTBRE};
+		\node at (4.3,0) {PTE};
+		\node at (-2.5,3) {IR};
+		\node at (6.5,0) {MR};
 	\end{tikzpicture}
 	\caption{A Venn diagram depicting the inclusion of different equilibria in games with ties.}
 	\label{fig:venn-with-ties}
 \end{figure}
 
-First, we can see from our definition of PTOPE, PTBPE, and PTBRE that any strategy profile satisfying the strict definition of each equilibrium also satisfies the weak definition of the respective equilibrium.
-Thus, we have sPTOPE $\subset$ PTOPE, sPTBPE $\subset$ PTBPE, and sPTBRE $\subset$ PTBRE.
+\begin{observation}
+	\label{th:strict-sub-weak}
+	We can see from our definition of PTOPE, PTBPE, and PTBRE that any strategy profile satisfying the strict definition of each equilibrium also satisfies the weak definition of the respective equilibrium.
+	Thus, we have sPTOPE $\subset$ PTOPE, sPTBPE $\subset$ PTBPE, and sPTBRE $\subset$ PTBRE.
+\end{observation}
 
 \begin{remark}
 	The inclusions are indeed strict, as shown in \autoref{tab:ptope-not-sub-sptope}, TODO, and TODO.
@@ -233,7 +240,24 @@ Thus, we have sPTOPE $\subset$ PTOPE, sPTBPE $\subset$ PTBPE, and sPTBRE $\subse
 
 Minimax rationalizibility intersects with all the other equilibiria, as shown in \autoref{tab:PTOPE-ne-minimax} and \autoref{tab:PTOPE-eq-minimax}.
 
-\autoref{tab:ties-pte-not-sub-ptbre} shows that PTE $\not\subseteq$ PTBRE, and TODO shows that sPTBRE $\not\subseteq$ PTE, which completes our inclusion inspection.
+\begin{lemma}
+	\label{th:ptbpe-subset-mr}
+	In any game $G = (P, S, \uu)$ of two players with $P = \{i, j\}$, if a strategy profile $\vecs \in S$ is a PTBPE, then it is minimax rationalizable.
+	We have PTBPE $\subset$ MR.
+\end{lemma}
+
+\begin{proof}
+	Suppose for the sake of contradiction that there is a strategy profile $\vecs \in S$ which is a PTBPE but not MR.
+	This means there is some $k \in \N$ such that $\vecs \in \mathcal{R}_k$ and $\vecs \notin \mathcal{R}_{k+1}$.
+	Suppose WLOG that player $i$ caused the elimination of $\vecs$ in the $k+1$\textsuperscript{st} round.
+	This means, player $i$ has some strategy $s_i' \in S_i'$ such that
+	\[
+		\forall (s_i', s_j') \in \mathcal{R}_k: u_i(s_i', s_j') > u_i(\vecs),
+	\]
+	and there is at least one $s_j' \in S_j$ such that $(s_i', s_j') \in \mathcal{R}_k$.
+	Now, we can observe that $(s_i', s_j) \in \mathcal{R}_k$; otherwise either the whole row or column corresponding to $(s_i', s_j)$ would have to be eliminated in some previous round but we know that $\vecs \in \mathcal{R}_k$ and $(s_i', s_j') \in \mathcal{R}_k$ for some $s_j' \in S_j$.
+	Since $u_i(s_i', s_j) > u_i(\vecs)$, it cannot be that $s_i$ is a perfectly transparent best response to $s_j$. Hence, $\vecs$ cannot be a perfectly transparent $j$-best profile, a contradiction.
+\end{proof}
 
 
 \section{Games without ties}
@@ -243,7 +267,7 @@ Moreover, all the \enquote{is subset of} relations are inherited from the previo
 The only difference is that PTE is not intersecting with PTBRE anymore (the example in \autoref{tab:ties-pte-not-sub-ptbre} indeed has ties).
 
 \begin{observation}
-	\label{th:ptbre-subset-pte}
+	\label{th:pte-subset-ptbre}
 	If a strategy profile is a PTE, then it must be a PTBRE because in the last preemption round, there is only one strategy profile to choose from.
 	We have PTE $\subset$ PTBRE.
 \end{observation}
@@ -257,16 +281,18 @@ All inclusions for games without ties are depicted by a Venn diagram in \autoref
 \begin{figure}[h]
 	\centering
 	\begin{tikzpicture}[line width=0.25pt]
-		\draw (0,0) circle (1);
-		\draw (0,0) circle (2);
-		\draw (0,0) circle (3);
+		\draw (-0.9,0) ellipse (1.1 and 1.1);
+		\draw (0.9,0) ellipse (1.1 and 1.1);
+		\draw (0,0) circle (2.2);
+		\draw (0,0) circle (3.3);
 		\draw[rounded corners=2ex] (-3.5,3.5) rectangle (3.5,-3.5);
-		\draw (4.5,0) ellipse (4 and 3);
-		\node at (-0.2,0) {PTOPE};
-		\node at (-0.2,1.35) {PTE};
-		\node at (-0.2,2.35) {PTBRE};
-		\node at (-0.2,3.25) {IR};
-		\node at (5,0) {MR};
+		\draw (2.8,0) ellipse (3 and 2.8);
+		\node at (-1,0) {PTOPE};
+		\node at (1,0) {PTBPE};
+		\node at (-0.5,1.45) {PTE};
+		\node at (-1.3,2.45) {PTBRE};
+		\node at (-2.5,3.0) {IR};
+		\node at (4.3,0) {MR};
 	\end{tikzpicture}
 	\caption{A Venn diagram depicting the inclusion of different equilibria in games without ties.}
 	\label{fig:venn-general-without-ties}
@@ -284,15 +310,17 @@ Furthermore, we present some other interesting observations about symmetric game
 \begin{figure}
 	\centering
 	\begin{tikzpicture}[line width=0.25pt]
-		\draw (0,0) circle (1);
-		\draw (0,0) circle (2);
-		\draw (0,0) circle (3);
+		\draw (-0.9,0) ellipse (1.1 and 1.1);
+		\draw (0.9,0) ellipse (1.1 and 1.1);
+		\draw (0,0) circle (2.2);
+		\draw (0,0) circle (3.3);
 		\draw[rounded corners=2ex] (-3.5,3.5) rectangle (3.5,-3.5);
-		\draw (3.0,0) ellipse (5 and 3);
-		\node at (0,0) {PTOPE};
-		\node at (-0.5,1.35) {PTE};
-		\node at (-1,2.35) {PTBRE};
-		\node at (-2,3.0) {IR};
+		\draw (2.8,0) ellipse (5 and 3.2);
+		\node at (-1,0) {PTOPE};
+		\node at (1,0) {PTBPE};
+		\node at (-0,1.35) {PTE};
+		\node at (-1.3,2.45) {PTBRE};
+		\node at (-2.5,3.0) {IR};
 		\node at (5,0) {MR};
 	\end{tikzpicture}
 	\caption{A Venn diagram depicting the inclusion of equilibria in symmetric games without ties.}
@@ -316,6 +344,7 @@ Furthermore, we present some other interesting observations about symmetric game
 \end{proof}
 
 \begin{lemma}[Fourny \cite{Fourny20}]
+	\label{th:pte-sym-subset-mr}
 	In a symmetric game $G = (P, S, \uu)$, if a strategy profile $\vecs \in S$ is a PTE, then it is minimax rationalizable.
 	Thus, we have PTE\textsuperscript{sym} $\subset$ MR\textsuperscript{sym}.
 \end{lemma}
