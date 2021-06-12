@@ -144,7 +144,7 @@ Thus, we have sPTOPE $\subset$ PTOPE, sPTBPE $\subset$ PTBPE, and sPTBRE $\subse
 \end{remark}
 
 \begin{remark}
-	\autoref{tab:PTOPE-not-sub-sptbre} shows that PTOPE $\not\subseteq$ PTBRE.
+	\autoref{tab:PTOPE-not-sub-sptbre} shows that PTOPE $\not\subseteq$ sPTBRE.
 \end{remark}
 
 \begin{lemma}
@@ -167,6 +167,39 @@ Thus, we have sPTOPE $\subset$ PTOPE, sPTBPE $\subset$ PTBPE, and sPTBRE $\subse
 \begin{remark}
 	\autoref{tab:pte-ne-PTOPE} shows that the inclusion is strict.
 \end{remark}
+
+\begin{lemma}
+	\label{th:ptbpe-subset-pte}
+	If a game $G = (P, S, \uu)$ of two players has a PTBPE $\vecs \in S$, then $\vecs$ is a PTE; we have PTBPE $\subset$ PTE.
+\end{lemma}
+
+\begin{proof}
+	The proof is very similar to the proof of \autoref{th:ptope-subset-pte}.
+	We suppose for the sake of contradiction that there is a game $G = (P, S, \uu)$ with $P = \{1, 2\}$, and a strategy profile $\vecs = (s_1, s_2) \in S$ such that $\vecs$ is a PTBPE but not a PTE and let $k$ be the last preemption round in which $\vecs$ is not eliminated (i.e., $\vecs \in \mathcal{S}_k(G)$ but $\vecs \notin \mathcal{S}_{k+1}(G)$).
+	Because $\vecs$ is eliminated in the $(k+1)$\textsuperscript{st} round, there must be some player $i \in P$ with a strategy $s_i^* \ne s_i$ which causes the elimination:
+	\[
+		\forall s_j' \in S_j: (s_i^*, s_j') \in \mathcal{S}_k(G) \implies u_i(s_i^*, s_j') > u_i(\vecs),
+	\]
+	where $j = 3 - i$ is the opponent of $i$ and there is at least one $s_j' \in S_j$ which satisfies $(s_i^*, s_j') \in \mathcal{S}_k(G)$.
+	Let $b \in S_j$ be the perfectly transparent best response of player $j$ to $s_i^*$.
+	We must have $(s_i^*, b) \in \mathcal{S}_k$ and so $u_i(s_i^*, b) > u_i(\vecs)$.
+	This means that $\vecs$ is not a perfectly transparent $i$-best profile, contradicting $\vecs$ being a PTBPE.
+\end{proof}
+
+\begin{lemma}
+	\label{th:ptbpe-subset-ptbre}
+	If a game $G = (P, S, \uu)$ of two players has a PTBPE $\vecs \in S$, then $\vecs$ is a PTBRE.
+	Similarly, if $\vecs$ is a strict PTBPE, then it is a strict PTBRE.
+	We have PTBPE $\subset$ PTBRE, and sPTBPE $\subset$ sPTBRE.
+\end{lemma}
+
+\begin{proof}
+	Suppose that a game $G = (P, S, \uu)$ with $P = \{i, j\}$ has a PTBPE $\vecs = (s_i, s_j) \in S$.
+	By definition, this means that $\vecs$ is a perfectly transparent $i$-best profile, hence $s_j$ is a perfectly transparent best response to $s_i$.
+	Moreover, $\vecs$ is a perfectly transparent $j$-best profile, hence $s_i$ is a perfectly transparent best response to $s_j$.
+	This implies that $\vecs$ is a PTBRE.
+	The same argument holds for strict equilibiria.
+\end{proof}
 
 \begin{observation}
 	\label{th:pte-subset-ir}
