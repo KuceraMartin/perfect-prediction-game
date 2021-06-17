@@ -1,20 +1,20 @@
 \chapter{Appendix}
 
 \section{Game Theory}
-In this section, we present examples and counterexamples of games with various properties.
+In this section of the Appendix, we present examples and counterexamples of games with various properties.
 These should complete our discussion from \autoref{chap:game-theory} on different equilibria and the relationships between them.
 
-Most of our equilibria involve some kind of round-elimination.
-To better visialize the elimination process, we highlight stragy profiles eliminated in different rounds with a diffrent background shade.
+Most of our equilibria involve some sort of round elimination.
+To better visualize the elimination process, we highlight strategy profiles eliminated in different rounds with a different background shade.
 Profiles that are eliminated in the very first round are highlighted in the \colorbox{gray!80}{darkest} background.
 Every subsequent round of elimination is highlighted with a \colorbox{gray!60}{lighter} and \colorbox{gray!40}{lighter} background.
-The last round of elimination is highlighted wih the \colorbox{gray!20}{lightest} backrgoud.
+The last round of elimination is highlighted with the \colorbox{gray!20}{lightest} background.
 Profiles that survive infinitely many rounds are left without highlighting.
 
 \begin{table}
 	\caption{
 		PTOPE\textsuperscript{sym} $\not\subseteq$ sPTOPE\textsuperscript{sym}.
-		Profiles (B, B) and (C, C) are PTOPE but only (C, C) is a strict PTOPE.
+		Profiles (B, B) and (C, C) are PTOPE, but only (C, C) is a strict PTOPE.
 	}
 	\label{tab:ptope-not-sub-sptope}
 	\centering
@@ -34,7 +34,7 @@ Profiles that survive infinitely many rounds are left without highlighting.
 \begin{table}
 	\caption{
 		PTBRE\textsuperscript{sym} $\not\subseteq$ sPTBRE\textsuperscript{sym}.
-		Profiles (A, A), (B, B) and (C, C) are PTBRE but only (A, A) and (B, B) is a strict PTBRE.
+		Profiles (A, A), (B, B), and (C, C) are PTBRE, but only (A, A) and (B, B) are strict PTBRE.
 	}
 	\label{tab:ptbre-not-sub-sptbre}
 	\centering
@@ -207,7 +207,7 @@ Profiles that survive infinitely many rounds are left without highlighting.
 \begin{table}
 	\caption{PTOPE $\not\subseteq$ MR.
 		In the first copy of the table, preemptively eliminated strategies (used for computing the PTOPE) are highlighted.
-		In the second copy, minimax dominated strategies (i.e., those that are not minimax rationalizable) are higlighted.
+		In the second copy, minimax-dominated strategies (i.e., those that are not minimax rationalizable) are highlighted.
 		Strategy profile (B, F) is a PTOPE, and the only minimax rationalizable profile is (C, F).
 	}
 	\label{tab:PTOPE-ne-minimax}
@@ -242,7 +242,7 @@ Profiles that survive infinitely many rounds are left without highlighting.
 	\caption{
 		PTOPE and MR coincide.
 		In this game, minimax elimination and the perfectly transparent preemption eliminate exactly the same profiles in each round.
-		Profile (C, C) is both a perfectly transparent optimal profile equilibrium, and minimax rationalizable.
+		Profile (C, C) is both a perfectly transparent optimal profile equilibrium and minimax rationalizable.
 	}
 	\label{tab:PTOPE-eq-minimax}
 	\centering
@@ -286,7 +286,7 @@ Profiles that survive infinitely many rounds are left without highlighting.
 	\caption{
 		sPTBRE\textsuperscript{sym} $\not\subseteq$ MR\textsuperscript{sym}.
 		In the first copy of the table, preemptively eliminated strategies (used for computing PTBRE) are highlighted.
-		In the second copy, minimax dominated strategies (i.e., those that are not minimax rationalizable) are higlighted.
+		In the second copy, minimax-dominated strategies (i.e., those that are not minimax rationalizable) are highlighted.
 		Strategy profiles (B, B) and (C, C) are a PTBRE but only (C, C) is MR.
 	}
 	\label{tab:sym-ptbre-ne-mr}
@@ -320,8 +320,8 @@ Profiles that survive infinitely many rounds are left without highlighting.
 	\caption{
 		MR\textsuperscript{sym} $\not\subset$ IR\textsuperscript{sym}.
 		In the first copy of the table, highlighted strategy profiles are not individually rational.
-		In the second copy, minimax dominated strategy profiles are higlighted.
-		Strategy profile (B, B) is minimax rationalizable but it is not individually rational.
+		In the second copy, minimax-dominated strategy profiles are highlighted.
+		Strategy profile (B, B) is minimax rationalizable, but it is not individually rational.
 	}
 	\label{tab:mr-not-sub-ir}
 	\centering
@@ -353,7 +353,7 @@ Profiles that survive infinitely many rounds are left without highlighting.
 \begin{table}
 	\caption{
 		PTE\textsuperscript{sym} $\not\subseteq$ PTBPE\textsuperscript{sym}.
-		Profile (B, B) is a PTE but there is no PTBPE because the only perfectly transparent row-best profile is (C, A) and the only column-best profile is (A, C).
+		Profile (B, B) is a PTE, but there is no PTBPE because the only perfectly transparent row-best profile is (C, A) and the only column-best profile is (A, C).
 	}
 	\label{tab:pte-not-sub-ptbpe}
 	\centering
@@ -373,7 +373,7 @@ Profiles that survive infinitely many rounds are left without highlighting.
 \begin{table}
 	\caption{
 		PTE\textsuperscript{sym} $\not\subseteq$ PTBRE\textsuperscript{sym}.
-		Profiles (A, A), (A, C), and (C, A) are PTE but only (A, A) is a PTBRE.
+		Profiles (A, A), (A, C), and (C, A) are PTE, but only (A, A) is a PTBRE.
 	}
 	\label{tab:ties-pte-not-sub-ptbre}
 	\centering
@@ -392,8 +392,19 @@ Profiles that survive infinitely many rounds are left without highlighting.
 
 
 \section{Inclusions overview}
+\label{sec:inclusions-overview}
+In this section of the Appendix, we summarize all the inclusion claims made in this report.
+Inclusions for games with ties are displayed in \autoref{tab:overview-nosym-dup}, inclusions for symmetric games with ties are displayed in \autoref{tab:overview-sym-dup}, inclusions for games without ties are displayed in \autoref{tab:overview-nosym-nodup}, and inclusions for symmetric games without ties are displayed in \autoref{tab:overview-sym-nodup}.
+Each table contains one row and one column for every equilibrium.
+The respective cell for row $A$ and column $B$ contains a reference to either a proof or a counterexample for the claim \enquote{$A \subseteq B$}.
+Every cell referring to a proof (i.e., the claim is true) is highlighted in \colorbox{green!30}{green} and each cell referring to a counterexample (i.e., the claim is false) is highlighted in \colorbox{red!30}{red}.
+For some inclusions, we do not present direct proofs or counterexamples but rather these are implied transitively from other inclusions that we prove.
+Such inclusions are highlighted in \colorbox{green!15}{light green} if they are true, and in \colorbox{red!15}{light red} if they are false.
+Inclusions highlighted in \colorbox{gray!30}{grey} are trivially true by reflexivity.
+
 \begin{sidewaystable}
-	\caption{Inclusions overview in non-symetric games with ties.}
+	\caption{Inclusions overview in non-symmetric games with ties. See \autoref{sec:inclusions-overview} for an explanation.}
+	\label{tab:overview-nosym-dup}
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
 		\hline
@@ -421,7 +432,8 @@ Profiles that survive infinitely many rounds are left without highlighting.
 \end{sidewaystable}
 
 \begin{sidewaystable}
-	\caption{Inclusions overview in symetric games with ties.}
+	\caption{Inclusions overview in symmetric games with ties. See \autoref{sec:inclusions-overview} for an explanation.}
+	\label{tab:overview-sym-dup}
 	\hspace{-4cm}
 	\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
 		\hline
@@ -449,7 +461,8 @@ Profiles that survive infinitely many rounds are left without highlighting.
 \end{sidewaystable}
 
 \begin{sidewaystable}
-	\caption{Inclusions overview in non-symetric games without ties.}
+	\caption{Inclusions overview in non-symmetric games without ties. See \autoref{sec:inclusions-overview} for an explanation.}
+	\label{tab:overview-nosym-nodup}
 	\begin{tabular}{|c|c|c|c|c|c|c|}
 		\hline
 		$\subseteq$  & PTOPE & PTBPE & PTBRE & PTE & IR & MR \\
@@ -470,7 +483,8 @@ Profiles that survive infinitely many rounds are left without highlighting.
 \end{sidewaystable}
 
 \begin{sidewaystable}
-	\caption{Inclusions overview in symetric games without ties.}
+	\caption{Inclusions overview in symmetric games without ties. See \autoref{sec:inclusions-overview} for an explanation.}
+	\label{tab:overview-sym-nodup}
 	\begin{tabular}{|c|c|c|c|c|c|c|}
 		\hline
 		$\subseteq$  & PTOPE & PTBPE & PTBRE & PTE & IR & MR \\

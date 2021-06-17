@@ -1,6 +1,8 @@
 \chapter{Game Theory}
 \label{chap:game-theory}
 
+As a warm-up, we include the following result.
+
 \begin{lemma}
 	For every game $G$, there exists at least one individually rational strategy profile.
 	In other words, $\mathcal{S}_1(G) \ne \emptyset$.
@@ -15,8 +17,15 @@
 	If $\mm$ was not individually rational, there would have to be some player $j \in P$ and a strategy $s_j^* \in S_j$ that would ensure a better worst-case payoff: $\min_{\vecs_{-j} \in S_{-j}}u_j(s_j^*, \vecs_{-j}) > u_j(\mm)$ which would contradict the choice of~$m_j$.
 \end{proof}
 
-In this chapter, we introduce two new equilibria: the perfectly transparent best response equilibrium, and the perfectly transparent optimal profile equilibrium.
-Then, we discuss some relations between these two equilibiria, and between the other equilibria introduced in \autoref{chap:background}.
+The main goal of this work is to create a gaming platform of human vs. computer, which trains the human to play towards a PTE.
+This \enquote{training} should be conducted by the human playing many games and trying to figure out how to maximize their payoffs.
+The primary means of affecting this process is through choosing an appropriate strategy chosen by the computer in each play.
+How precisely this response should be chosen is not clear and needs to be determined by experiments.
+
+This chapter introduces three new equilibria which might be useful for the cause described in the previous paragraph: the perfectly transparent best response equilibrium and the perfectly transparent optimal profile equilibrium.
+Then, we discuss some relations between these two equilibria and between the other equilibria introduced in \autoref{chap:background}.
+
+We start by defining the most natural way to translate the preemption process for determining a PTE to a notion of best response.
 
 \begin{definition}[Perfectly transparent best response]
 	In a game (possibly with ties) $G = (P, S, \uu)$ we say a strategy $s_i^* \in S_i$ is a perfectly transparent best response to a strategy profile $\vecs_{-i} \in S_{-i}$ of the opponent players if it is the Nashian best response to $\vecs_{-i}$ across all profiles that survive the maximum possible number of preemption rounds.
@@ -31,11 +40,21 @@ Then, we discuss some relations between these two equilibiria, and between the o
 	\]
 \end{definition}
 
+A best response naturally induces an equilibrium.
+
 \begin{definition}[Perfectly transparent best response equilibrium]
 	We say a strategy profile $\vecs = (s_1, \dots, s_n) \in S$ is a (\textit{weak}) perfectly transparent best response equilibrium (PTBRE) if $s_i$ is a (weak) perfectly transparent best response to $\vecs_{-i}$ for all players $i \in P$.
 	
 	Similarly, $\vecs$ is a \textit{strict} PTBRE if $s_i$ is a strict perfectly transparent best response to $\vecs_{-i}$ for all players $i \in P$.
 \end{definition}
+
+It is easy to see that for any game, if a strategy profile is a PTE, then it is also a PTBRE.
+Our initial hope was that the other direction also holds, so PTE and PTBRE are equivalent.
+Unfortunately, this is not true, as we can see in the following sections.
+
+Next, we can consider the following situation: we are playing a game of 2 players, and we know that our opponent's strategy will always be a perfectly transparent best response to our strategy.
+In this case, what strategy should we choose to maximize our payoff?
+This is captured in the following definition.
 
 \begin{definition}[Perfectly transparent $i$-best profile]
 	For a game $G = (P, S, \uu)$ of two players with $P = \{i, j\}$
@@ -50,15 +69,21 @@ Then, we discuss some relations between these two equilibiria, and between the o
 	\[
 		\forall s_i' \in S_i: s_i' \ne s_i \implies u_i(\vecs) > u_i\left(s_i', b(s_i')\right).
 	\]
-	Note that even in the strict definition, we still consider $b(s_i')$ to be a weak best response.
+	Note that we still consider $b(s_i')$ to be a weak best response even in the strict definition.
 	This is to ensure that every strict best profile is also a weak best profile.
 \end{definition}
+
+Again, this notion naturally induces an equilibrium.
 
 \begin{definition}[Perfectly transparent best profile equilibrium]
 	For a game of two players, we say that a strategy profile $\vecs \in S$ is a (\textit{weak}) perfectly transparent best profile equilibrium (PTBPE) if $\vecs$ is a (weak) perfectly transparent $i$-best profile for both players $i \in P$.
 
 	Similarly, $\vecs$ is a \textit{strict} PTBPE if it is a strict perfectly transparent $i$-best profile for both $i \in P$.
 \end{definition}
+
+Another situation that we consider is the following: we are playing a game of two players, and the strategy that we are going to choose is a perfectly transparent best response to the opponent's strategy.
+What is the best payoff that we can get---that is, what payoff would we get if the opponent knew we would choose a perfectly transparent best response and were optimizing for \textit{our} payoff instead of theirs?
+This is captured by the following definition.
 
 \begin{definition}[Perfectly transparent $i$-optimal profile]
 	For a given game $G = (P, S, \uu)$ and player $i \in P$ we say a strategy profile $\vecs = (s_1, \dots, s_n) \in S$ is a (\textit{weak}) perfectly transparent $i$-optimal profile if
@@ -76,25 +101,38 @@ Then, we discuss some relations between these two equilibiria, and between the o
 	This is to ensure that every strict optimal profile is also a weak optimal profile.
 \end{definition}
 
+This definition also induces an equilibrium.
+
 \begin{definition}[Perfectly transparent optimal profile equilibrium]
 	We say that a strategy profile $\vecs \in S$ is a (\textit{weak}) perfectly transparent optimal profile equilibrium (PTOPE) if $\vecs$ is a (weak) perfectly transparent $i$-optimal profile for all $i \in P$.
 
 	Similarly, $\vecs$ is a \textit{strict} PTOPE if it is a strict perfectly transparent $i$-optimal profile for all $i \in P$.
 \end{definition}
 
+While the other equilibria model selfish behavior, PTOPE models altruistic behavior.
+It can be seen as the non-Nashian counterpart to the Berge equilibrium \cite{berge1957theorie}.
+
 Recall that for any game $G = (P, S, \uu)$, a strategy profile $\vecs \in S$ is individually rational if and only if it survives the first preemption round: $\vecs \in \mathcal{S}_1(G)$.
 This means that every PTE must be individually rational.
-If we think of these equilibiria as sets of strategy profiles in any possible game, we can express this as PTE $\subset$ IR.
+If we think of these equilibria as sets of strategy profiles in any possible game, we can express this as PTE $\subset$ IR.
 It is not hard to see that the inclusion is indeed strict as there are games in which $\mathcal{S}_2 \subsetneq \mathcal{S}_1$, so not all individually rational profiles are PTEs.
 
-In the rest of this chapter, we present several such inclusion results that help to understand the relations between individal rationality, perfetcly transparent best response equilibiria, perfectly transparent equilibiria, perfectly transparent optimal profile equilibiria, and minimax rationalizibility.
+In the rest of this chapter, we present several such inclusion results that help to understand the relations between individual rationality, perfectly transparent best response equilibria, perfectly transparent equilibria, perfectly transparent optimal profile equilibria, and minimax rationalizability.
 
+These results were obtained by first computing equilibria for all games in large datasets \cite{bigDataset}, and analyzing the results using Apache Spark.
+Most of the counterexamples found in the Appendix come from these datasets.
+Moreover, not finding counterexamples for certain inclusions initiated many hypotheses that we proved at a later point.`'
+An overview of all inclusions that we prove or disprove can be found in \autoref{sec:inclusions-overview} of the Appendix.
 
 \section{Games with ties}
+\label{sec:games-with-ties}
 
 We start by presenting results about the most general setup: games with ties.
 All the proofs presented in this section naturally hold also for the more specific cases (symmetric games, games without ties).
 The results are summarized by a Venn diagram in \autoref{fig:venn-with-ties}.
+
+We consider the most interesting result of this section to be that both PTBPE and PTOPE are subsets of PTE.
+This means that both selfishness and altruism can achieve a perfectly transparent equilibrium under the non-Nashian assumptions.
 
 \begin{figure}[b]
 	\centering
@@ -128,10 +166,6 @@ The results are summarized by a Venn diagram in \autoref{fig:venn-with-ties}.
 	Thus, we have sPTOPE $\subset$ PTOPE, sPTBPE $\subset$ PTBPE, and sPTBRE $\subset$ PTBRE.
 \end{observation}
 
-\begin{remark}
-	The inclusions are indeed strict, as shown in \autoref{tab:ptope-not-sub-sptope}, TODO, and TODO.
-\end{remark}
-
 \begin{observation}
 	\label{th:ptope-subset-ptbre}
 	For any game $G = (P, S, \uu)$, if a strategy profile $\vecs \in S$ is a PTOPE, then it is a PTBRE.
@@ -142,17 +176,9 @@ The results are summarized by a Venn diagram in \autoref{fig:venn-with-ties}.
 \begin{proof}
 	If $\vecs$ is a PTOPE, it is by definition a perfectly transparent $i$-optimal profile for every player $i \in P$.
 	If $\vecs$ is a perfectly transparent $i$-optimal profile, then, again by definition, $s_i$ is a perfectly transparent best response to $\vecs_{-i}$.
-	This being true for all $i \in P$ is exactly the definition of a PTBRE.
-	The same argument holds for strict equilibiria.
+	This being true for all $i \in P$ is precisely the definition of a PTBRE.
+	The same argument holds for strict equilibria.
 \end{proof}
-
-\begin{remark}
-	TODO: inclusion indeed strict
-\end{remark}
-
-\begin{remark}
-	\autoref{tab:PTOPE-not-sub-sptbre} shows that PTOPE $\not\subseteq$ sPTBRE.
-\end{remark}
 
 \begin{lemma}
 	\label{th:ptope-subset-pte}
@@ -170,10 +196,6 @@ The results are summarized by a Venn diagram in \autoref{fig:venn-with-ties}.
 	By the choice of $\vecs_{-i}^*$, we must have $u_i(b, \vecs_{-i}^*) \ge u_i(s_i^*, \vecs_{-i}^*) > u_i(\vecs)$.
 	This means that $\vecs$ is not a perfectly transparent $i$-optimal profile, contradicting $\vecs$ being a PTOPE.
 \end{proof}
-
-\begin{remark}
-	\autoref{tab:pte-ne-PTOPE} shows that the inclusion is strict.
-\end{remark}
 
 \begin{lemma}
 	\label{th:ptbpe-subset-pte}
@@ -205,7 +227,7 @@ The results are summarized by a Venn diagram in \autoref{fig:venn-with-ties}.
 	By definition, this means that $\vecs$ is a perfectly transparent $i$-best profile, hence $s_j$ is a perfectly transparent best response to $s_i$.
 	Moreover, $\vecs$ is a perfectly transparent $j$-best profile, hence $s_i$ is a perfectly transparent best response to $s_j$.
 	This implies that $\vecs$ is a PTBRE.
-	The same argument holds for strict equilibiria.
+	The same argument holds for strict equilibria.
 \end{proof}
 
 \begin{observation}
@@ -230,15 +252,9 @@ The results are summarized by a Venn diagram in \autoref{fig:venn-with-ties}.
 	Let us suppose that there is a game $G = (P, S, \uu)$ and a strategy profile $\vecs = (s_1, \dots, s_n) \in S$ such that $\vecs$ is a PTBRE but not individually rational.
 	This is equivalent to $s_i$ being a perfectly transparent best response to $\vecs_{-i}$ for all $i \in P$, and $\vecs \notin \mathcal{S}_1(G)$.
 	Note that we must also have $(s_i', \vecs_{-i}) \notin \mathcal{S}_1(G)\ \forall s_i' \in S_i,\ \forall i \in P$ because otherwise $s_i$ would not be a perfectly transparent best response to $\vecs_{-i}$ for some player $i$.
-	This means the perfetcly transparent best response of every player $i \in P$ to $\vecs_{-i}$ is simply a Nashian best response (since all considered strategy profiles are eliminated in the same preemption round).
+	This means the perfectly transparent best response of every player $i \in P$ to $\vecs_{-i}$ is simply a Nashian best response (since all considered strategy profiles are eliminated in the same preemption round).
 	Thus, $\vecs$ is a Nash equilibrium, which is always individually rational.
 \end{proof}
-
-\begin{remark}
-	\autoref{tab:ir-ne-ptbre} shows that the inclusion is indeed strict.
-\end{remark}
-
-Minimax rationalizibility intersects with all the other equilibiria, as shown in \autoref{tab:PTOPE-ne-minimax} and \autoref{tab:PTOPE-eq-minimax}.
 
 \begin{lemma}
 	\label{th:ptbpe-subset-mr}
@@ -247,7 +263,7 @@ Minimax rationalizibility intersects with all the other equilibiria, as shown in
 \end{lemma}
 
 \begin{proof}
-	Suppose for the sake of contradiction that there is a strategy profile $\vecs \in S$ which is a PTBPE but not MR.
+	Suppose for the sake of contradiction that there is a strategy profile $\vecs \in S$, which is a PTBPE but not MR.
 	This means there is some $k \in \N$ such that $\vecs \in \mathcal{R}_k$ and $\vecs \notin \mathcal{R}_{k+1}$.
 	Suppose WLOG that player $i$ caused the elimination of $\vecs$ in the $k+1$\textsuperscript{st} round.
 	This means, player $i$ has some strategy $s_i' \in S_i'$ such that
@@ -259,26 +275,54 @@ Minimax rationalizibility intersects with all the other equilibiria, as shown in
 	Since $u_i(s_i', s_j) > u_i(\vecs)$, it cannot be that $s_i$ is a perfectly transparent best response to $s_j$. Hence, $\vecs$ cannot be a perfectly transparent $j$-best profile, a contradiction.
 \end{proof}
 
+All the described inclusions are strict.
+In \autoref{tab:overview-nosym-dup} an overview of all inclusions can be found.
+For each pair of equilibria $A, B$, it refers to either a proof or a counterexample of the claim \enquote{$A \subseteq B$} (note that $A \subseteq B \land B \not\subseteq A$ implies strict inclusion: $A \subset B$).
+
+% TODO
+Minimax rationalizability intersects with all the other equilibria, as shown in \autoref{tab:PTOPE-eq-minimax}.
+
+
+\section{Symetric games with ties}
+Every proof from the previous section holds even for symmetric games with ties.
+However, some counterexamples that we gave are non-symetric.
+In particular, for the following claims we do not have any counterexamples that would prove them:
+\begin{enumerate}
+	\item sPTOPE $\not\subseteq$ MR. For non-symetric games proved by \autoref{tab:PTOPE-ne-minimax}.
+	\item PTOPE $\not\subseteq$ MR. For non-symmetric games holds transitively because sPTOPE~$\subset$~PTOPE (\autoref{th:strict-sub-weak}), and sPTOPE~$\not\subseteq$~MR (point 1).
+	\item PTE $\not\subseteq$ MR. For non-symmetric games holds because PTOPE $\subset$ PTE (\autoref{th:ptope-subset-pte}), and PTOPE $\not\subset$ MR (point 2).
+\end{enumerate}
+Since we have not found any counterexamples in our datasets, we believe the opposite statements to be true.
+
+\begin{conjecture}
+	For any game $G = (P, S, \uu)$, if a strategy profile $\vecs \in S$ is a PTOPE, then it is minimax rationalizable.
+	We have PTOPE $\subset$ MR.
+\end{conjecture}
+
+\begin{conjecture}
+	For any game $G = (P, S, \uu)$, if a strategy profile $\vecs \in S$ is a PTE, then it is minimax rationalizable.
+	We have PTE $\subset$ MR.
+\end{conjecture}
+
+Due to limited time constraints, we have not been able to prove these conjectures.
+
+All other inclusions are the same as in \autoref{sec:games-with-ties}.
+An overview of all inclusion proofs and counterexamples can be found in \autoref{tab:overview-sym-dup}.
 
 \section{Games without ties}
-We can observe that in games without ties, similar to Nash equilibria, weak and strict equilibiria are equivalent also in the case of PTBRE and PTOPE.
-Thus, in this section, we do not distingiush between them.
-Moreover, all the \enquote{is subset of} relations are inherited from the previous section.
+We can observe that in games without ties, similar to Nash equilibria, weak and strict equilibria are also equivalent in the case of PTBRE and PTOPE.
+Thus, in this section, we do not distinguish between them.
+Moreover, all the \enquote{is subset of} relations are inherited from \autoref{sec:games-with-ties}.
 The only difference is that PTE is not intersecting with PTBRE anymore (the example in \autoref{tab:ties-pte-not-sub-ptbre} indeed has ties).
+All inclusions for games without ties are depicted by a Venn diagram in \autoref{fig:venn-general-without-ties}.
 
 \begin{observation}
 	\label{th:pte-subset-ptbre}
-	If a strategy profile is a PTE, then it must be a PTBRE because in the last preemption round, there is only one strategy profile to choose from.
+	If a strategy profile is a PTE, then it must be a PTBRE because there is only one strategy profile to choose from in the last preemption round.
 	We have PTE $\subset$ PTBRE.
 \end{observation}
 
-\begin{remark}
-	\autoref{tab:ptbre-ne-pte} shows that the inclusion is strict.
-\end{remark}
-
-All inclusions for games without ties are depicted by a Venn diagram in \autoref{fig:venn-general-without-ties}.
-
-\begin{figure}[h]
+\begin{figure}[t]
 	\centering
 	\begin{tikzpicture}[line width=0.25pt]
 		\draw (-0.9,0) ellipse (1.1 and 1.1);
@@ -298,16 +342,17 @@ All inclusions for games without ties are depicted by a Venn diagram in \autoref
 	\label{fig:venn-general-without-ties}
 \end{figure}
 
+An overview of all inclusion proofs and counterexamples can be found in \autoref{tab:overview-nosym-nodup}.
 
 \section{Symmetric games without ties}
 In this section, we restrict ourselves to symmetric games without ties.
-All the \enquote{subset} relations from the previous section still hold, since symmetric games are a special case of general games.
-Moreover, none of the equilibiria collapses (i.e., they are still strict subsets, even when restricted to symmetric games); this because all the provided counterexamples are symmetric games.
-The only new relation that emerges is between minimax rationaliziblity and~PTE.
+All the \enquote{subset} relations from the previous section still hold since symmetric games are a special case of general games.
+Moreover, none of the equilibria collapses (i.e., they are still strict subsets, even when restricted to symmetric games); this because all the provided counterexamples are symmetric games.
+The only new relation that emerges is between minimax rationalizability and~PTE.
 All the inclusions are depicted in \autoref{fig:venn-sym-without-ties}.
 Furthermore, we present some other interesting observations about symmetric games.
 
-\begin{figure}
+\begin{figure}[t]
 	\centering
 	\begin{tikzpicture}[line width=0.25pt]
 		\draw (-0.9,0) ellipse (1.1 and 1.1);
@@ -350,20 +395,14 @@ Furthermore, we present some other interesting observations about symmetric game
 \end{lemma}
 
 \begin{proof}
-	Suppose for the sake of deriving a contradiction that there is a game $G = (P, S, \uu)$ and a strategy profile $\vecs \in S$ that is a PTE but not minimax rationalizable.
+	Suppose, for the sake of deriving a contradiction, that there is a game $G = (P, S, \uu)$ and a strategy profile $\vecs \in S$ that is a PTE but not minimax rationalizable.
 	By definition, this means that there is some player $i \in P$ such that $(s_i, \vecs_{-i}')$ is not minimax rationalizable for any $\vecs' \in S$.
 	By symmetry, if this statement holds for one player, then it must hold for all players.
 	Let $s_j$ be the strategy that minimax-dominates $s_i$ (i.e. causes that $s_i$ is not minimax rationalizable).
 	We denote $\vecs^* = (s_j, s_j, \dots, s_j)$.
-	In the round where strategy $s_i$ is eliminated, strategy profile $\vecs^*$ must survive---otherwise strategy $s_j$ would be eliminated as well, but we supposed that $s_j$ is the strategy that caused the elimination of $s_i$.
+	In the round where strategy $s_i$ is eliminated, strategy profile $\vecs^*$ must survive---otherwise, strategy $s_j$ would be eliminated as well, but we supposed that $s_j$ is the strategy that caused the elimination of $s_i$.
 	Moreover, we must have $u_i(\vecs^*) > u_i(\vecs)\ \forall i \in P$ because $s_j$ minimax-dominates $s_i$.
 	This means $\vecs$ is not Pareto-optimal which contradicts $\vecs$ being a PTE.
 \end{proof}
 
-\begin{remark}
-	\autoref{tab:sym-mr-ne-pte} shows that the inclusion is strict.
-\end{remark}
-
-\begin{remark}
-	\autoref{tab:sym-ptbre-ne-mr} and \autoref{tab:sym-mr-ne-ptbre} show that PTBRE and MR are still intersecting, even in symmetric games.
-\end{remark}
+An overview of all inclusion proofs and counterexamples can be found in \autoref{tab:overview-sym-nodup}.

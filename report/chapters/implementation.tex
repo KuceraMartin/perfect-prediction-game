@@ -11,10 +11,31 @@ It defines the following entities:
 \begin{itemize}
 	\item \textsc{Game}: a case class that represents a game in normal form for two players.
 	\item \textsc{BestResponse}: a trait that describes a best response, given a game and the opponent's strategy.
+	It provides a method \textit{equilibria} which automatically computes all equilibria induced by the respective best response.
 	It is implemented by the following objects:
 	\begin{itemize}
-		\item \textsc{NashianBestResponse}
-		\item \textsc{PerfectlyTransparentBestResponse}
+		\item \textsc{NashianBestResponse.Weak}
+		\item \textsc{NashianBestResponse.Strict}
+		\item \textsc{PerfectlyTransparentBestResponse.Weak}
+		\item \textsc{PerfectlyTransparentBestResponse.Strict}
+	\end{itemize}
+	\item \textsc{Eliminator}: a trait that describes an elimination process used for computing equilibria.
+	It defines method \textit{eliminate} which represents one round of elimination.
+	It implements method \textit{all} which performs the loop of elimination as long as the set of non-eliminated profiles keeps changing.
+	It is implemmented by the following objects:
+	\begin{itemize}
+		\item \textsc{IndividualRationality}
+		\item \textsc{MinimaxRationalizability}
+	\end{itemize}
+	\item In the theoretical part of this work, we also define some other equilibria: PTBPE and PTOPE.
+	These are not induced by best response definitions.
+	Instead, they are defined as strategy profiles where the \textit{perfectly transparent $i$-best profiles} and \textit{perfectly transparent $i$-optimal profiles} coincide for all players $i$.
+	These are implemented by the following objects:
+	\begin{itemize}
+		\item \textsc{PerfectlyTransparentRowBestProfile.Weak}
+		\item \textsc{PerfectlyTransparentRowBestProfile.Strict}
+		\item \textsc{PerfectlyTransparentColOptimalProfile.Weak}
+		\item \textsc{PerfectlyTransparentColOptimalProfile.Strict}
 	\end{itemize}
 	\item \textsc{GameGenerator}: an object for generating random games.
 \end{itemize}
@@ -27,8 +48,8 @@ The API exposes the following endpoints:
 \begin{itemize}
 	\item \textsc{NewUser}: Creates a new user and returns the user's ID.
 	\item \textsc{NewGame}: Starts a new game; returns the game matrix and ID.
-	\item \textsc{Play}: For a game with given ID, accepts the human-player's (row) strategy, and returns the computer's (column) strategy.
-	\item \textsc{Stats}: Returns statistics for a user with given ID: number of games played and the average payoff.
+	\item \textsc{Play}: For a game with a given ID, accepts the human player's (row) strategy and returns the computer's (column) strategy.
+	\item \textsc{Stats}: Returns statistics for a user with a given ID: number of games played and the average payoff.
 \end{itemize}
 
 Play Framework is used to implement the server.
@@ -44,7 +65,7 @@ For communicating with the database, we use Slick library.
 \section{Console module}
 The console module is a sample client for the REST API described in \autoref{sec:impl-web-module}.
 It allows the user to play a series of games of chosen dimensions.
-For each game, the game matrix is displayed and the user is asked to choose a strategy.
+For each game, the game matrix is displayed, and the user is asked to choose a strategy.
 After choosing a strategy, the computer's strategy and the resulting payoff is displayed.
 Then, the user is asked whether she wants to play another game.
 At the end, statistics over all games are displayed.
@@ -58,5 +79,5 @@ At the end, statistics over all games are displayed.
 
 \section{Analysis module}
 The analysis module is used for computing statistics about large datasets of games using Apache Spark.
-It loads the datasests and computes the PTBPE, PTBRE, individually rational and minimax rationalizable strategy profiles, and stores them as a new dataset.
-Searching through this dataset was useful to find counterexamples and form conjectures about inclusions of these equilibiria (see \autoref{chap:game-theory}).
+It loads the datasets and computes the PTBPE, PTBRE, individually rational and minimax rationalizable strategy profiles, and stores them as a new dataset.
+Searching through this dataset was useful to find counterexamples and form conjectures about inclusions of these equilibria (see \autoref{chap:game-theory}).

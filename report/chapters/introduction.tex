@@ -1,29 +1,29 @@
 \chapter{Introduction}
-In Nashian game theory we ask ourselves, if a rational player knew what the strategies of all opponent players, what strategy would she choose.
-It would quite naturally be the strategy that maximizes her own payoff.
-A state in which no player would be motivated to change strategy even after knowing the opponents' srategies is called a Nash equilibrium.
+In Nashian game theory, we ask ourselves, if a rational player knew the strategies of all opponent players, what strategy would she choose.
+It would naturally be the strategy that maximizes her own payoff.
+A state in which no player would be motivated to change strategy even after knowing the opponents' strategies is called a Nash equilibrium.
 
 Non-Nashian game theory offers a different perspective.
-It makes the assumption that each player can perfectly predict the other players' strategies.
-Let us think about what this means for an individual player (let's call her Alice).
-When thinking about this assumption for the first time, it might seem obvious that Alice should just choose whatever strategy yields the best payoff for her, considering all the opponents' strategies that she correctly predicted, i.e., the Nashian best response.
+It assumes that each player can perfectly predict the other players' strategies.
+Let us think about what this means for an individual player (let us call her Alice).
+When thinking about this assumption for the first time, it might seem evident that Alice should choose whatever strategy yields the best payoff for her, considering all the opponents' strategies that she correctly predicted, i.e., the Nashian best response.
 However, since the other players can also predict perfectly, they would know about this and adapt their strategies accordingly.
-Since Alice can predict perfectly, she needs to take this into consideration (and the other players need to take her consideration into theirs, and she needs to take theirs into hers, and so on).
+If Alice acts rationally, she needs to take this into consideration (and the other players need to take her consideration into theirs, and she needs to take theirs into hers, and so on).
 
 For example, consider the famous Prisonner's dilemma (see \autoref{tab:prisoners-dilemma}).
 Suppose that Alice was playing against Bob and predicted that Bob was going to cooperate.
 Her Nahian best response would then be to defect.
-If she did choose to defect though, Bob would predict it and he would defect as well.
+If she did choose to defect, though, Bob would predict it, and he would defect as well.
 This would lead to a Nash equilibrium (defect, defect).
-However, it is not a PTE because Alice knew about this from the begining, and she must have also considered the other case---cooperating.
+However, it is not a PTE because Alice knew about this from the beginning, and she must have also considered the other case---cooperating.
 If Alice cooperated, we can see by the same argument (since the game is symmetric) that Bob would not be motivated to switch from cooperating to defecting.
-This is because if he defected, Alice would defect as well, and (cooporate, cooparate) has a strictly better payoff for Bob than (defect, defect).
+This is because if he defected, Alice would defect as well, and (cooperate, cooperate) has a strictly better payoff for Bob than (defect, defect).
 Thus, both Alice and Bob know that cooperating leads to the best possible payoff for each, and (cooperate, cooperate) indeed is a PTE.
 
 \begin{table}
-	\caption{Prisoner's dilemma---a standard example of a game in normal form.
+	\caption{Prisoner's dilemma---a classic example of a game in normal form.
 	Two suspects (row- and column-player) are placed in solitary confinement, with no means of communicating with each other.
-	Each suspect has two options: either cooperate with the other by remaining silent, or defect by testifying against the other.
+	Each suspect has two options: either cooperate with the other by remaining silent or defect by testifying against the other.
 	If both suspects remain silent, each of them will serve one year in prison.
 	If one defects while the other remains silent, the other will serve three years.
 	If both defect, each of them will serve two years.
@@ -41,29 +41,29 @@ Thus, both Alice and Bob know that cooperating leads to the best possible payoff
 	\end{tabular}
   \end{table}
 
-Note that Alice and Bob actually never needed to use their predictring ability at all.
+Note that Alice and Bob actually never needed to use their predicting ability at all.
 Just believing that the other player can predict their strategy was enough to choose an optimal strategy.
-This is in fact true for any game, not just for our example \cite{Fourny20}.
+This is, in fact, true for any game, not just for our example \cite{Fourny20}.
 
 In general, games can have multiple PTEs.
-However, games without ties (sometimes also called games in general position), if a PTE exists, then it is unique and Pareto-optimal \cite{Fourny20}.
+However, games without ties (sometimes also called games in general position), if a PTE exists, then it is unique, and Pareto-optimal \cite{Fourny20}.
 
-We provide a formal definition of PTE in \autoref{chap:background} but this should be enough to illustrate why it is an interesting concept.
+We provide a formal definition of PTE in \autoref{chap:background}, but this should be enough to illustrate why it is an interesting concept.
 Since game theory has many practical applications, it is interesting to research how or under what conditions players might be motivated to play in a way that leads to everyone reaching as good a payoff as possible.
 
 The goal of this work is twofold:
-First, it is to develop a REST API-based backend for playing games that will teach human players to think similarly as Alice and Bob in our example.
+First, it is to develop a REST API-based backend for playing games that will teach human players to think similarly to Alice and Bob in our example.
 That is, it will motivate them to play towards a PTE (or at least to something that is, in some sense, close to a PTE).
 We develop a backend that supports playing 2-player randomly generated games against a computer.
 The backend is in the form of a web (HTTP) based API server.
 Any client can connect to the server and request a new game which the server generates randomly and sends back to the client.
-Subsequently, the client can then choose a strategy and send it to the server, which responds with the computer's strategy and the resulting payoff.
+Subsequently, the client can choose a strategy and send it to the server, which responds with the computer's strategy and the resulting payoff.
 The human player is supposed to think that the computer chooses its strategy independently, not knowing the opponent's strategy, even though in reality, it actually does know the opponent's strategy and uses it to choose its own---this is to simulate Perfect Prediction.
-All games played through the server are stored in a database together with the results so that they can be analyzed later.
+All games played through the server are stored in a database together with the results to be analyzed later.
 
 The second goal is to define new notions of best responses that might ultimately lead to a PTE.
-The idea here is that even though the computer knows its opponent's strategy and it could just play the Nashian best response to maximize its own utility, it should rather choose some potentially suboptimal strategy, such that a player who plays towards a PTE is better off than one who does not.
+The idea here is that even though the computer knows its opponent's strategy and it could just play the Nashian best response to maximize its own utility, it should instead choose some potentially suboptimal strategy, such that a player who plays towards a PTE is better off than one who does not.
 This way, it might be possible to train people into non-Nashian thinking.
 To this end, we define a perfectly transparent best response, perfectly transparent $i$-best profile, and perfectly transparent $i$-optimal profile.
 These three best responses induce three new equilibria: perfectly transparent best response equilibrium, perfectly transparent best profile Equilibrium, and perfectly transparent optimal profile equilibrium.
-Furthermore, we analyze large datasets of randomly generated games to find out information about how the relate to each other, and to some other equilibra---most importantly to PTE.
+Furthermore, we analyze large datasets of randomly generated games to find out information about how they relate to each other, and to some other equilibria---most importantly to PTE.
