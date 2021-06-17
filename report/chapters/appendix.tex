@@ -389,3 +389,103 @@ Profiles that survive infinitely many rounds are left without highlighting.
 		\hline
 	\end{tabular}
 \end{table}
+
+
+\section{Inclusions overview}
+\begin{sidewaystable}
+	\caption{Inclusions overview in non-symetric games with ties.}
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+		\hline
+		$\subseteq$  & sPTOPE & PTOPE & sPTBPE & PTBPE & sPTBRE & PTBRE & PTE & IR & MR \\
+		\hline
+		sPTOPE & \cellcolor{gray!30} & \cellcolor{green!30} \autoref{th:strict-sub-weak} & \cellcolor{red!15} & \cellcolor{red!25} \autoref{tab:sptope-not-sub-ptbpe} & \cellcolor{green!30} \autoref{th:ptope-subset-ptbre} & \cellcolor{green!15} & \cellcolor{green!15} & \cellcolor{green!15} & \cellcolor{red!30} \autoref{tab:PTOPE-ne-minimax} \\
+		\hline
+		PTOPE & \cellcolor{red!30} \autoref{tab:ptope-not-sub-sptope} & \cellcolor{gray!30} & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!30} \autoref{tab:PTOPE-not-sub-sptbre} & \cellcolor{green!30} \autoref{th:ptope-subset-ptbre} & \cellcolor{green!30} \autoref{th:ptope-subset-pte} & \cellcolor{green!15} & \cellcolor{red!15} \\
+		\hline
+		sPTBPE & \cellcolor{red!15} & \cellcolor{red!30} \autoref{tab:sptbpe-not-sub-ptope} & \cellcolor{gray!30} & \cellcolor{green!30} \autoref{th:strict-sub-weak} & \cellcolor{green!30} \autoref{th:ptbpe-subset-ptbre} & \cellcolor{green!15} & \cellcolor{green!15} & \cellcolor{green!15} & \cellcolor{green!15} \\
+		\hline
+		PTBPE & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{gray!30} & \cellcolor{red!30} \autoref{tab:ptbpe-not-sub-sptbre} & \cellcolor{green!30} \autoref{th:ptbpe-subset-ptbre} & \cellcolor{green!30} \autoref{th:ptbpe-subset-pte} & \cellcolor{green!15} & \cellcolor{green!30} \autoref{th:ptbpe-subset-mr} \\
+		\hline
+		sPTBRE & \cellcolor{red!15} & \cellcolor{red!30} \autoref{tab:sptbre-not-sub-ptope} & \cellcolor{red!15} & \cellcolor{red!30} \autoref{tab:ptbre-not-sub-ptbpe} & \cellcolor{gray!30} & \cellcolor{green!30} \autoref{th:strict-sub-weak} & \cellcolor{red!30} \autoref{tab:ptbre-ne-pte} & \cellcolor{green!15} & \cellcolor{red!30} \autoref{tab:sym-ptbre-ne-mr} \\
+		\hline
+		PTBRE & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!30} \autoref{tab:ptbre-not-sub-sptbre} & \cellcolor{gray!30} & \cellcolor{red!15} & \cellcolor{green!30} \autoref{th:ptbre-subset-ir} & \cellcolor{red!15} \\
+		\hline
+		PTE & \cellcolor{red!15} & \cellcolor{red!30} \autoref{tab:pte-ne-PTOPE} & \cellcolor{red!15} & \cellcolor{red!30} \autoref{tab:pte-not-sub-ptbpe} & \cellcolor{red!15} & \cellcolor{red!30} \autoref{tab:ties-pte-not-sub-ptbre} & \cellcolor{gray!30} & \cellcolor{green!30} \autoref{th:pte-subset-ir} & \cellcolor{red!15} \\
+		\hline
+		IR & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!30} \autoref{tab:ir-not-sub-ptbpe} & \cellcolor{red!15} & \cellcolor{red!30} \autoref{tab:ir-ne-ptbre} & \cellcolor{red!30} \autoref{tab:ir-not-sub-pte} & \cellcolor{gray!30} & \cellcolor{red!15} \\
+		\hline
+		MR & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!30} \autoref{tab:mr-not-sub-ir} & \cellcolor{gray!30} \\
+		\hline
+		\end{tabular}
+\end{sidewaystable}
+
+\begin{sidewaystable}
+	\caption{Inclusions overview in symetric games with ties.}
+	\hspace{-4cm}
+	\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+		\hline
+		$\subseteq$  & sPTOPE & PTOPE & sPTBPE & PTBPE & sPTBRE & PTBRE & PTE & IR & MR \\
+		\hline
+		sPTOPE & \cellcolor{gray!30} & \cellcolor{green!30} \autoref{th:strict-sub-weak} & \cellcolor{red!15} & \cellcolor{red!25} \autoref{tab:sptope-not-sub-ptbpe} & \cellcolor{green!30} \autoref{th:ptope-subset-ptbre} & \cellcolor{green!15} & \cellcolor{green!15} & \cellcolor{green!15} & ? \\
+		\hline
+		PTOPE & \cellcolor{red!30} \autoref{tab:ptope-not-sub-sptope} & \cellcolor{gray!30} & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!30} \autoref{tab:PTOPE-not-sub-sptbre} & \cellcolor{green!30} \autoref{th:ptope-subset-ptbre} & \cellcolor{green!30} \autoref{th:ptope-subset-pte} & \cellcolor{green!15} & ? \\
+		\hline
+		sPTBPE & \cellcolor{red!15} & \cellcolor{red!30} \autoref{tab:sptbpe-not-sub-ptope} & \cellcolor{gray!30} & \cellcolor{green!30} \autoref{th:strict-sub-weak} & \cellcolor{green!30} \autoref{th:ptbpe-subset-ptbre} & \cellcolor{green!15} & \cellcolor{green!15} & \cellcolor{green!15} & \cellcolor{green!15} \\
+		\hline
+		PTBPE & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{gray!30} & \cellcolor{red!30} \autoref{tab:ptbpe-not-sub-sptbre} & \cellcolor{green!30} \autoref{th:ptbpe-subset-ptbre} & \cellcolor{green!30} \autoref{th:ptbpe-subset-pte} & \cellcolor{green!15} & \cellcolor{green!30} \autoref{th:ptbpe-subset-mr} \\
+		\hline
+		sPTBRE & \cellcolor{red!15} & \cellcolor{red!30} \autoref{tab:sptbre-not-sub-ptope} & \cellcolor{red!15} & \cellcolor{red!30} \autoref{tab:ptbre-not-sub-ptbpe} & \cellcolor{gray!30} & \cellcolor{green!30} \autoref{th:strict-sub-weak} & \cellcolor{red!30} \autoref{tab:ptbre-ne-pte} & \cellcolor{green!15} & \cellcolor{red!30} \autoref{tab:sym-ptbre-ne-mr} \\
+		\hline
+		PTBRE & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!30} \autoref{tab:ptbre-not-sub-sptbre} & \cellcolor{gray!30} & \cellcolor{red!15} & \cellcolor{green!30} \autoref{th:ptbre-subset-ir} & \cellcolor{red!15} \\
+		\hline
+		PTE & \cellcolor{red!15} & \cellcolor{red!30} \autoref{tab:pte-ne-PTOPE} & \cellcolor{red!15} & \cellcolor{red!30} \autoref{tab:pte-not-sub-ptbpe} & \cellcolor{red!15} & \cellcolor{red!30} \autoref{tab:ties-pte-not-sub-ptbre} & \cellcolor{gray!30} & \cellcolor{green!30} \autoref{th:pte-subset-ir} & ? \\
+		\hline
+		IR & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!30} \autoref{tab:ir-not-sub-ptbpe} & \cellcolor{red!15} & \cellcolor{red!30} \autoref{tab:ir-ne-ptbre} & \cellcolor{red!30} \autoref{tab:ir-not-sub-pte} & \cellcolor{gray!30} & \cellcolor{red!15} \\
+		\hline
+		MR & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!30} \autoref{tab:mr-not-sub-ir} & \cellcolor{gray!30} \\
+		\hline
+		\end{tabular}
+\end{sidewaystable}
+
+\begin{sidewaystable}
+	\caption{Inclusions overview in non-symetric games without ties.}
+	\begin{tabular}{|c|c|c|c|c|c|c|}
+		\hline
+		$\subseteq$  & PTOPE & PTBPE & PTBRE & PTE & IR & MR \\
+		\hline
+		PTOPE & \cellcolor{gray!30} & \cellcolor{red!30} \autoref{tab:sptope-not-sub-ptbpe} & \cellcolor{green!30} \autoref{th:ptope-subset-ptbre} & \cellcolor{green!30} \autoref{th:ptope-subset-pte} & \cellcolor{green!15} & \cellcolor{red!30} \autoref{tab:PTOPE-ne-minimax} \\
+		\hline
+		PTBPE & \cellcolor{red!30} \autoref{tab:sptbpe-not-sub-ptope} & \cellcolor{gray!30} & \cellcolor{green!30} \autoref{th:ptbpe-subset-ptbre} & \cellcolor{green!30} \autoref{th:ptbpe-subset-pte} & \cellcolor{green!15} & \cellcolor{green!30} \autoref{th:ptbpe-subset-mr} \\
+		\hline
+		PTBRE & \cellcolor{red!30} \autoref{tab:sptbre-not-sub-ptope} & \cellcolor{red!30} \autoref{tab:ptbre-not-sub-ptbpe} & \cellcolor{gray!30} & \cellcolor{red!30} \autoref{tab:ptbre-ne-pte} & \cellcolor{green!30} \autoref{th:ptbre-subset-ir} & \cellcolor{red!30} \autoref{tab:sym-ptbre-ne-mr} \\
+		\hline
+		PTE & \cellcolor{red!30} \autoref{tab:pte-ne-PTOPE} & \cellcolor{red!30} \autoref{tab:pte-not-sub-ptbpe} & \cellcolor{green!30} \autoref{th:pte-subset-ptbre} & \cellcolor{gray!30} & \cellcolor{green!30} \autoref{th:pte-subset-ir} & \cellcolor{red!15} \\
+		\hline
+		IR & \cellcolor{red!15} & \cellcolor{red!30} \autoref{tab:ir-not-sub-ptbpe} & \cellcolor{red!30} \autoref{tab:ir-ne-ptbre} & \cellcolor{red!30} \autoref{tab:ir-not-sub-pte} & \cellcolor{gray!30} & \cellcolor{red!15} \\
+		\hline
+		MR & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!30} \autoref{tab:mr-not-sub-ir} & \cellcolor{gray!30} \\
+		\hline
+		\end{tabular}
+\end{sidewaystable}
+
+\begin{sidewaystable}
+	\caption{Inclusions overview in symetric games without ties.}
+	\begin{tabular}{|c|c|c|c|c|c|c|}
+		\hline
+		$\subseteq$  & PTOPE & PTBPE & PTBRE & PTE & IR & MR \\
+		\hline
+		PTOPE & \cellcolor{gray!30} & \cellcolor{red!30} \autoref{tab:sptope-not-sub-ptbpe} & \cellcolor{green!30} \autoref{th:ptope-subset-ptbre} & \cellcolor{green!30} \autoref{th:ptope-subset-pte} & \cellcolor{green!15} & \cellcolor{green!15} \\
+		\hline
+		PTBPE & \cellcolor{red!30} \autoref{tab:sptbpe-not-sub-ptope} & \cellcolor{gray!30} & \cellcolor{green!30} \autoref{th:ptbpe-subset-ptbre} & \cellcolor{green!30} \autoref{th:ptbpe-subset-pte} & \cellcolor{green!15} & \cellcolor{green!15} \\
+		\hline
+		PTBRE & \cellcolor{red!30} \autoref{tab:sptbre-not-sub-ptope} & \cellcolor{red!30} \autoref{tab:ptbre-not-sub-ptbpe} & \cellcolor{gray!30} & \cellcolor{red!30} \autoref{tab:ptbre-ne-pte} & \cellcolor{green!30} \autoref{th:ptbre-subset-ir} & \cellcolor{red!30} \autoref{tab:sym-ptbre-ne-mr} \\
+		\hline
+		PTE & \cellcolor{red!30} \autoref{tab:pte-ne-PTOPE} & \cellcolor{red!30} \autoref{tab:pte-not-sub-ptbpe} & \cellcolor{green!30} \autoref{th:pte-subset-ptbre} & \cellcolor{gray!30} & \cellcolor{green!30} \autoref{th:pte-subset-ir} & \cellcolor{green!30} \autoref{th:pte-sym-subset-mr} \\
+		\hline
+		IR & \cellcolor{red!15} & \cellcolor{red!30} \autoref{tab:ir-not-sub-ptbpe} & \cellcolor{red!30} \autoref{tab:ir-ne-ptbre} & \cellcolor{red!30} \autoref{tab:ir-not-sub-pte} & \cellcolor{gray!30} & \cellcolor{red!15} \\
+		\hline
+		MR & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!15} & \cellcolor{red!30} \autoref{tab:mr-not-sub-ir} & \cellcolor{gray!30} \\
+		\hline
+		\end{tabular}
+\end{sidewaystable}
