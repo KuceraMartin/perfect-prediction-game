@@ -5,7 +5,7 @@ Each module is described in a separate section below.
 There are several services ready to be used via Docker Compose, and can simply be run without the need of installing any additional software:
 \textit{web} (the web API server), \textit{postgres} (a PostgreSQL database; is started automatically when running \textit{web}), \textit{console} (the console interface), \textit{analysis} (Apache Spark with commands from the \textit{analysis} module made available), and \textit{sbt} (the building tool; can be used to compile modules and to run tests).
 
-\section{Core module}
+\section{Core Module}
 While the core module does not contain much code, it is the heart of this project.
 It defines the following entities:
 \begin{itemize}
@@ -40,7 +40,7 @@ It defines the following entities:
 	\item \textsc{GameGenerator}: an object for generating random games.
 \end{itemize}
 
-\section{Web module}
+\section{Web Module}
 \label{sec:impl-web-module}
 The web module is a web server that provides a REST API for playing games in normal form against a computer.
 Every time a game is played, the result is stored in a PostgreSQL database (see \autoref{fig:db-schema}).
@@ -62,7 +62,7 @@ For communicating with the database, we use Slick library.
 	\label{fig:db-schema}
 \end{figure}
 
-\section{Console module}
+\section{Console Module}
 The console module is a sample client for the REST API described in \autoref{sec:impl-web-module}.
 It allows the user to play a series of games of chosen dimensions.
 For each game, the game matrix is displayed, and the user is asked to choose a strategy.
@@ -77,7 +77,7 @@ At the end, statistics over all games are displayed.
 	\label{fig:console-screen}
 \end{figure}
 
-\section{Analysis module}
+\section{Analysis Module}
 The analysis module is used for computing statistics about large datasets of games using Apache Spark.
 It loads the datasets and computes the PTBPE, PTBRE, individually rational and minimax rationalizable strategy profiles, and stores them as a new dataset.
 Searching through this dataset was useful to find counterexamples and form conjectures about inclusions of these equilibria (see \autoref{chap:game-theory}).
