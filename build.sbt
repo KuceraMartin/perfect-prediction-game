@@ -23,7 +23,7 @@ lazy val console = project
   .dependsOn(structures)
   .settings(commonSettings)
 
-lazy val web = project
+lazy val api = project
   .dependsOn(core)
   .dependsOn(structures)
   .enablePlugins(PlayScala)
