@@ -10,7 +10,7 @@ docker-compose run sbt assembly
 
 ## Run API
 ```sh
-docker-compose run web
+docker-compose run api
 ```
 
 ## Run terminal interface
