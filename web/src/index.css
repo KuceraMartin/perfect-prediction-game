@@ -1,0 +1,50 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#app {
+	max-width: 600pt;
+	margin: 0 auto;
+}
+
+.game {
+	margin: 10pt;
+}
+
+.game table {
+	border-spacing: 0;
+	border-collapse: collapse;
+	margin: 0 auto;
+}
+
+.game table .cell {
+	padding: 3pt;
+	text-align: center;
+}
+
+.game table td {
+	width: 50pt;
+	border: 1pt solid black;
+}
+
+.game table.active tr.row-strategy:hover {
+	background: lightgreen;
+	cursor: pointer;
+}
+
+.game table.finished tr:hover {
+	cursor: default;
+}
+
+.game .highlight-strategy {
+	background: lightgreen;
+}
+
+.game .highlight-profile {
+	background: green;
+}
