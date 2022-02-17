@@ -51,6 +51,18 @@ services:
             - sbt:/home/scala/.sbt
             - cache:/home/scala/.cache
         entrypoint: java -jar console/target/scala-2.12/console-assembly-0.1.jar
+    web:
+        image: node:17-alpine
+        depends_on:
+            - api
+        ports:
+            - 3000:3000
+        expose:
+            - ${WEB_EXPOSE}
+        volumes:
+            - .:/src
+        working_dir: /src/web
+        entrypoint: npm start
     sbt:
         build:
             context: docker/scala
