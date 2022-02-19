@@ -18,6 +18,14 @@ docker-compose run api
 docker-compose run console
 ```
 
+
+## Run web interface
+```sh
+docker-compose run web
+```
+(this is a dev mode which runs `npm start` internally)
+
+
 ## Run Spark data analysis
 Run Spark Shell:
 ```sh
